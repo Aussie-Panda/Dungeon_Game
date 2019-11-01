@@ -47,4 +47,9 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+    
+    
+    public Entity getEntity (Point pt) {
+    	
+    }
 }

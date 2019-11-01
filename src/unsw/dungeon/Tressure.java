@@ -13,7 +13,7 @@ public class Tressure extends Entity implements Collectable {
 
 	@Override
 	public void collect(Player p) {
-		// TODO Auto-generated method stub
+
 		p.setTreasure(p.getTreasure()+1);
 		this.numOftreasure = p.getTreasure();
 	}

@@ -11,6 +11,10 @@ public class Player extends Entity implements Movable {
 
     private Dungeon dungeon;
     private int treasure;
+    final static int NORMAL = 0;
+    final static int SWORD = 1;
+    final static int POTION = 2;
+    private int state = NORMAL;
     
     // a back pack contains multiple collectable items
     private ArrayList<Collectable> backPack;
@@ -31,52 +35,13 @@ public class Player extends Entity implements Movable {
     
     // pick up all the collectable items
     public void pickUp (Collectable c) {
-    	
-    	if (c.getClass() == null ) {
-    		System.out.println("Can't pick up not a collectable object");
-    	} 
-    	
-    	if (addToBag (c) == true) return;
-    	
-    	else if (c.getClass().isInstance(Tressure.class)) {
-    		this.treasure++;
-    	}
+    	c.collect(this);
     }
     
-
-    /**
-     * A helper to the pickUp function use to check if 
-     * exits a collectable in the bag.
-     * @param c
-     * @return if can successfully add to bag return true
-     * else false
-     */
-    public boolean addToBag (Collectable c) {
-    	int flag = 0;
-    	if (c.getClass().isInstance(Key.class)) {
-    		c = (Key) c;
-    		flag = 1;
-    	}
-    	
-    	if (c.getClass().isInstance(Sword.class)) {
-    		c = (Sword) c;
-    		flag = 1;
-    	}
-    	
-    	// if it can be pick up to bag and bag doesn't 
-    	// contains the item, add to bag retrun success
-    	if (!backPack.contains(c) && (flag == 1)) {
-			backPack.add(c);
-			return true;
-		}
-    	return false;
-    }
-    
- //=========== end of backPack functions ===========    
+//=========== end of backPack functions ===========    
     
     
-
-
+//
 
 
 
@@ -116,6 +81,18 @@ public class Player extends Entity implements Movable {
 
 	public void setTreasure(int treasure) {
 		this.treasure = treasure;
+	}
+
+	public void setBackPack(ArrayList<Collectable> backPack) {
+		this.backPack = backPack;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 
 }
