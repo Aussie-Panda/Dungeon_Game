@@ -12,7 +12,7 @@ public class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
-    private IntegerProperty x, y;
+    private Point pt;
 
     /**
      * Create an entity positioned in square (x,y)
@@ -20,23 +20,22 @@ public class Entity {
      * @param y
      */
     public Entity(int x, int y) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
+        pt = new Point(x, y);
     }
 
     public IntegerProperty x() {
-        return x;
+        return pt.x();
     }
 
     public IntegerProperty y() {
-        return y;
+        return pt.y();
     }
 
     public int getY() {
-        return y().get();
+        return pt.getY();
     }
 
     public int getX() {
-        return x().get();
+        return pt.getX();
     }
 }

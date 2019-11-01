@@ -20,3 +20,8 @@ public class TracingState implements EnemyState {
     }
 
 }
+
+
+public system(){
+    Player player1 = new Player(new Point(1, 2));
+}
