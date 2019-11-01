@@ -1,29 +1,32 @@
 package unsw.dungeon;
 
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Point {
 
-    private int x;
-    private int y;
+    private IntegerProperty x, y;
 
     public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
     }
 
     public Point getUp(){
-        return new Point(x, y+1);
+        return new Point(getX(), getY() + 1);
     }
 
     public Point getDown(){
-        return new Point(x, y-1);
+        return new Point(getX(), getY() - 1);
     }
 
     public Point getLeft(){
-        return new Point(x-1, y);
+        return new Point(getX() - 1, getY());
     }
 
     public Point getRight(){
-        return new Point(x+1, y);
+        return new Point(getX() + 1, getY());
     }
 
     @Override
@@ -34,7 +37,7 @@ public class Point {
         } else if (obj.getClass() != this.getClass()){
             return false;
 
-        } else if (((Point) obj).getX() != this.x && ((Point) obj).getY() != this.y){
+        } else if (((Point) obj).getX() != this.getX() && ((Point) obj).getY() != this.getY()){
             return false;
         }
 
@@ -42,27 +45,35 @@ public class Point {
     }
 
     public int getX() {
-        return x;
+        return x().get();
     }
 
     public int getY() {
+        return y().get();
+    }
+
+    public IntegerProperty x() {
+        return x;
+    }
+
+    public IntegerProperty y() {
         return y;
     }
 
     public void setUp() {
-        this.y++;
+        y().set(getY() + 1);
     }
 
     public void setDown() {
-        this.y--;
+        y().set(getY() - 1);
     }
 
     public void setLeft() {
-        this.x--;
+        x().set(getX() - 1);
     }
 
     public void setRight() {
-        this.x++;
+        x().set(getX() + 1);
     }
 
 }
