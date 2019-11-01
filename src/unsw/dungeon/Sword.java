@@ -13,9 +13,27 @@ public class Sword extends Entity implements Collectable {
 	@Override
 	public void collect(Player p) {
 		//if sword is colleted switch player's state
-		p.setState(1);
+		ArrayList<Collectable> backPack = p.getBackPack();
+		Dungeon dungeon = p.getDungeon();
+		if (!hasSword(backPack)) {
+			// set the player state to sword
+			p.setState(1);
+			// add to backpack
+			backPack.add(this);
+			//remove from dungeon list
+			dungeon.removeEntity(this);
+			//set cord to pickedup
+			this.getPt().pickedUp();
+		}
+		
 		
 	}
-
+	public boolean hasSword (ArrayList<Collectable> backPack) {
+		//if has key in the bag
+		for (Collectable c : backPack) {
+			if (c.getClass().isInstance(Sword.class)) return true;
+		}
+		return false;
+	}
 
 }

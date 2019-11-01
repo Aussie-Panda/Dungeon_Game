@@ -38,4 +38,12 @@ public class Entity {
     public int getX() {
         return pt.getX();
     }
+
+	public Point getPt() {
+		return pt;
+	}
+
+	public void setPt(Point pt) {
+		this.pt = pt;
+	}
 }

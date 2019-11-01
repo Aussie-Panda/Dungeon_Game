@@ -16,6 +16,10 @@ public class Tressure extends Entity implements Collectable {
 
 		p.setTreasure(p.getTreasure()+1);
 		this.numOftreasure = p.getTreasure();
+		//remove from dungeon list
+		dungeon.removeEntity(this);
+		//set cord to pickedup
+		this.getPt().pickedUp();
 	}
 
 	

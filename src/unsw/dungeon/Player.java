@@ -95,6 +95,11 @@ public class Player extends Entity implements Movable {
 		this.state = state;
 	}
 
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+
 }
 
 

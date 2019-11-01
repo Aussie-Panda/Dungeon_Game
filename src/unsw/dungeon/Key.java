@@ -23,8 +23,14 @@ public class Key extends Entity implements Consumable, Collectable {
 	public void collect(Player p) {
 		// TODO Auto-generated method stub
 		ArrayList<Collectable> backPack = p.getBackPack();
+		Dungeon dungeon = p.getDungeon();
 		if (!hasKey(backPack)) {
+			// add to backpack
 			backPack.add(this);
+			//remove from dungeon list
+			dungeon.removeEntity(this);
+			//set cord to pickedup
+			this.getPt().pickedUp();
 		}
 		
 	}
