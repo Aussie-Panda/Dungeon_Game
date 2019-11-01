@@ -13,10 +13,18 @@ public class TracingState implements EnemyState {
         e.setState(new DodgingState(player));
     }
 
-
     @Override
     public String getState() {
         return "Tracing";
+    }
+
+
+
+    public void tracePlayer(){
+        while(true){
+
+        }
+
     }
 
 }
