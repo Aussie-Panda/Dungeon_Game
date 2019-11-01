@@ -5,7 +5,7 @@ package unsw.dungeon;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
+public class Player extends Entity implements Movable {
 
     private Dungeon dungeon;
 
@@ -19,21 +19,25 @@ public class Player extends Entity {
         this.dungeon = dungeon;
     }
 
+    @Override
     public void moveUp() {
         if (getY() > 0)
             y().set(getY() - 1);
     }
 
+    @Override
     public void moveDown() {
         if (getY() < dungeon.getHeight() - 1)
             y().set(getY() + 1);
     }
 
+    @Override
     public void moveLeft() {
         if (getX() > 0)
             x().set(getX() - 1);
     }
 
+    @Override
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
