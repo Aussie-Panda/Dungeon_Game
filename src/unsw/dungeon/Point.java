@@ -11,14 +11,15 @@ public class Point {
     public Point(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+		
     }
 
     public Point getUp(){
-        return new Point(getX(), getY() + 1);
+        return new Point(getX(), getY() - 1);
     }
 
     public Point getDown(){
-        return new Point(getX(), getY() - 1);
+        return new Point(getX(), getY() + 1);
     }
 
     public Point getLeft(){
@@ -37,7 +38,7 @@ public class Point {
         } else if (obj.getClass() != this.getClass()){
             return false;
 
-        } else if (((Point) obj).getX() != this.getX() && ((Point) obj).getY() != this.getY()){
+        } else if (((Point) obj).getX() != this.getX() || ((Point) obj).getY() != this.getY()){
             return false;
         }
 
@@ -61,11 +62,11 @@ public class Point {
     }
 
     public void setUp() {
-        y().set(getY() + 1);
+        y().set(getY() - 1);
     }
 
     public void setDown() {
-        y().set(getY() - 1);
+        y().set(getY() + 1);
     }
 
     public void setLeft() {

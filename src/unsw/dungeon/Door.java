@@ -13,4 +13,8 @@ public class Door extends Entity {
         
     }
 
+	// TODO
+	public boolean canPass() {
+		return false;
+	}
 }
