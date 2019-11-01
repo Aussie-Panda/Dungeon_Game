@@ -109,6 +109,15 @@ public class Player extends Entity implements Movable {
 	public ArrayList<Collectable> getBackPack() {
 		return backPack;
 	}
+
+	public int getTreasure() {
+		return treasure;
+	}
+
+	public void setTreasure(int treasure) {
+		this.treasure = treasure;
+	}
+
 }
 
 
