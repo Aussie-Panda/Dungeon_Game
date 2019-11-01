@@ -30,7 +30,7 @@ public class Player extends Entity implements Movable {
         this.treasure = 0;
     }
 
-//=========== backPack functions ===========
+    //=========== backPack functions ===========
     
     // pick up all the collectable items
     public void pickUp (Collectable c) {
@@ -40,7 +40,7 @@ public class Player extends Entity implements Movable {
 	public boolean hasSword () {
 		//if has key in the bag
 		for (Collectable c : backPack) {
-			if (c.getClass().isInstance(Sword.class)) return true;
+			if (c.getClass() == Sword.class) return true;
 		}
 		return false;
 	}
@@ -50,40 +50,103 @@ public class Player extends Entity implements Movable {
 	public boolean hasKey () {
 		//if has key in the bag
 		for (Collectable c : backPack) {
-			if (c.getClass().isInstance(Key.class)) return true;
+			if (c.getClass() == Key.class) return true;
 		}
 		return false;
 	}
-//=========== end of backPack functions ===========    
+	//=========== end of backPack functions ===========    
     
+	
+	//=========== enviroment detection ===========
+	
+	
+	public boolean passable (ArrayList <Entity> eList) {
+		if (eList.isEmpty()) return true;
+		for (Entity e : eList) {
+			//System.out.println(e.getClass() == Wall.class);
+			if (e.getClass() == Wall.class) {
+				return false;
+			} else if (e.getClass() == Boulder.class) {
+				return ((Boulder) e).canPass();
+			} else if (e.getClass() ==Door.class) {
+				return ((Door) e).canPass();
+			}
+		}
+		
+		return true;
+	}
+	
+	public ArrayList <Collectable> isCollectable (ArrayList <Entity> eList) {
+		ArrayList <Collectable> result = new ArrayList <Collectable> ();
+		for (Entity e : eList) {
+			if (e instanceof Collectable) {
+				result.add((Collectable) e);
+			}
+		}
+		return result;
+	}
+	
+	
+	
+	
+	//=========== end of enviroment detection ===========
+	
     
-//
-
-
-
+	//=========== player Movement ===========
+	public void processMove (Point target, String direction) {
+		ArrayList <Entity> eList = this.dungeon.getEntity(target);
+		ArrayList <Collectable> cList = this.isCollectable(eList);
+		boolean cond = (getY() < dungeon.getHeight() - 1) && (getY() > 0) &&
+				(getX() > 0) && (getX() < dungeon.getWidth() - 1);
+		
+        if (cond && (passable(eList))) {
+        	if (!cList.isEmpty()) {
+        		for (Collectable c : cList) {
+        			this.pickUp(c);
+        		}
+        	}
+        	if (direction == "up") {
+        		this.getPt().setUp();
+        	}
+            
+        	if (direction == "down") {
+        		this.getPt().setDown();
+        	}
+        	if (direction == "left") {
+        		this.getPt().setLeft();
+        	}
+        	if (direction == "right") {
+        		this.getPt().setRight();
+        	}
+        }
+	}
+	
 	@Override
     public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
+		Point target = getPt().getUp();
+		processMove (target, "up");
+		//if ((getY() > 0) && (passable(eList)))
     }
 
     @Override
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
+    	Point target = getPt().getDown();
+        //if (getY() < dungeon.getHeight() - 1)
+		processMove (target, "down");
     }
 
     @Override
     public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
+    	Point target = getPt().getLeft();
+    	processMove (target, "left");
     }
 
     @Override
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+    	Point target = getPt().getRight();
+    	processMove (target, "right");
     }
+    //=========== end of backPack functions ===========  
     
     //=========== getters and setters functions ===========
 
@@ -115,11 +178,11 @@ public class Player extends Entity implements Movable {
 	}
 
 	public void setState(String state) {
-		if (state == "normal") {
+		if (state.equals("normal")) {
 			this.state = NORMAL;
 		}
 		
-		else if (state == "invincible") {
+		else if (state.equals("invincible")) {
 			this.state = INVINCIBLE;
 		}
 		

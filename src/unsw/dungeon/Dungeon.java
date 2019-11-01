@@ -57,9 +57,11 @@ public class Dungeon {
     
     // return a list of entity on the pt position
     public ArrayList <Entity> getEntity (Point pt) {
+    	
     	ArrayList <Entity> result = new ArrayList <Entity>();
     	for (Entity e : entities) {
-    		if (e.getPt() == pt) {
+    	
+    		if (e.getPt().equals(pt)) {
     			result.add(e);
     		}
     	}

@@ -61,6 +61,12 @@ public abstract class DungeonLoader {
             onLoad(wall);
             entity = wall;
             break;
+        case "exit":
+            Exit exit = new Exit(x, y);
+            onLoad(exit);
+            entity = exit;
+            break;    
+        
         // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
