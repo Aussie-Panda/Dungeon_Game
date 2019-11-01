@@ -27,6 +27,8 @@ public class Player extends Entity implements Movable {
         this.treasure = 0;
     }
 
+//=========== backPack functions ===========
+    
     // pick up all the collectable items
     public void pickUp (Collectable c) {
     	
@@ -70,12 +72,10 @@ public class Player extends Entity implements Movable {
     	return false;
     }
     
+ //=========== end of backPack functions ===========    
     
     
-    
-    public ArrayList<Collectable> getBackPack() {
-		return backPack;
-	}
+
 
 
 
@@ -103,4 +103,12 @@ public class Player extends Entity implements Movable {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
+    
+    //=========== getters and setters functions ===========
+
+	public ArrayList<Collectable> getBackPack() {
+		return backPack;
+	}
 }
+
+
