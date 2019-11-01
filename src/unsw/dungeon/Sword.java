@@ -22,8 +22,7 @@ public class Sword extends Entity implements Collectable {
 			backPack.add(this);
 			//remove from dungeon list
 			dungeon.removeEntity(this);
-			//set cord to pickedup
-			this.getPt().pickedUp();
+
 		}
 		
 		

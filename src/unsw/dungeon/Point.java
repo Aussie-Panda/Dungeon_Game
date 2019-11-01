@@ -75,10 +75,6 @@ public class Point {
     public void setRight() {
         x().set(getX() + 1);
     }
-    
-    public void pickedUp() {
-        x().set(-1);
-        y().set(-1);
-    }
+
 
 }
