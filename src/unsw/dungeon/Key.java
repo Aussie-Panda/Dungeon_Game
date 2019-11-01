@@ -24,7 +24,7 @@ public class Key extends Entity implements Consumable, Collectable {
 		// TODO Auto-generated method stub
 		ArrayList<Collectable> backPack = p.getBackPack();
 		Dungeon dungeon = p.getDungeon();
-		if (!hasKey(backPack)) {
+		if (!p.hasKey()) {
 			// add to backpack
 			backPack.add(this);
 			//remove from dungeon list
@@ -33,15 +33,7 @@ public class Key extends Entity implements Consumable, Collectable {
 		}
 		
 	}
-	
-	
-	public boolean hasKey (ArrayList<Collectable> backPack) {
-		//if has key in the bag
-		for (Collectable c : backPack) {
-			if (c.getClass().isInstance(Key.class)) return true;
-		}
-		return false;
-	}
+
 	
 	
 }
