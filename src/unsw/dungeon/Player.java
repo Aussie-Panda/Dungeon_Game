@@ -63,26 +63,30 @@ public class Player extends Entity implements Movable {
 
 	@Override
     public void moveUp() {
+		Point target = getPt().getUp();
         if (getY() > 0)
-            y().set(getY() - 1);
+            this.getPt().setUp();
     }
 
     @Override
     public void moveDown() {
+    	Point target = getPt().getDown();
         if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
+        	this.getPt().setDown();
     }
 
     @Override
     public void moveLeft() {
+    	Point target = getPt().getLeft();
         if (getX() > 0)
-            x().set(getX() - 1);
+        	this.getPt().setLeft();
     }
 
     @Override
     public void moveRight() {
+    	Point target = getPt().getRight();
         if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+        	this.getPt().setRight();
     }
     
     //=========== getters and setters functions ===========
@@ -115,11 +119,11 @@ public class Player extends Entity implements Movable {
 	}
 
 	public void setState(String state) {
-		if (state == "normal") {
+		if (state.equals("normal")) {
 			this.state = NORMAL;
 		}
 		
-		else if (state == "invincible") {
+		else if (state.equals("invincible")) {
 			this.state = INVINCIBLE;
 		}
 		
