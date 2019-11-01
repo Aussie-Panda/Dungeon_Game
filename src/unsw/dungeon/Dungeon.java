@@ -21,6 +21,7 @@ public class Dungeon {
     private List<Entity> entities;
     private Player player;
 
+    
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -52,8 +53,20 @@ public class Dungeon {
         entities.remove(entity);
     }
     
-    
-    public Entity getEntity (Point pt) {
-    	
+    // return a list of entity on the pt position
+    public ArrayList <Entity> getEntity (Point pt) {
+    	ArrayList <Entity> result = new ArrayList <Entity>();
+    	for (Entity e : entities) {
+    		if (e.getPt() == pt) {
+    			result.add(e);
+    		}
+    	}
+    	return result;
     }
+    
+    
+    
+    
+    
+    
 }
