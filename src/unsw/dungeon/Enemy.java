@@ -1,9 +1,10 @@
 package unsw.dungeon;
 
-public class Enemy extends Entity implements Movable{
+public class Enemy extends Entity implements Movable {
 
     Dungeon dungeon;
     Player player;
+    EnemyState state = new TracingState(this.player); // tracing state by default
 
     public Enemy(Dungeon dungeon, int x, int y) {
         super(x,y);
@@ -29,5 +30,9 @@ public class Enemy extends Entity implements Movable{
     @Override
     public void moveRight() {
 
+    }
+
+    public void setState(EnemyState state) {
+        this.state = state;
     }
 }
