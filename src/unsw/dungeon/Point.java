@@ -76,4 +76,5 @@ public class Point {
         x().set(getX() + 1);
     }
 
+
 }
