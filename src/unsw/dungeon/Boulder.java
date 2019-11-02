@@ -12,10 +12,9 @@ public class Boulder extends Entity implements Movable {
 	// TODO
     @Override
 	public boolean passable (Dungeon dungeon, Point pt) {
-		boolean result = true;
+		boolean result = false;
 		
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
-		boolean cond = (eList == null);
 		// if no object, througabe, switch
 		if (eList == null) return true;
 		
