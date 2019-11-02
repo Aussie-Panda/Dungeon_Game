@@ -15,9 +15,18 @@ public class Boulder extends Entity implements Movable {
 		boolean result = true;
 		
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
+		boolean cond = (eList == null);
+		// if no object, througabe, switch
 		if (eList == null) return true;
 		
-
+		if (eList.size() == 1) {
+			for (Entity e : eList) {
+				if ((e instanceof Collectable) || 
+				(e.getClass() == Switch.class)) {
+					return true;
+				}
+			}
+		}
 		
 		return result;
 	}
@@ -29,44 +38,71 @@ public class Boulder extends Entity implements Movable {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-		if (direction == "up") {
-			moveUp();
+		
+		Point target = getPt().getUp();
+		Switch dest = p.getDungeon().getSwitch(target);
+		Switch curr = p.getDungeon().getSwitch(this.getPt());
+		
+		//if can move
+		if (passable(p.getDungeon(),target)) {
+			if (direction == "up") {	
+				moveUp();
+				//move player
+				p.getPt().setUp();
+			}
+			
+			if (direction == "down") {
+				moveDown();
+				p.getPt().setDown();
+			}
+			
+			if (direction == "left") {
+				moveLeft();
+				p.getPt().setLeft();
+			}
+			
+			if (direction == "right") {
+				moveRight();
+				p.getPt().setRight();
+			}
 		}
 		
-		if (direction == "down") {
-			moveUp();
-		}
 		
-		if (direction == "left") {
-			moveUp();
+		//turn on
+		if (dest != null) {
+			dest.setState(1);
 		}
-		
-		if (direction == "right") {
-			moveUp();
+		//turn off
+		if (curr != null) {
+			dest.setState(0);
 		}
 	}
 
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
+		this.getPt().setUp();
 		
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
+		this.getPt().setDown();
 		
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
+		this.getPt().setLeft();
 		
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
+		this.getPt().setRight();
 		
 	}
 

@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Door extends Entity {
+public class Door extends Entity implements Throughable {
 
     Dungeon dungeon;
     int id;
@@ -16,5 +16,11 @@ public class Door extends Entity {
 	// TODO
 	public boolean canPass() {
 		return false;
+	}
+
+	@Override
+	public void through() {
+		// TODO Auto-generated method stub
+		
 	}
 }

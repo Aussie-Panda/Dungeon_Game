@@ -14,12 +14,21 @@ public class Switch extends Entity  implements Floor {
 	@Override
 	public void trigger() {
 		// TODO Auto-generated method stub
+		
 
 	}
 	
 	public boolean isOn () {
 		if (state == OFF) return false;
 		return true;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 
 }

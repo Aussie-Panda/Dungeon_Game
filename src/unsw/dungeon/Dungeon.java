@@ -108,6 +108,19 @@ public class Dungeon {
 		return result;
 	}
 	
+	public Switch getSwitch (Point pt) {
+		
+		Switch result = null;
+		for (Entity e : entities) {
+			if (e.getPt().equals(pt)) {
+				if (e.getClass() == Switch.class) {
+					result = (Switch) e;
+				}
+			}	
+		}
+		return result;
+	}
+	
 	
 	public ArrayList <Entity> getEntity (Point pt) {
 		
