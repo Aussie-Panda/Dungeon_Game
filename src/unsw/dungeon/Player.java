@@ -136,7 +136,7 @@ public class Player extends Entity implements Movable {
 			// move down
 			this.getPt().setDown();
 		} else {
-			if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
+			if ((getY() < dungeon.getHeight() - 1) && (passable(target) || dungeon.getBoulder(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "down");

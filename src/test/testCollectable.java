@@ -8,6 +8,7 @@ import unsw.dungeon.Dungeon;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 import unsw.dungeon.Point;
+import unsw.dungeon.Potion;
 import unsw.dungeon.Treassure;
 
 public class testCollectable {
@@ -63,7 +64,7 @@ public class testCollectable {
 	
 	@Test
     void testPlayerPickTreasures(){
-		System.out.println("Testing Player pick keys -----");
+		System.out.println("Testing Player pick Treasures -----");
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
@@ -82,7 +83,7 @@ public class testCollectable {
 	
 	@Test
     void testPlayerPickSword(){
-		System.out.println("Testing Player pick keys -----");
+		System.out.println("Testing Player pick Swords -----");
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
@@ -98,5 +99,22 @@ public class testCollectable {
         assertEquals(p.getTreasure() == 2, true);
 
     }
+	
+	@Test
+    void testPlayerPickPotion(){
+		System.out.println("Testing Player pick potion -----");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        
+        Potion po = new Potion(1, 0);
+        dungeon.addEntity(po);
+        p.moveRight();
+        assertEquals(p.getState() == "normal", true);
+
+
+    }
+	
+	
 	
 }

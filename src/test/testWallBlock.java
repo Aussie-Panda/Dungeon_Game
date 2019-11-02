@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import unsw.dungeon.Boulder;
 import unsw.dungeon.Dungeon;
+import unsw.dungeon.Enemy;
 import unsw.dungeon.Player;
 import unsw.dungeon.Point;
 import unsw.dungeon.Wall;
@@ -40,4 +42,71 @@ public class testWallBlock {
 
         assertEquals(p.getPt().equals(correct), true);
 	}
+	
+	
+	@Test
+    void testWallBlockBoulder(){
+		System.out.println("Testing Wall Block Boulder");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        
+        Boulder b = new Boulder(0, 1);
+        dungeon.addEntity(b);
+
+
+        Wall w1 = new Wall(0,2);        
+        dungeon.addEntity(w1);
+
+        p.moveDown();
+        Point correct = new Point(0,1);
+
+        assertEquals(b.getPt().equals(correct), true);
+	}
+	
+	@Test
+    void testWallBlockBoulderAfterMove(){
+		System.out.println("Testing Wall Block Boulder after moving the boulder");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        
+        Boulder b = new Boulder(0, 1);
+        dungeon.addEntity(b);
+
+
+        Wall w1 = new Wall(0,3);        
+        dungeon.addEntity(w1);
+
+        p.moveDown();
+        p.moveDown();
+        p.moveDown();
+        Point correct = new Point(0,2);
+
+        assertEquals(b.getPt().equals(correct), true);
+	}
+	
+	
+	
+	@Test
+    void testWallBlockEnemy(){
+		System.out.println("Testing Wall Block Enemy");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        Enemy e = new Enemy(dungeon, 0, 1);
+        dungeon.addEntity(p);
+        dungeon.addEntity(e);
+
+
+        Wall w1 = new Wall(0,2);        
+        dungeon.addEntity(w1);
+
+        e.moveDown();
+        Point correct = new Point(0,1);
+
+        assertEquals(e.getPt().equals(correct), true);
+	}
+	
+	
+	
 }

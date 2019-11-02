@@ -16,7 +16,7 @@ public class Boulder extends Entity implements Movable {
 		
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
 		// if no object, througabe, switch
-		if (eList == null) return true;
+		if (eList.isEmpty()) return true;
 		
 		if (eList.size() == 1) {
 			for (Entity e : eList) {
@@ -30,7 +30,26 @@ public class Boulder extends Entity implements Movable {
 		return result;
 	}
     
-    
+    public Point setTarget(Point pt, String direction) {
+    	Point target = new Point(-1, -1);
+    	if (direction == "up") {
+    		target = getPt().getUp();
+    	}
+    	
+		if (direction == "down") {
+			target = getPt().getDown();		
+    	}
+		
+		if (direction == "left") {
+			target = getPt().getLeft();
+		}
+		
+		if (direction == "right") {
+			target = getPt().getRight();
+    	}
+		
+		return target;
+    }
 
     
     
@@ -38,9 +57,10 @@ public class Boulder extends Entity implements Movable {
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
 		
-		Point target = getPt().getUp();
+		Point target = setTarget(this.getPt(), direction);
 		Switch dest = p.getDungeon().getSwitch(target);
 		Switch curr = p.getDungeon().getSwitch(this.getPt());
+		
 		
 		//if can move
 		if (passable(p.getDungeon(),target)) {
@@ -73,7 +93,7 @@ public class Boulder extends Entity implements Movable {
 		}
 		//turn off
 		if (curr != null) {
-			dest.setState(0);
+			curr.setState(0);
 		}
 	}
 
