@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Potion extends Entity implements Consumable, Collectable {
 
@@ -14,11 +16,16 @@ public class Potion extends Entity implements Consumable, Collectable {
 		//if sword is colleted switch player's state
 		ArrayList<Collectable> backPack = p.getBackPack();
 		Dungeon dungeon = p.getDungeon();
-		if (p.getState() == "invincible") {
-			// set timer
-			
+		if (p.getState() != "invincible") {
+			p.setState("invincible");
 			//remove from dungeon list
 			dungeon.removeEntity(this);
+			// set timer for 5 sec	    
+			Timer timer = new Timer();
+	        timer.schedule(new potionTimer(), 0, 1000);
+	        p.setState("normal");
+		    
+			
 
 		}
 		
