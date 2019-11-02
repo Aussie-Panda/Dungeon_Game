@@ -20,7 +20,7 @@ public class Entity {
     	
     }
     
-    public boolean passable(Point pt) {
+    public boolean passable(Dungeon d, Point pt) {
 		return false;
 	}
     
@@ -55,6 +55,11 @@ public class Entity {
 
 	public void setPt(Point pt) {
 		this.pt = pt;
+	}
+
+	public void interact(Player p, String direction) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

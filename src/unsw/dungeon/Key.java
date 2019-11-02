@@ -14,7 +14,7 @@ public class Key extends Entity implements Consumable, Collectable {
     }
 
     @Override
-    public boolean passable (Point pt) {
+    public boolean passable (Dungeon d, Point pt) {
     	return true;
     }
     

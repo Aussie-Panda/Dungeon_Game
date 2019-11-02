@@ -11,7 +11,7 @@ public class Sword extends Entity implements Collectable {
 
 
     @Override
-    public boolean passable (Point pt) {
+    public boolean passable (Dungeon d, Point pt) {
     	return true;
     }
 	
