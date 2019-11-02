@@ -16,6 +16,7 @@ public class Switch extends Entity  implements Floor, Subject{
 	@Override
 	public void trigger() {
 		// TODO Auto-generated method stub
+		
 
 	}
 	
@@ -33,4 +34,13 @@ public class Switch extends Entity  implements Floor, Subject{
 	public void notifyObserver() {
 		goal.update(this);
 	}
+	
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 }
