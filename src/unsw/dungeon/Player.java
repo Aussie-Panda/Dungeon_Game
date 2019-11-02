@@ -92,7 +92,9 @@ public class Player extends Entity implements Movable {
 		} else {
 			if ((getY() > 0) && (passable(target))) {
 				for (Entity e : eList) {
-					e.interact(this, "up");
+					if (!(e instanceof Floor)) {
+						e.interact(this, "up");
+					}
 				}
 			}
 		}
@@ -113,7 +115,10 @@ public class Player extends Entity implements Movable {
 		} else {
 			if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
 				for (Entity e : eList) {
-					e.interact(this, "down");
+					if (!(e instanceof Floor)) {
+						e.interact(this, "down");
+					}
+					
 				}
 			}
 		}
@@ -131,7 +136,9 @@ public class Player extends Entity implements Movable {
 		} else {
 			if ((getX() > 0) && (passable(target))) {
 				for (Entity e : eList) {
-					e.interact(this, "left");
+					if (!(e instanceof Floor)) {
+						e.interact(this, "left");
+					}
 				}
 			}
 		}
@@ -149,28 +156,10 @@ public class Player extends Entity implements Movable {
 		} else {
 			if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
 				for (Entity e : eList) {
-					e.interact(this, "right");
+					if (!(e instanceof Floor)) {
+						e.interact(this, "right");
+					}
 				}
-			}
-		}
-    	
-    	
-    	
-    	
-    	if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
-			if (dungeon.getBoulder(target) != null) {
-				Boulder b = dungeon.getBoulder(target);
-				b.interact(this, "right");
-				return;
-			}
-			
-			// move Right
-			this.getPt().setRight();
-			
-			//collect
-			if (dungeon.getCollectable(this.getPt()) != null) {
-				Collectable c = dungeon.getCollectable(this.getPt());
-				c.collect(this);
 			}
 		}
     }
