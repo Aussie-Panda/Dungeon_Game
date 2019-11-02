@@ -46,7 +46,7 @@ public class Portal extends Entity implements Throughable {
 
     @Override
     public void interact(Player p, String direction) {
-        through(p, dir);
+        through(p, direction);
     }
 
     public int getId() {
