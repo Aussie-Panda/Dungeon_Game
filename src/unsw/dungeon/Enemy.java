@@ -30,6 +30,8 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         s.attachObserver(this);
     }
 
+
+
     @Override
     public void attachObserver(Observer o) {
         goal = o;
@@ -41,7 +43,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     }
 
     @Override
-    public void update() {
+    public void update(Subject s) {
         convertState();
     }
 

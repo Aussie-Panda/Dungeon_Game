@@ -34,7 +34,7 @@ public class Switch extends Entity  implements Floor, Subject{
 	public void notifyObserver() {
 		goal.update(this);
 	}
-	
+
 	public int getState() {
 		return state;
 	}
