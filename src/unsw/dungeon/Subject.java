@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
 public interface Subject {
-    void attachObserver(Observer o);
-    void removeObserver(Observer o);
+    public void attachObserver(Observer o);
+    public void notifyObserver();
 }

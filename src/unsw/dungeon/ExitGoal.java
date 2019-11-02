@@ -11,10 +11,10 @@ public class ExitGoal implements Goal, Observer{
     }
 
 
-
     @Override
     public void subscript(Subject s) {
         this.exit = s;
+        s.attachObserver(this);
     }
 
     @Override
@@ -24,6 +24,8 @@ public class ExitGoal implements Goal, Observer{
 
     @Override
     public void update() {
-        status = status ^ false;//TODO
+        status = status ^ true;//TODO
+        dungeon.win();
+
     }
 }
