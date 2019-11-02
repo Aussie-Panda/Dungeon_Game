@@ -54,6 +54,8 @@ public class Player extends Entity implements Movable {
 		}
 		return false;
 	}
+	
+	
 
 	public boolean hasKey () {
 		//if has key in the bag
@@ -62,6 +64,20 @@ public class Player extends Entity implements Movable {
 		}
 		return false;
 	}
+	
+	public void consumeKey(int id) {
+		// TODO Auto-generated method stub
+		for (Collectable c : backPack) {
+			if (c.getClass() == Key.class) {
+				Key k = (Key)c;
+				if (k.getId() == id) {
+					backPack.remove(k);
+				}
+			}
+		}
+		
+	}
+	
 	//=========== end of backPack functions ===========    
     
 	
@@ -188,6 +204,8 @@ public class Player extends Entity implements Movable {
 	public void setBackPack(ArrayList<Collectable> backPack) {
 		this.backPack = backPack;
 	}
+	
+
 
 	public String getState() {
 		String str = null;
@@ -217,6 +235,8 @@ public class Player extends Entity implements Movable {
 	public Dungeon getDungeon() {
 		return dungeon;
 	}
+
+
 
 
 
