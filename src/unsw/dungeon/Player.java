@@ -66,22 +66,10 @@ public class Player extends Entity implements Movable {
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
 		if (eList == null) return true;
 		for (Entity e : eList) {
-			result = result & e.passable(pt);
+			result = result & e.passable(dungeon,pt);
 		}
 		return result;
 	}
-	
-//	public Collectable isCollectable (ArrayList <Entity> eList) {
-//		ArrayList <Collectable> result = new ArrayList <Collectable> ();
-//		for (Entity e : eList) {
-//			if (e instanceof Collectable) {
-//				return (Collectable) e;
-//			}
-//		}
-//		return null;
-//	}
-	
-	
 	
 	
 	//=========== end of enviroment detection ===========
@@ -89,14 +77,6 @@ public class Player extends Entity implements Movable {
     
 	//=========== player Movement ===========
 	
-//	public void processMove (Point target, String direction) {
-//		ArrayList <Entity> eList = this.dungeon.getEntity(target);
-//		Collectable c = isCollectable(eList);
-//		boolean cond = (getY() < dungeon.getHeight() - 1) && (getY() > 0) &&
-//				(getX() > 0) && (getX() < dungeon.getWidth() - 1);
-//		
-
-//	}
 	
 
 	
@@ -109,7 +89,7 @@ public class Player extends Entity implements Movable {
 		if ((getY() > 0) && (passable(target))) {
 			if (dungeon.getBoulder(target) != null) {
 				Boulder b = dungeon.getBoulder(target);
-				b.moveUp();
+				b.interact(this, "up");
 				return;
 			}
 			
@@ -133,7 +113,7 @@ public class Player extends Entity implements Movable {
     	if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
 			if (dungeon.getBoulder(target) != null) {
 				Boulder b = dungeon.getBoulder(target);
-				b.moveDown();
+				b.interact(this, "down");
 				return;
 			}
 			this.getPt().setDown();
@@ -151,7 +131,7 @@ public class Player extends Entity implements Movable {
 		if ((getX() > 0) && (passable(target))) {
 			if (dungeon.getBoulder(target) != null) {
 				Boulder b = dungeon.getBoulder(target);
-				b.moveLeft();
+				b.interact(this, "left");
 				return;
 			}
 			
@@ -172,7 +152,7 @@ public class Player extends Entity implements Movable {
     	if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
 			if (dungeon.getBoulder(target) != null) {
 				Boulder b = dungeon.getBoulder(target);
-				b.moveRight();
+				b.interact(this, "right");
 				return;
 			}
 			

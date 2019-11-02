@@ -11,9 +11,43 @@ public class Boulder extends Entity implements Movable {
 
 	// TODO
     @Override
-    public boolean passable (Point pt) {
-    	return true;
-    }
+	public boolean passable (Dungeon dungeon, Point pt) {
+		boolean result = true;
+		
+		ArrayList <Entity> eList = dungeon.getEntity(pt);
+		if (eList == null) return true;
+		
+		// if boulder false
+		// if collectable false
+		// if wall false
+		// if movable false
+		
+		return result;
+	}
+    
+    
+
+    
+    
+	@Override
+	public void interact(Player p, String direction) {
+		// TODO Auto-generated method stub
+		if (direction == "up") {
+			moveUp();
+		}
+		
+		if (direction == "down") {
+			moveUp();
+		}
+		
+		if (direction == "left") {
+			moveUp();
+		}
+		
+		if (direction == "right") {
+			moveUp();
+		}
+	}
 
 	@Override
 	public void moveUp() {

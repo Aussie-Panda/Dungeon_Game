@@ -10,7 +10,7 @@ public class Exit extends Entity implements Subject{
 	}
 	
     @Override
-    public boolean passable (Point pt) {
+    public boolean passable (Dungeon d, Point pt) {
     	return true;
     }
 
