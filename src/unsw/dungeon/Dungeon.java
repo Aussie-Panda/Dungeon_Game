@@ -123,4 +123,8 @@ public class Dungeon {
 	public List<Entity> getEntities() {
 		return entities;
 	}
+
+	public void win(){
+    	System.out.println("WIN!!");
+	}
 }

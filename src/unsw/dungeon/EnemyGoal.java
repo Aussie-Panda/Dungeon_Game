@@ -18,7 +18,7 @@ public class EnemyGoal implements Goal, Observer {
 
 
     @Override
-    public void update() {
+    public void update(Subject s) {
         if (enemies > 0) enemies--;
         if (enemies == 0) status = true;
         else status = false;
