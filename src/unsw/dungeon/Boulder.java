@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
-public class Boulder extends Entity {
+import java.util.ArrayList;
+
+public class Boulder extends Entity implements Movable {
 
 	public Boulder(int x, int y) {
 		super(x, y);
@@ -8,7 +10,38 @@ public class Boulder extends Entity {
 	}
 
 	// TODO
-	public boolean canPass() {
-		return false;
+    @Override
+    public boolean passable (Point pt) {
+    	return true;
+    }
+
+	@Override
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		
 	}
+
+	@Override
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveRight() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+
+
 }
+

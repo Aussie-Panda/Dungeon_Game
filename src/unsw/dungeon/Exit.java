@@ -8,6 +8,11 @@ public class Exit extends Entity implements Subject{
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
+	
+    @Override
+    public boolean passable (Point pt) {
+    	return true;
+    }
 
 	@Override
 	public void attachObserver(Observer o) {

@@ -60,31 +60,26 @@ public class Player extends Entity implements Movable {
 	//=========== enviroment detection ===========
 	
 	
-	public boolean passable (ArrayList <Entity> eList) {
-		if (eList.isEmpty()) return true;
-		for (Entity e : eList) {
-			//System.out.println(e.getClass() == Wall.class);
-			if (e.getClass() == Wall.class) {
-				return false;
-			} else if (e.getClass() == Boulder.class) {
-				return ((Boulder) e).canPass();
-			} else if (e.getClass() ==Door.class) {
-				return ((Door) e).canPass();
-			}
-		}
+	public boolean passable (Point pt) {
+		boolean result = true;
 		
-		return true;
-	}
-	
-	public ArrayList <Collectable> isCollectable (ArrayList <Entity> eList) {
-		ArrayList <Collectable> result = new ArrayList <Collectable> ();
+		ArrayList <Entity> eList = dungeon.getEntity(pt);
+		if (eList == null) return true;
 		for (Entity e : eList) {
-			if (e instanceof Collectable) {
-				result.add((Collectable) e);
-			}
+			result = result & e.passable(pt);
 		}
 		return result;
 	}
+	
+//	public Collectable isCollectable (ArrayList <Entity> eList) {
+//		ArrayList <Collectable> result = new ArrayList <Collectable> ();
+//		for (Entity e : eList) {
+//			if (e instanceof Collectable) {
+//				return (Collectable) e;
+//			}
+//		}
+//		return null;
+//	}
 	
 	
 	
@@ -93,60 +88,105 @@ public class Player extends Entity implements Movable {
 	
     
 	//=========== player Movement ===========
-	public void processMove (Point target, String direction) {
-		ArrayList <Entity> eList = this.dungeon.getEntity(target);
-		ArrayList <Collectable> cList = this.isCollectable(eList);
-		boolean cond = (getY() < dungeon.getHeight() - 1) && (getY() > 0) &&
-				(getX() > 0) && (getX() < dungeon.getWidth() - 1);
-		
-        if (cond && (passable(eList))) {
-        	if (!cList.isEmpty()) {
-        		for (Collectable c : cList) {
-        			this.pickUp(c);
-        		}
-        	}
-        	if (direction == "up") {
-        		this.getPt().setUp();
-        	}
-            
-        	if (direction == "down") {
-        		this.getPt().setDown();
-        	}
-        	if (direction == "left") {
-        		this.getPt().setLeft();
-        	}
-        	if (direction == "right") {
-        		this.getPt().setRight();
-        	}
-        }
-	}
+	
+//	public void processMove (Point target, String direction) {
+//		ArrayList <Entity> eList = this.dungeon.getEntity(target);
+//		Collectable c = isCollectable(eList);
+//		boolean cond = (getY() < dungeon.getHeight() - 1) && (getY() > 0) &&
+//				(getX() > 0) && (getX() < dungeon.getWidth() - 1);
+//		
+
+//	}
+	
+
 	
 	@Override
     public void moveUp() {
+	
 		Point target = getPt().getUp();
-		processMove (target, "up");
-		//if ((getY() > 0) && (passable(eList)))
+		
+		// interact boulder
+		if ((getY() > 0) && (passable(target))) {
+			if (dungeon.getBoulder(target) != null) {
+				Boulder b = dungeon.getBoulder(target);
+				b.moveUp();
+				return;
+			}
+			
+			// move up
+			this.getPt().setUp();
+			
+			//collect
+			if (dungeon.getCollectable(this.getPt()) != null) {
+				Collectable c = dungeon.getCollectable(this.getPt());
+				c.collect(this);
+			}
+		}
     }
 
     @Override
     public void moveDown() {
+
     	Point target = getPt().getDown();
+
         //if (getY() < dungeon.getHeight() - 1)
-		processMove (target, "down");
+    	if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
+			if (dungeon.getBoulder(target) != null) {
+				Boulder b = dungeon.getBoulder(target);
+				b.moveDown();
+				return;
+			}
+			this.getPt().setDown();
+			if (dungeon.getCollectable(this.getPt()) != null) {
+				Collectable c = dungeon.getCollectable(this.getPt());
+				c.collect(this);
+			}
+		}
     }
 
     @Override
     public void moveLeft() {
     	Point target = getPt().getLeft();
-    	processMove (target, "left");
+    	// interact boulder
+		if ((getX() > 0) && (passable(target))) {
+			if (dungeon.getBoulder(target) != null) {
+				Boulder b = dungeon.getBoulder(target);
+				b.moveLeft();
+				return;
+			}
+			
+			// move left
+			this.getPt().setLeft();
+			
+			//collect
+			if (dungeon.getCollectable(this.getPt()) != null) {
+				Collectable c = dungeon.getCollectable(this.getPt());
+				c.collect(this);
+			}
+		}
     }
 
     @Override
     public void moveRight() {
     	Point target = getPt().getRight();
-    	processMove (target, "right");
+    	if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
+			if (dungeon.getBoulder(target) != null) {
+				Boulder b = dungeon.getBoulder(target);
+				b.moveRight();
+				return;
+			}
+			
+			// move Right
+			this.getPt().setRight();
+			
+			//collect
+			if (dungeon.getCollectable(this.getPt()) != null) {
+				Collectable c = dungeon.getCollectable(this.getPt());
+				c.collect(this);
+			}
+		}
     }
-    //=========== end of backPack functions ===========  
+    //=========== end of Player movement functions ===========  
     
     //=========== getters and setters functions ===========
 
@@ -194,6 +234,7 @@ public class Player extends Entity implements Movable {
 	public Dungeon getDungeon() {
 		return dungeon;
 	}
+
 
 
 }

@@ -55,4 +55,5 @@ public class Enemy extends Entity implements Movable, Observer {
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1) getPt().setRight();
     }
+
 }

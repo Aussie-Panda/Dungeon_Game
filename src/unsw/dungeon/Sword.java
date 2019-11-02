@@ -10,6 +10,19 @@ public class Sword extends Entity implements Collectable {
 	}
 
 
+    @Override
+    public boolean passable (Point pt) {
+    	return true;
+    }
+	
+	@Override
+	public void interact(Player p) {
+		// TODO Auto-generated method stub
+		collect(p);
+	}
+
+
+
 	@Override
 	public void collect(Player p) {
 		//if sword is colleted switch player's state

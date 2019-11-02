@@ -55,22 +55,71 @@ public class Dungeon {
         entities.remove(entity);
     }
     
-    // return a list of entity on the pt position
-    public ArrayList <Entity> getEntity (Point pt) {
+    // if find a movable return else, null
+	public Movable  getMovable (Point pt) {
     	
-    	ArrayList <Entity> result = new ArrayList <Entity>();
+		Movable  result = null;
     	for (Entity e : entities) {
-    	
     		if (e.getPt().equals(pt)) {
-    			result.add(e);
+    			if (e instanceof Movable ) {
+	    			result = (Movable ) e;
+	    		}
     		}
     	}
     	return result;
     }
     
+	public Collectable getCollectable (Point pt) {
+	    	
+    	Collectable result = null;
+    	for (Entity e : entities) {
+    		if (e.getPt().equals(pt)) {
+    			if (e instanceof Collectable) {
+	    			result = (Collectable) e;
+	    		}
+    		}
+    	}
+    	return result;
+    }
+	    
+	public Wall getWall (Point pt) {
+		
+		Wall result = null;
+		for (Entity e : entities) {
+			if (e.getPt().equals(pt)) {
+				if (e.getClass() == Wall.class) {
+					result = (Wall) e;
+				}
+			}	
+		}
+		return result;
+	}
     
-    
-    
-    
+	public Boulder getBoulder (Point pt) {
+		
+		Boulder result = null;
+		for (Entity e : entities) {
+			if (e.getPt().equals(pt)) {
+				if (e.getClass() == Boulder.class) {
+					result = (Boulder) e;
+				}
+			}	
+		}
+		return result;
+	}
+	
+	
+	public ArrayList <Entity> getEntity (Point pt) {
+		
+		ArrayList <Entity> result = new ArrayList <Entity> ();
+		for (Entity e : entities) {
+			if (e.getPt().equals(pt)) {
+				result.add(e);
+			}
+		}
+		return result;
+	}
+	
+	
     
 }

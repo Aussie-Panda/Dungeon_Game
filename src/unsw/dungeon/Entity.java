@@ -14,6 +14,16 @@ public class Entity {
     // externally observed.
     private Point pt;
 
+    
+    
+    public void interact (Player p) {
+    	
+    }
+    
+    public boolean passable(Point pt) {
+		return false;
+	}
+    
     /**
      * Create an entity positioned in square (x,y)
      * @param x
@@ -46,4 +56,6 @@ public class Entity {
 	public void setPt(Point pt) {
 		this.pt = pt;
 	}
+	
+	
 }
