@@ -50,6 +50,7 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+        if (entity.getClass() == Player.class) setPlayer((Player) entity);
     }
     
     public void removeEntity(Entity entity) {
