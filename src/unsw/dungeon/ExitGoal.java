@@ -23,8 +23,8 @@ public class ExitGoal implements Goal, Observer{
     }
 
     @Override
-    public void update() {
-        status = status ^ true;//TODO
+    public void update(Subject s) {
+        status =  true;//TODO
         dungeon.win();
 
     }

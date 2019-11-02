@@ -6,6 +6,7 @@ public class Goals implements Goal {
 
     private Dungeon dungeon;
     private String type;
+//    private boolean status = false;
     private ArrayList<Goal> subGoals = new ArrayList <Goal>();
 
 
@@ -39,10 +40,7 @@ public class Goals implements Goal {
         return res;
     }
 
-    // notify dungeon that this goal is complete
-    public void complete(){
-        dungeon.win();
-    }
+
 
     public void addSubgoals(Goal g) {
         this.subGoals.add(g);

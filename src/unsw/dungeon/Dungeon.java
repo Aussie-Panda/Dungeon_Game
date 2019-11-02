@@ -119,7 +119,8 @@ public class Dungeon {
 		}
 		return result;
 	}
-	
-	
-    
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
 }

@@ -23,7 +23,7 @@ public class Exit extends Entity implements Subject{
 
 	@Override
 	public void notifyObserver() {
-		goal.update();
+		goal.update(this);
 	}
 
 	public void setOtherGoal(Goal g) {

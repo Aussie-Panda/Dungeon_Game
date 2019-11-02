@@ -1,10 +1,11 @@
 package unsw.dungeon;
 
-public class Enemy extends Entity implements Movable, Observer {
+public class Enemy extends Entity implements Movable, Observer, Subject {
 
     private Dungeon dungeon;
     private EnemyState state;
     private Subject player;
+    private Observer goal;
 
     public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
@@ -27,6 +28,16 @@ public class Enemy extends Entity implements Movable, Observer {
     public void subscript(Subject s) {
         this.player = s;
         s.attachObserver(this);
+    }
+
+    @Override
+    public void attachObserver(Observer o) {
+        goal = o;
+    }
+
+    @Override
+    public void notifyObserver() {
+        goal.update();
     }
 
     @Override
