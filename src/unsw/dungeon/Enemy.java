@@ -12,7 +12,6 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         this.dungeon = dungeon;
         subscript((Subject) dungeon.getPlayer());
         this.state = new TracingState((Player) this.player); // tracing state by default
-
     }
 
 
@@ -30,8 +29,6 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         s.attachObserver(this);
     }
 
-
-
     @Override
     public void attachObserver(Observer o) {
         goal = o;
@@ -45,6 +42,17 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     @Override
     public void update(Subject s) {
         convertState();
+    }
+
+    @Override
+    public void interact(Player p) {
+        // enemy die if player is invincible
+        if (p.getState().equals("invincible")){
+            dungeon.removeEntity(this);
+            notifyObserver();
+        } else {
+            dungeon.lose();
+        }
     }
 
     @Override

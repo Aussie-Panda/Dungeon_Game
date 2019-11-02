@@ -52,6 +52,7 @@ class GoalTest {
         dungeon.addEntity(new Treassure(dungeon, 2, 2));
         dungeon.addEntity(new Treassure(dungeon, 3, 4));
         TreassureGoal goal = new TreassureGoal(dungeon);
+        goal.setMain();
 
         p.moveRight();
         p.moveDown();
@@ -68,6 +69,7 @@ class GoalTest {
         dungeon.addEntity(new Treassure(dungeon, 2, 2));
         dungeon.addEntity(new Treassure(dungeon, 3, 4));
         TreassureGoal goal = new TreassureGoal(dungeon);
+        goal.setMain();
 
         p.moveRight();  // pick 1st treasure
         p.moveDown();
@@ -76,6 +78,42 @@ class GoalTest {
         p.moveRight();
         p.moveDown();
         p.moveDown();   // pick 3rd treasure
+
+        assertTrue(goal.isComplete());
+    }
+
+    @Test
+    void testSingleEnemyGoalFail(){
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        Enemy e1 = new Enemy(dungeon, 2, 2);
+        dungeon.addEntity(e1);
+        Enemy e2 = new Enemy(dungeon, 4, 4);
+        dungeon.addEntity(e2);
+        EnemyGoal goal = new EnemyGoal(dungeon);
+        goal.setMain();
+
+        e1.interact(p);
+
+        assertFalse(goal.isComplete());
+    }
+
+    @Test
+    void testSingleEnemyGoalSuccess(){
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        Enemy e1 = new Enemy(dungeon, 2, 2);
+        dungeon.addEntity(e1);
+        Enemy e2 = new Enemy(dungeon, 4, 4);
+        dungeon.addEntity(e2);
+        EnemyGoal goal = new EnemyGoal(dungeon);
+        goal.setMain();
+
+        p.setState("invincible");
+        e1.interact(p);
+        e2.interact(p);
 
         assertTrue(goal.isComplete());
     }
