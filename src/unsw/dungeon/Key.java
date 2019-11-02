@@ -27,7 +27,7 @@ public class Key extends Entity implements Consumable, Collectable {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-		collect(p);
+		
 		if (direction == "up") {
 			p.getPt().setUp();
 		}
@@ -43,6 +43,8 @@ public class Key extends Entity implements Consumable, Collectable {
 		if (direction == "right") {
 			p.getPt().setRight();
 		}
+		collect(p);
+		
 	}
 	
 	@Override

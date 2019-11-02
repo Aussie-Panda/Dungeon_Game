@@ -20,7 +20,7 @@ public class Treassure extends Entity implements Collectable, Subject {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-		collect(p);
+		
 		if (direction == "up") {
 			p.getPt().setUp();
 		}
@@ -36,6 +36,7 @@ public class Treassure extends Entity implements Collectable, Subject {
 		if (direction == "right") {
 			p.getPt().setRight();
 		}
+		collect(p);
 	}
 	
     

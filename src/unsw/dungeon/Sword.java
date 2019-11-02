@@ -18,7 +18,7 @@ public class Sword extends Entity implements Collectable {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-		collect(p);
+		
 		if (direction == "up") {
 			p.getPt().setUp();
 		}
@@ -34,6 +34,8 @@ public class Sword extends Entity implements Collectable {
 		if (direction == "right") {
 			p.getPt().setRight();
 		}
+		collect(p);
+		
 }
 	
 
