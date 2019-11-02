@@ -7,10 +7,11 @@ import java.util.ArrayList;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Movable {
+public class Player extends Entity implements Movable, Subject {
 
     private Dungeon dungeon;
     private int treasure;
+    private ArrayList <Observer> observers = new ArrayList <Observer>();
     final static int NORMAL = 0;
     final static int INVINCIBLE = 1;
     private int state = NORMAL;
@@ -78,9 +79,21 @@ public class Player extends Entity implements Movable {
 		
 	}
 	
-	//=========== end of backPack functions ===========    
-    
-	
+	//=========== end of backPack functions ===========
+
+	@Override
+	public void attachObserver(Observer o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void notifyObserver() {
+		for (Observer o : observers){
+			o.update(this);
+		}
+	}
+
+
 	//=========== enviroment detection ===========
 	
 	
