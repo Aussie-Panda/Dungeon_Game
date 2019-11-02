@@ -36,4 +36,5 @@ public class Enemy extends Entity implements Movable {
     public void setState(EnemyState state) {
         this.state = state;
     }
+
 }

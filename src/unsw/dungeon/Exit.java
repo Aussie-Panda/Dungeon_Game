@@ -6,5 +6,10 @@ public class Exit extends Entity {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
+	
+    @Override
+    public boolean passable (Point pt) {
+    	return true;
+    }
 
 }

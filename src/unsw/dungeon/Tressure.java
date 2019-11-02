@@ -11,6 +11,17 @@ public class Tressure extends Entity implements Collectable {
         this.numOftreasure = 0;
     }
 
+    @Override
+    public boolean passable (Point pt) {
+    	return true;
+    }
+    
+	@Override
+	public void interact(Player p) {
+		// TODO Auto-generated method stub
+		collect(p);
+	}
+    
 	@Override
 	public void collect(Player p) {
 
