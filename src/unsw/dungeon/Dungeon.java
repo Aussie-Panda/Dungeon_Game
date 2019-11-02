@@ -20,7 +20,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
-
+    // need a status indicating winning
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -28,6 +28,8 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.player = null;
     }
+
+
 
     public int getWidth() {
         return width;

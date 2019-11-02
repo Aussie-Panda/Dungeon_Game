@@ -16,7 +16,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="json.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/json.jar!/" />
@@ -26,5 +26,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="zulu11.35.13-ca-jdk11.0" level="project" />
+    <orderEntry type="library" exported="" name="jdk-11.0.2" level="project" />
   </component>
 </module>
