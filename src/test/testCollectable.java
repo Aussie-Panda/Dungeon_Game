@@ -8,6 +8,7 @@ import unsw.dungeon.Dungeon;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 import unsw.dungeon.Point;
+import unsw.dungeon.Treassure;
 
 public class testCollectable {
 
@@ -57,6 +58,44 @@ public class testCollectable {
         p.moveRight();
 
         assertEquals(p.getBackPack().contains(k1), true);
+
+    }
+	
+	@Test
+    void testPlayerPickTreasures(){
+		System.out.println("Testing Player pick keys -----");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        
+        Treassure t = new Treassure(dungeon, 1, 0);
+        dungeon.addEntity(t);
+        Treassure t1 = new Treassure(dungeon, 2, 0);
+        dungeon.addEntity(t1);
+        
+        p.moveRight();
+        assertEquals(p.getTreasure() == 1, true);
+        p.moveRight();
+        assertEquals(p.getTreasure() == 2, true);
+
+    }
+	
+	@Test
+    void testPlayerPickSword(){
+		System.out.println("Testing Player pick keys -----");
+        Dungeon dungeon = new Dungeon(4, 4);
+        Player p = new Player(dungeon, 0, 0);
+        dungeon.addEntity(p);
+        
+        Treassure t = new Treassure(dungeon, 1, 0);
+        dungeon.addEntity(t);
+        Treassure t1 = new Treassure(dungeon, 2, 0);
+        dungeon.addEntity(t1);
+        
+        p.moveRight();
+        assertEquals(p.getTreasure() == 1, true);
+        p.moveRight();
+        assertEquals(p.getTreasure() == 2, true);
 
     }
 	

@@ -46,7 +46,7 @@ public class Treassure extends Entity implements Collectable, Subject {
 		p.setTreasure(p.getTreasure()+1);
 		this.numOftreasure = p.getTreasure();
 		// notify goal that this tressure has been picked
-		notifyObserver();
+		if (goal  != null) notifyObserver();
 		//remove from dungeon list
 		dungeon.removeEntity(this);
 

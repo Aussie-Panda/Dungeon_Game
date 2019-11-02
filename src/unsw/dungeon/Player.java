@@ -72,6 +72,7 @@ public class Player extends Entity implements Movable {
 				Key k = (Key)c;
 				if (k.getId() == id) {
 					backPack.remove(k);
+					return;
 				}
 			}
 		}
