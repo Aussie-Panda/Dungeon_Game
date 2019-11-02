@@ -17,10 +17,7 @@ public class Boulder extends Entity implements Movable {
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
 		if (eList == null) return true;
 		
-		// if boulder false
-		// if collectable false
-		// if wall false
-		// if movable false
+
 		
 		return result;
 	}

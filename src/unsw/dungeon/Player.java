@@ -64,7 +64,7 @@ public class Player extends Entity implements Movable {
 		boolean result = true;
 		
 		ArrayList <Entity> eList = dungeon.getEntity(pt);
-		if (eList == null) return true;
+		if (eList.isEmpty()) return true;
 		for (Entity e : eList) {
 			result = result & e.passable(dungeon,pt);
 		}
@@ -85,41 +85,41 @@ public class Player extends Entity implements Movable {
 	
 		Point target = getPt().getUp();
 		
-		// interact boulder
-		if ((getY() > 0) && (passable(target))) {
-			if (dungeon.getBoulder(target) != null) {
-				Boulder b = dungeon.getBoulder(target);
-				b.interact(this, "up");
-				return;
-			}
-			
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
 			// move up
 			this.getPt().setUp();
-			
-			//collect
-			if (dungeon.getCollectable(this.getPt()) != null) {
-				Collectable c = dungeon.getCollectable(this.getPt());
-				c.collect(this);
+		} else {
+			if ((getY() > 0) && (passable(target))) {
+				for (Entity e : eList) {
+					if (!(e instanceof Floor)) {
+						e.interact(this, "up");
+					}
+				}
 			}
 		}
-    }
+		
+	}
+	
 
     @Override
     public void moveDown() {
 
     	Point target = getPt().getDown();
-
-        //if (getY() < dungeon.getHeight() - 1)
-    	if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
-			if (dungeon.getBoulder(target) != null) {
-				Boulder b = dungeon.getBoulder(target);
-				b.interact(this, "down");
-				return;
-			}
+    	
+    	
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			// move down
 			this.getPt().setDown();
-			if (dungeon.getCollectable(this.getPt()) != null) {
-				Collectable c = dungeon.getCollectable(this.getPt());
-				c.collect(this);
+		} else {
+			if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
+				for (Entity e : eList) {
+					if (!(e instanceof Floor)) {
+						e.interact(this, "down");
+					}
+					
+				}
 			}
 		}
     }
@@ -128,41 +128,38 @@ public class Player extends Entity implements Movable {
     public void moveLeft() {
     	Point target = getPt().getLeft();
     	// interact boulder
-		if ((getX() > 0) && (passable(target))) {
-			if (dungeon.getBoulder(target) != null) {
-				Boulder b = dungeon.getBoulder(target);
-				b.interact(this, "left");
-				return;
-			}
-			
+    	
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
 			// move left
 			this.getPt().setLeft();
-			
-			//collect
-			if (dungeon.getCollectable(this.getPt()) != null) {
-				Collectable c = dungeon.getCollectable(this.getPt());
-				c.collect(this);
+		} else {
+			if ((getX() > 0) && (passable(target))) {
+				for (Entity e : eList) {
+					if (!(e instanceof Floor)) {
+						e.interact(this, "left");
+					}
+				}
 			}
 		}
+
     }
 
     @Override
     public void moveRight() {
     	Point target = getPt().getRight();
-    	if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
-			if (dungeon.getBoulder(target) != null) {
-				Boulder b = dungeon.getBoulder(target);
-				b.interact(this, "right");
-				return;
-			}
-			
-			// move Right
+    	
+    	ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			// move right
 			this.getPt().setRight();
-			
-			//collect
-			if (dungeon.getCollectable(this.getPt()) != null) {
-				Collectable c = dungeon.getCollectable(this.getPt());
-				c.collect(this);
+		} else {
+			if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
+				for (Entity e : eList) {
+					if (!(e instanceof Floor)) {
+						e.interact(this, "right");
+					}
+				}
 			}
 		}
     }
