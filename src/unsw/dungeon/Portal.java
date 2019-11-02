@@ -25,41 +25,28 @@ public class Portal extends Entity implements Throughable {
         dir.add(por.getPt().getLeft());
         for (Point pt : dir){
             ArrayList<Entity> eList = dungeon.getEntity(pt);
-            if (eList.isEmpty()) {
-                if (pt.getY() < dungeon.getHeight()
-                        && pt.getY() >= 0
-                        && pt.getX() < dungeon.getWidth()
-                        && pt.getX() >= 0){
+            if (pt.getY() < dungeon.getHeight()
+                    && pt.getY() >= 0
+                    && pt.getX() < dungeon.getWidth()
+                    && pt.getX() >= 0
+                    && passable(dungeon, pt)){
                     return pt;
                 }
-            } else {
-
-
-            }
         }
-
-            if ((getY() < dungeon.getHeight() - 1) && (passable(target))) {
-                for (Entity e : eList) {
-                    if (!(e instanceof Floor)) {
-                        e.interact(this, "down");
-                    }
-
-                }
-            }
-        }
+        return null;
     }
 
     @Override
-    public void through(Movable p) {
+    public void through(Movable p, String dir) {
         // get the corresponding portal
         Portal B  = dungeon.getPortal(id, !isA);
-
-        ((Entity) p).setPt(B.getPt());
+        Point pt = validDirection(B);
+        if (pt != null) ((Entity) p).setPt(pt);
     }
 
     @Override
     public void interact(Player p, String direction) {
-        through(p);
+        through(p, dir);
     }
 
     public int getId() {
