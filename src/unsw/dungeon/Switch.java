@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
-public class Switch extends Entity  implements Floor {
+public class Switch extends Entity  implements Floor, Subject{
+
+	private Observer goal;
 
 	public Switch(int x, int y) {
 		super(x, y);
@@ -22,4 +24,13 @@ public class Switch extends Entity  implements Floor {
 		return true;
 	}
 
+	@Override
+	public void attachObserver(Observer o) {
+		goal = o;
+	}
+
+	@Override
+	public void notifyObserver() {
+		goal.update(this);
+	}
 }

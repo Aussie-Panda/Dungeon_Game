@@ -3,11 +3,17 @@ package unsw.dungeon;
 public class ExitGoal implements Goal, Observer{
 
     Subject exit;
+    Boolean isMain = false;
     Boolean status = false;
     Dungeon dungeon;
 
     public ExitGoal (Dungeon dungeon){
         this.dungeon = dungeon;
+        for (Entity e : dungeon.getEntities()){
+            if (e.getClass() == Exit.class) {
+                subscript((Subject) e);
+            }
+        }
     }
 
 
@@ -26,6 +32,15 @@ public class ExitGoal implements Goal, Observer{
     public void update(Subject s) {
         status =  true;//TODO
         dungeon.win();
-
     }
+
+    public void setMain() {
+        isMain = true;
+    }
+
+    @Override
+    public boolean isMain() {
+        return isMain;
+    }
+
 }

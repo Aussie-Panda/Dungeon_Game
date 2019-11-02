@@ -1,11 +1,12 @@
 package unsw.dungeon;
 
-public class Tressure extends Entity implements Collectable {
+public class Treassure extends Entity implements Collectable, Subject {
 
     Dungeon dungeon;
     private int numOftreasure;
+    Observer goal;
 
-    public Tressure (Dungeon dungeon, int x, int y){
+    public Treassure(Dungeon dungeon, int x, int y){
         super(x, y);
         this.dungeon = dungeon;
         this.numOftreasure = 0;
@@ -43,14 +44,23 @@ public class Tressure extends Entity implements Collectable {
 
 		p.setTreasure(p.getTreasure()+1);
 		this.numOftreasure = p.getTreasure();
+		// notify goal that this tressure has been picked
+		notifyObserver();
 		//remove from dungeon list
 		dungeon.removeEntity(this);
 
 	}
 
-	
-	
-	
+	@Override
+	public void attachObserver(Observer o) {
+    	goal = o;
+	}
+
+	@Override
+	public void notifyObserver() {
+		goal.update(this);
+	}
+
 	public int getNumOftreasure() {
 		return numOftreasure;
 	}

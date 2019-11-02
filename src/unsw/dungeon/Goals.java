@@ -6,6 +6,7 @@ public class Goals implements Goal {
 
     private Dungeon dungeon;
     private String type;
+    private boolean isMain = false;
 //    private boolean status = false;
     private ArrayList<Goal> subGoals = new ArrayList <Goal>();
 
@@ -40,10 +41,17 @@ public class Goals implements Goal {
         return res;
     }
 
-
+    @Override
+    public boolean isMain() {
+        return false;
+    }
 
     public void addSubgoals(Goal g) {
         this.subGoals.add(g);
+    }
+
+    public void setMain() {
+        isMain = true;
     }
 }
 
