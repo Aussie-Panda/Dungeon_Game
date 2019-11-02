@@ -2,6 +2,6 @@ package unsw.dungeon;
 
 public interface Throughable {
 	
-	public void through(Player p, String dir);
+	public void through(Movable m, String dir);
 	
 }

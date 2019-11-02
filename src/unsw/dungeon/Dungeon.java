@@ -84,7 +84,6 @@ public class Dungeon {
     }
 	    
 	public Wall getWall (Point pt) {
-		
 		Wall result = null;
 		for (Entity e : entities) {
 			if (e.getPt().equals(pt)) {
@@ -97,7 +96,6 @@ public class Dungeon {
 	}
     
 	public Boulder getBoulder (Point pt) {
-		
 		Boulder result = null;
 		for (Entity e : entities) {
 			if (e.getPt().equals(pt)) {
@@ -110,7 +108,6 @@ public class Dungeon {
 	}
 	
 	public Switch getSwitch (Point pt) {
-		
 		Switch result = null;
 		for (Entity e : entities) {
 			if (e.getPt().equals(pt)) {
@@ -120,6 +117,15 @@ public class Dungeon {
 			}	
 		}
 		return result;
+	}
+
+	public Portal getPortal (int id, boolean isA) {
+		for (Entity e: entities){
+			if (e.getClass() == Portal.class && ((Portal) e).getId() == id && ((Portal) e).isA() != isA){
+				return (Portal) e;
+			}
+		}
+		return null;
 	}
 	
 	

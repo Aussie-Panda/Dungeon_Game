@@ -84,8 +84,7 @@ public class Player extends Entity implements Movable {
 	
     
 	//=========== player Movement ===========
-	
-	
+
 
 	
 	@Override
@@ -114,8 +113,7 @@ public class Player extends Entity implements Movable {
     public void moveDown() {
 
     	Point target = getPt().getDown();
-    	
-    	
+
 		ArrayList <Entity> eList = dungeon.getEntity(target);
 		if (eList.isEmpty()) {
 			// move down
