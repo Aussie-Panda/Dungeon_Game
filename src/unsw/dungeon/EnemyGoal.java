@@ -10,7 +10,7 @@ public class EnemyGoal implements Goal, Observer {
 
     @Override
     public void subscript(Subject s) {
-
+        subject = s;
     }
 
     @Override

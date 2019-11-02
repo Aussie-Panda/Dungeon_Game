@@ -1,11 +1,13 @@
 package unsw.dungeon;
 
-public class ExitGoal extends GoalObject implements Observer{
+public class ExitGoal implements Goal, Observer{
 
     Subject exit;
+    Boolean status = false;
+    Dungeon dungeon;
 
     public ExitGoal (Dungeon dungeon){
-        super(dungeon);
+        this.dungeon = dungeon;
     }
 
 
@@ -13,5 +15,15 @@ public class ExitGoal extends GoalObject implements Observer{
     @Override
     public void subscript(Subject s) {
         this.exit = s;
+    }
+
+    @Override
+    public boolean isComplete() {
+        return status;
+    }
+
+    @Override
+    public void update() {
+        status = status ^ false;//TODO
     }
 }
