@@ -148,6 +148,10 @@ public class Dungeon {
     	System.out.println("WIN!!");
 	}
 
+	public void lose() {
+    	System.out.println("LOSE!!");
+	}
+
 
 
 }

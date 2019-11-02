@@ -26,6 +26,7 @@ public class Exit extends Entity implements Subject{
 		goal.update(this);
 	}
 
+	// if there's other goal, player must achieve them first
 	public void setOtherGoal(Goal g) {
 		otherGoal = g;
 	}
@@ -33,7 +34,12 @@ public class Exit extends Entity implements Subject{
 	// if player wants to get to exit and all other goals are completed, notify ExitGoal
 	@Override
 	public void interact(Player p) {
-		if (goal != null && otherGoal.isComplete()) {
+		// if there's no other goal
+		if (otherGoal == null) {
+			notifyObserver();
+
+		// if others goals are completed
+		} else if (otherGoal.isComplete()) {
 			notifyObserver();
 
 		} else {
