@@ -47,6 +47,14 @@ public class Player extends Entity implements Movable {
     
 	
 	
+	public boolean hasKey (int id) {
+		//if has key in the bag
+		for (Collectable c : backPack) {
+			if (c.getClass() == Key.class && ((Key) c).getId() == id) return true;
+		}
+		return false;
+	}
+
 	public boolean hasKey () {
 		//if has key in the bag
 		for (Collectable c : backPack) {

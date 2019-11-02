@@ -20,7 +20,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
-    private Goal goal; // store the first processed goal
+//    private Goal mainGoal; // store the first processed goal
     // need a status indicating winning
     
     public Dungeon(int width, int height) {
