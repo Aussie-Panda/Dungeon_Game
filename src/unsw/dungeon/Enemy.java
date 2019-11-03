@@ -63,6 +63,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     public void moveUp() {
 	
 		Point target = getPt().getUp();
+		Throughable t = dungeon.getThroughable(target);
 		if (getY() <= 0) {
 			return;
 		}
@@ -72,6 +73,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 			this.getPt().setUp();
 		} else {
 			if (passable(target))  {
+				if (t != null) {
+					t.through(this, "Up");
+					return;
+				}
 				this.getPt().setUp();
 			} else if ((dungeon.getPlayer(target) != null)) {
 				this.interact((Player) this.player, null);
@@ -83,7 +88,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     public void moveDown() {
 		//
 		Point target = getPt().getDown();
-		
+		Throughable t = dungeon.getThroughable(target);
 		if (getY() >= dungeon.getHeight() - 1) {
 			return;
 		}
@@ -93,7 +98,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 			this.getPt().setDown();
 		} else {
 			if (passable(target))  {
-				//
+				if (t != null) {
+					t.through(this, "down");
+					return;
+				}
 				this.getPt().setDown();
 			} else if ((dungeon.getPlayer(target) != null)) {
 				this.interact((Player) this.player, null);
@@ -105,7 +113,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     public void moveLeft() {
 		//
 		Point target = getPt().getLeft();
-		
+		Throughable t = dungeon.getThroughable(target);
 		if ((getX() <= 0)) {
 			return;
 		}
@@ -115,7 +123,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 			this.getPt().setLeft();
 		} else {
 			if (passable(target))  {
-				//
+				if (t != null) {
+					t.through(this, "left");
+					return;
+				}
 				this.getPt().setLeft();
 			} else if ((dungeon.getPlayer(target) != null)) {
 				this.interact((Player) this.player, null);
@@ -127,6 +138,8 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     public void moveRight() {
 		//
 		Point target = getPt().getRight();
+		Throughable t = dungeon.getThroughable(target);
+		
 		
 		if (getX() >= dungeon.getWidth() - 1) {
 			return;
@@ -137,7 +150,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 			this.getPt().setRight();
 		} else {
 			if (passable(target))  {
-				//
+				if (t != null) {
+					t.through(this, "right");
+					return;
+				}
 				this.getPt().setRight();
 			} else if ((dungeon.getPlayer(target) != null)) {
 				this.interact((Player) this.player, null);

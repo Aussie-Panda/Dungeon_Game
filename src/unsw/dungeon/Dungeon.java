@@ -129,6 +129,20 @@ public class Dungeon {
 		return null;
 	}
 	
+
+	public Throughable getThroughable (Point pt) {
+    	
+		Throughable result = null;
+    	for (Entity e : entities) {
+    		if (e.getPt().equals(pt)) {
+    			if (e instanceof Throughable) {
+	    			result = (Throughable) e;
+	    		}
+    		}
+    	}
+    	return result;
+    }
+	
 	public Player getPlayer (Point pt) {
 		Player result = null;
 		for (Entity e : entities) {
