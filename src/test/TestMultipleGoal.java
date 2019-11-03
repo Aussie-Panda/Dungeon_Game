@@ -39,9 +39,9 @@ public class TestMultipleGoal {
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
         // set tressures
+        dungeon.addEntity(new Treassure(dungeon, 0, 2));
+        dungeon.addEntity(new Treassure(dungeon, 0, 3));
         dungeon.addEntity(new Treassure(dungeon, 1, 3));
-        dungeon.addEntity(new Treassure(dungeon, 2, 3));
-        dungeon.addEntity(new Treassure(dungeon, 3, 3));
 
         // set switch and boulder
         dungeon.addEntity(new Switch(2, 0));
@@ -61,10 +61,10 @@ public class TestMultipleGoal {
         p.moveLeft();
         p.moveDown();
         p.moveRight();  // toggle 2nd switch
-
+        p.moveLeft();
         // pick up treasure
         p.moveDown();   // pick up 1st
-        p.moveRight(); // pick up 2nd
+        p.moveDown(); // pick up 2nd
         p.moveRight(); // pick up 3rd
 
         assertTrue(goals.isComplete());
