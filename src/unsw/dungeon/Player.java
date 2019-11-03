@@ -129,7 +129,8 @@ public class Player extends Entity implements Movable, Subject {
 			// move up
 			this.getPt().setUp();
 		} else {
-			if ((passable(target)) || (dungeon.getBoulder(target) != null)) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null) || 
+					(dungeon.getThroughable(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "up");
@@ -155,7 +156,8 @@ public class Player extends Entity implements Movable, Subject {
 			// move down
 			this.getPt().setDown();
 		} else {
-			if ((passable(target) || dungeon.getBoulder(target) != null)) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null) || 
+					(dungeon.getThroughable(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "down");
@@ -179,7 +181,8 @@ public class Player extends Entity implements Movable, Subject {
 			// move left
 			this.getPt().setLeft();
 		} else {
-			if ((passable(target)) || (dungeon.getBoulder(target) != null)) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null) || 
+					(dungeon.getThroughable(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "left");
@@ -199,7 +202,8 @@ public class Player extends Entity implements Movable, Subject {
 			// move right
 			this.getPt().setRight();
 		} else {
-			if (passable(target) || (dungeon.getBoulder(target) != null)) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null) || 
+					(dungeon.getThroughable(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "right");

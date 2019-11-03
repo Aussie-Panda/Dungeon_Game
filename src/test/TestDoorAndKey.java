@@ -33,15 +33,13 @@ class TestDoorAndKey {
 
     @Test
     void testPlayerWithKey() {
-        int idD = 0;
-        int idK = 0;
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
 
-        Door d1 = new Door(dungeon, ++idD, 1,1);
+        Door d1 = new Door(dungeon, 0, 1,1);
         dungeon.addEntity(d1);
-        Key k1 = new Key(dungeon, ++idK, 1, 2 );
+        Key k1 = new Key(dungeon, 0, 1, 2 );
         dungeon.addEntity(k1);
 
         // player goes to pick up key
