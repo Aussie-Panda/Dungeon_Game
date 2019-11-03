@@ -32,7 +32,7 @@ public class ExitGoal implements Goal, Observer{
 
     @Override
     public void update(Subject s) {
-        status =  true;//TODO
+        status =  true;
         if (isMain())dungeon.win();
         else if (parent != null) {
             status = true;
