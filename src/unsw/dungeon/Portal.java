@@ -41,7 +41,20 @@ public class Portal extends Entity implements Throughable {
         // get the corresponding portal
         Portal B  = dungeon.getPortal(id, !isA);
         Point pt = validDirection(B);
-        if (pt != null) ((Entity) p).setPt(pt);
+        
+        
+        if (pt != null) {
+        	
+        	Collectable c = dungeon.getCollectable(pt);
+        	if (c != null && (p.getClass() == Player.class)) {
+            	((Entity) c).interact((Player) p, dir);
+            	return;
+            }
+        	
+        	((Entity) p).setPt(pt);
+        }
+        
+
     }
 
     @Override
@@ -55,6 +68,11 @@ public class Portal extends Entity implements Throughable {
 
     public boolean isA() {
         return isA;
+    }
+    
+    @Override
+    public boolean passable (Dungeon d, Point pt) {
+    	return true;
     }
 
 }

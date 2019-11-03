@@ -21,21 +21,7 @@ public class Treassure extends Entity implements Collectable, Subject {
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
 		
-		if (direction == "up") {
-			p.getPt().setUp();
-		}
-		
-		if (direction == "down") {
-			p.getPt().setDown();
-		}
-		
-		if (direction == "left") {
-			p.getPt().setLeft();
-		}
-		
-		if (direction == "right") {
-			p.getPt().setRight();
-		}
+		p.setPt(this.getPt());
 		collect(p);
 	}
 	

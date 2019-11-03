@@ -26,15 +26,15 @@ public class TestCollectable {
         dungeon.addEntity(k1);
         
         p.moveRight();
-        
-
+        Point correct = new Point (1,0);
+        assertEquals(p.getPt().equals(correct), true);
         assertEquals(p.getBackPack().contains(k1), false);
         assertEquals(p.getBackPack().contains(k), true);
         
         p.moveRight();
         //fail becuz already has one key
         assertEquals(p.getBackPack().contains(k1), false);
-
+        
     }
 	
 	@Test
