@@ -35,8 +35,9 @@ public class SwitchGoal implements Goal, Observer {
         if (switches == 0) {
             status = true;
             if (isMain) dungeon.win();
+        } else {
+        	status = false;
         }
-        else status = false;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class Exit extends Entity implements Subject{
 
 	// if player wants to get to exit and all other goals are completed, notify ExitGoal
 	@Override
-	public void interact(Player p) {
+	public void interact(Player p, String dir) {
 		// if there's no other goal
 		if (otherGoal == null) {
 			notifyObserver();

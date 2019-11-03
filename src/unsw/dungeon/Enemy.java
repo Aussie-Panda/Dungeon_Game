@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class Enemy extends Entity implements Movable, Observer, Subject {
 
     private Dungeon dungeon;
@@ -47,7 +49,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     }
 
     @Override
-    public void interact(Player p) {
+    public void interact(Player p, String dir) {
         // enemy die if player is invincible
         if (p.getState().equals("invincible")){
             dungeon.removeEntity(this);
@@ -78,5 +80,18 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1) getPt().setRight();
     }
+    
+    
+    
+	public boolean passable (Point pt) {
+		boolean result = true;
+		
+		ArrayList <Entity> eList = dungeon.getEntity(pt);
+		if (eList.isEmpty()) return true;
+		for (Entity e : eList) {
+			result = result & e.passable(dungeon,pt);
+		}
+		return result;
+	}
 
 }

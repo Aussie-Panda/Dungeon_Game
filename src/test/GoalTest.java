@@ -50,7 +50,7 @@ class GoalTest {
         dungeon.addEntity(p);
         dungeon.addEntity(new Treassure(dungeon, 1, 0));
         dungeon.addEntity(new Treassure(dungeon, 2, 2));
-        dungeon.addEntity(new Treassure(dungeon, 3, 4));
+        dungeon.addEntity(new Treassure(dungeon, 3, 3));
         TreassureGoal goal = new TreassureGoal(dungeon);
         goal.setMain();
 
@@ -67,7 +67,7 @@ class GoalTest {
         dungeon.addEntity(p);
         dungeon.addEntity(new Treassure(dungeon, 1, 0));
         dungeon.addEntity(new Treassure(dungeon, 2, 2));
-        dungeon.addEntity(new Treassure(dungeon, 3, 4));
+        dungeon.addEntity(new Treassure(dungeon, 3, 3));
         TreassureGoal goal = new TreassureGoal(dungeon);
         goal.setMain();
 
@@ -76,7 +76,6 @@ class GoalTest {
         p.moveDown();
         p.moveRight();  // pick 2nd treasure
         p.moveRight();
-        p.moveDown();
         p.moveDown();   // pick 3rd treasure
 
         assertTrue(goal.isComplete());
@@ -90,7 +89,7 @@ class GoalTest {
         Enemy e1 = new Enemy(dungeon, 2, 2);
         dungeon.addEntity(e1);
         e1.subscript(p);
-        Enemy e2 = new Enemy(dungeon, 4, 4);
+        Enemy e2 = new Enemy(dungeon, 3, 3);
         dungeon.addEntity(e2);
         e2.subscript(p);
         EnemyGoal goal = new EnemyGoal(dungeon);
@@ -108,15 +107,15 @@ class GoalTest {
         Enemy e1 = new Enemy(dungeon, 2, 2);
         dungeon.addEntity(e1);
         e1.subscript(p);
-        Enemy e2 = new Enemy(dungeon, 4, 4);
+        Enemy e2 = new Enemy(dungeon, 3, 3);
         dungeon.addEntity(e2);
         e2.subscript(p);
         EnemyGoal goal = new EnemyGoal(dungeon);
         goal.setMain();
 
         p.setState("invincible");
-        e1.interact(p);
-        e2.interact(p);
+        e1.interact(p, null);
+        e2.interact(p, null);
 
         assertTrue(goal.isComplete());
     }
@@ -126,7 +125,7 @@ class GoalTest {
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
-        dungeon.addEntity(new Switch(4, 0));
+        dungeon.addEntity(new Switch(3, 0));
         dungeon.addEntity((new Boulder(2, 0)));
         SwitchGoal goal = new SwitchGoal(dungeon);
         goal.setMain();
@@ -142,20 +141,18 @@ class GoalTest {
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
-        dungeon.addEntity(new Switch(4, 0));
-        dungeon.addEntity((new Switch(4,4)));
-        dungeon.addEntity((new Boulder(2, 0)));
-        dungeon.addEntity((new Boulder(3, 4)));
+        dungeon.addEntity(new Switch(0, 2));
+        dungeon.addEntity((new Switch(2, 0)));
+        dungeon.addEntity((new Boulder(1, 0)));
+        dungeon.addEntity((new Boulder(0, 1)));
         SwitchGoal goal = new SwitchGoal(dungeon);
         goal.setMain();
 
-        p.moveRight();
+
         p.moveRight(); // push first boulder to the first switch
-        p.moveDown();
-        p.moveDown();
         p.moveLeft();
-        p.moveDown();
-        p.moveRight(); // push second boulder o the second switch
+
+        p.moveDown(); // push second boulder o the second switch
 
         assertTrue(goal.isComplete());
 

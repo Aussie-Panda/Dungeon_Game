@@ -121,13 +121,15 @@ public class Player extends Entity implements Movable, Subject {
     public void moveUp() {
 	
 		Point target = getPt().getUp();
-		
+		if (getY() <= 0) {
+			return;
+		}
 		ArrayList <Entity> eList = dungeon.getEntity(target);
 		if (eList.isEmpty()) {
 			// move up
 			this.getPt().setUp();
 		} else {
-			if ((getY() > 0) && (passable(target))) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "up");
@@ -145,11 +147,15 @@ public class Player extends Entity implements Movable, Subject {
     	Point target = getPt().getDown();
 
 		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (getY() >= (dungeon.getHeight() - 1)) {
+			return;
+		}
+		
 		if (eList.isEmpty()) {
 			// move down
 			this.getPt().setDown();
 		} else {
-			if ((getY() < dungeon.getHeight() - 1) && (passable(target) || dungeon.getBoulder(target) != null)) {
+			if ((passable(target) || dungeon.getBoulder(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "down");
@@ -166,11 +172,14 @@ public class Player extends Entity implements Movable, Subject {
     	// interact boulder
     	
 		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (getX() <= 0) {
+			return;
+		}
 		if (eList.isEmpty()) {
 			// move left
 			this.getPt().setLeft();
 		} else {
-			if ((getX() > 0) && (passable(target))) {
+			if ((passable(target)) || (dungeon.getBoulder(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "left");
@@ -184,13 +193,13 @@ public class Player extends Entity implements Movable, Subject {
     @Override
     public void moveRight() {
     	Point target = getPt().getRight();
-    	
+    	if (getX() >= dungeon.getWidth() - 1) return;
     	ArrayList <Entity> eList = dungeon.getEntity(target);
 		if (eList.isEmpty()) {
 			// move right
 			this.getPt().setRight();
 		} else {
-			if ((getX() < dungeon.getWidth() - 1) && (passable(target))) {
+			if (passable(target) || (dungeon.getBoulder(target) != null)) {
 				for (Entity e : eList) {
 					if (!(e instanceof Floor)) {
 						e.interact(this, "right");

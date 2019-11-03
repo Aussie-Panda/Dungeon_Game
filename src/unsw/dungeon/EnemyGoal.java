@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
 public class EnemyGoal implements Goal, Observer {
-
+	
+	private Dungeon dungeon;
     private int enemies = 0;
     private boolean isMain = false;
     private boolean status = false;
@@ -10,6 +11,8 @@ public class EnemyGoal implements Goal, Observer {
         for (Entity e : dungeon.getEntities()){
             if (e.getClass() == Enemy.class) subscript((Subject) e);
         }
+        this.dungeon = dungeon;
+        
     }
 
     @Override
@@ -22,7 +25,10 @@ public class EnemyGoal implements Goal, Observer {
     @Override
     public void update(Subject s) {
         if (enemies > 0) enemies--;
-        if (enemies == 0) status = true;
+        if (enemies == 0) {
+        	status = true;
+        	if (isMain()) dungeon.win();
+        }
         else status = false;
     }
 
