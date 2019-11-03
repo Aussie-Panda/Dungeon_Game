@@ -11,7 +11,7 @@ import unsw.dungeon.Point;
 import unsw.dungeon.Potion;
 import unsw.dungeon.Treassure;
 
-public class testCollectable {
+public class TestCollectable {
 
 	@Test
     void testPlayerPickKeys(){

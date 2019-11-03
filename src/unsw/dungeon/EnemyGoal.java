@@ -6,6 +6,7 @@ public class EnemyGoal implements Goal, Observer {
     private int enemies = 0;
     private boolean isMain = false;
     private boolean status = false;
+    private Goals parent;
 
     public EnemyGoal(Dungeon dungeon) {
         for (Entity e : dungeon.getEntities()){
@@ -28,6 +29,7 @@ public class EnemyGoal implements Goal, Observer {
         if (enemies == 0) {
         	status = true;
         	if (isMain()) dungeon.win();
+        	else if (parent != null) parent.checkComplete(this);
         }
         else status = false;
     }
@@ -44,5 +46,10 @@ public class EnemyGoal implements Goal, Observer {
 
     public void setMain() {
         isMain = true;
+    }
+
+    @Override
+    public void setParent(Goals g) {
+        parent = g;
     }
 }

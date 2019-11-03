@@ -6,6 +6,7 @@ public class SwitchGoal implements Goal, Observer {
     private Dungeon dungeon;
     private boolean status = false;
     private boolean isMain = false;
+    private Goals parent;
 
     public SwitchGoal(Dungeon dungeon) {
         for (Entity e : dungeon.getEntities()){
@@ -35,6 +36,7 @@ public class SwitchGoal implements Goal, Observer {
         if (switches == 0) {
             status = true;
             if (isMain) dungeon.win();
+            else if (parent != null) parent.checkComplete(this);
         } else {
         	status = false;
         }
@@ -53,5 +55,10 @@ public class SwitchGoal implements Goal, Observer {
 
     public void setMain() {
         isMain = true;
+    }
+
+    @Override
+    public void setParent(Goals g){
+        parent = g;
     }
 }

@@ -6,8 +6,7 @@ import unsw.dungeon.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GoalTest {
-
+class TestSingleGoal {
 
     @Test
     void testSingleExitGoalFail(){
@@ -134,7 +133,6 @@ class GoalTest {
         p.moveRight();
 
         assertFalse(goal.isComplete());
-
     }
 
     @Test
@@ -149,14 +147,14 @@ class GoalTest {
         SwitchGoal goal = new SwitchGoal(dungeon);
         goal.setMain();
 
-
         p.moveRight(); // push first boulder to the first switch
         p.moveLeft();
-
         p.moveDown(); // push second boulder o the second switch
 
         assertTrue(goal.isComplete());
 
     }
+
+
 
 }

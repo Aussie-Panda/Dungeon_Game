@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 
 
-class potionTimer extends TimerTask {
+class PotionTimer extends TimerTask {
 
     int countdown = 5;
 

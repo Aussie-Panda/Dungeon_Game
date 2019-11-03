@@ -2,7 +2,6 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Potion extends Entity implements Consumable, Collectable {
 
@@ -22,7 +21,7 @@ public class Potion extends Entity implements Consumable, Collectable {
 			dungeon.removeEntity(this);
 			// set timer for 5 sec	    
 			Timer timer = new Timer();
-	        timer.schedule(new potionTimer(), 0, 1000);
+	        timer.schedule(new PotionTimer(), 0, 1000);
 	        p.setState("normal");
 		    
 			

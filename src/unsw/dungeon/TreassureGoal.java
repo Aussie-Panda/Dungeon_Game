@@ -6,6 +6,7 @@ public class TreassureGoal implements Goal, Observer  {
     private boolean status = false;
     private boolean isMain = false;
     private Dungeon dungeon;
+    private Goals parent;
 
     public TreassureGoal(Dungeon dungeon) {
         for (Entity e : dungeon.getEntities()){
@@ -27,6 +28,7 @@ public class TreassureGoal implements Goal, Observer  {
         if (treassures == 0) {
             status = true;
             if (isMain) dungeon.win();
+            else if (parent != null) parent.checkComplete(this);
         }
         else status = false;
     }
@@ -43,5 +45,10 @@ public class TreassureGoal implements Goal, Observer  {
 
     public void setMain() {
         isMain = true;
+    }
+
+    @Override
+    public void setParent(Goals g) {
+        parent = g;
     }
 }
