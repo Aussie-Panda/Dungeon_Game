@@ -129,6 +129,18 @@ public class Dungeon {
 		return null;
 	}
 	
+	public Player getPlayer (Point pt) {
+		Player result = null;
+		for (Entity e : entities) {
+			if (e.getPt().equals(pt)) {
+				if (e.getClass() == Player.class) {
+					result = (Player) e;
+				}
+			}	
+		}
+		return result;
+	}
+	
 	
 	public ArrayList <Entity> getEntity (Point pt) {
 		

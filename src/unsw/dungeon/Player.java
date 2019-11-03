@@ -259,6 +259,12 @@ public class Player extends Entity implements Movable, Subject {
 		return dungeon;
 	}
 
+	@Override
+	public boolean passable(Dungeon d, Point pt) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 
 

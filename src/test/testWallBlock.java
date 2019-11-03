@@ -91,18 +91,31 @@ public class testWallBlock {
 	@Test
     void testWallBlockEnemy(){
 		System.out.println("Testing Wall Block Enemy");
-        Dungeon dungeon = new Dungeon(4, 4);
+        Dungeon dungeon = new Dungeon(3, 3);
         Player p = new Player(dungeon, 0, 0);
-        Enemy e = new Enemy(dungeon, 0, 1);
         dungeon.addEntity(p);
+        Enemy e = new Enemy(dungeon, 1, 1);
         dungeon.addEntity(e);
 
-
-        Wall w1 = new Wall(0,2);        
+        Wall w = new Wall(1,0);
+        Wall w1 = new Wall(0,1);
+        Wall w2 = new Wall(1,2);
+        Wall w3 = new Wall(2,1);
+        dungeon.addEntity(w);
         dungeon.addEntity(w1);
-
+        dungeon.addEntity(w2);
+        dungeon.addEntity(w3);
+        
+        e.moveUp();
         e.moveDown();
-        Point correct = new Point(0,1);
+        e.moveLeft();
+        e.moveRight();
+        e.moveUp();
+        e.moveDown();
+        e.moveLeft();
+        e.moveRight();
+        
+        Point correct = new Point(1,1);
 
         assertEquals(e.getPt().equals(correct), true);
 	}

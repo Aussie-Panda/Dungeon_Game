@@ -104,7 +104,7 @@ class GoalTest {
         Dungeon dungeon = new Dungeon(4, 4);
         Player p = new Player(dungeon, 0, 0);
         dungeon.addEntity(p);
-        Enemy e1 = new Enemy(dungeon, 2, 2);
+        Enemy e1 = new Enemy(dungeon, 0, 1);
         dungeon.addEntity(e1);
         e1.subscript(p);
         Enemy e2 = new Enemy(dungeon, 3, 3);
@@ -114,7 +114,8 @@ class GoalTest {
         goal.setMain();
 
         p.setState("invincible");
-        e1.interact(p, null);
+        //e1.interact(p, null);
+        e1.moveUp();
         e2.interact(p, null);
 
         assertTrue(goal.isComplete());

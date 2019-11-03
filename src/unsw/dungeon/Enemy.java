@@ -59,28 +59,92 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         }
     }
 
-    @Override
+	@Override
     public void moveUp() {
-        if (getY() > 0) getPt().setUp();
-
-    }
-
-    @Override
+	
+		Point target = getPt().getUp();
+		if (getY() <= 0) {
+			return;
+		}
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			// move up
+			this.getPt().setUp();
+		} else {
+			if (passable(target))  {
+				this.getPt().setUp();
+			} else if ((dungeon.getPlayer(target) != null)) {
+				this.interact((Player) this.player, null);
+			}
+		}
+	}
+		
+	@Override
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1) getPt().setDown();
+		//
+		Point target = getPt().getDown();
+		
+		if (getY() >= dungeon.getHeight() - 1) {
+			return;
+		}
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			//
+			this.getPt().setDown();
+		} else {
+			if (passable(target))  {
+				//
+				this.getPt().setDown();
+			} else if ((dungeon.getPlayer(target) != null)) {
+				this.interact((Player) this.player, null);
+			}
+		}
+	}
 
-    }
-
-    @Override
+	@Override
     public void moveLeft() {
-        if (getX() > 0) getPt().setLeft();
-    }
+		//
+		Point target = getPt().getLeft();
+		
+		if ((getX() <= 0)) {
+			return;
+		}
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			//
+			this.getPt().setLeft();
+		} else {
+			if (passable(target))  {
+				//
+				this.getPt().setLeft();
+			} else if ((dungeon.getPlayer(target) != null)) {
+				this.interact((Player) this.player, null);
+			}
+		}
+	}
 
-    @Override
+	@Override
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1) getPt().setRight();
-    }
-    
+		//
+		Point target = getPt().getRight();
+		
+		if (getX() >= dungeon.getWidth() - 1) {
+			return;
+		}
+		ArrayList <Entity> eList = dungeon.getEntity(target);
+		if (eList.isEmpty()) {
+			//
+			this.getPt().setRight();
+		} else {
+			if (passable(target))  {
+				//
+				this.getPt().setRight();
+			} else if ((dungeon.getPlayer(target) != null)) {
+				this.interact((Player) this.player, null);
+			}
+		}
+	}
+
     
     
 	public boolean passable (Point pt) {
