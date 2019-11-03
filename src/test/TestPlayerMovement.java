@@ -8,7 +8,7 @@ import unsw.dungeon.Dungeon;
 import unsw.dungeon.Player;
 import unsw.dungeon.Point;
 
-public class testPlayerMovement {
+public class TestPlayerMovement {
 
 	@Test
     void testPlayerMoveLeft(){

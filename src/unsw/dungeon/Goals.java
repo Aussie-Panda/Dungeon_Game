@@ -9,10 +9,13 @@ public class Goals implements Goal {
     private boolean isMain = false;
 //    private boolean status = false;
     private ArrayList<Goal> subGoals = new ArrayList <Goal>();
+    private Goals parent;
+    private boolean hasExit = false;
 
 
-    public Goals (Dungeon dungeon) {
+    public Goals (Dungeon dungeon, String type) {
         this.dungeon = dungeon;
+        this.type = type;
     }
 
 
@@ -43,15 +46,27 @@ public class Goals implements Goal {
 
     @Override
     public boolean isMain() {
-        return false;
+        return isMain;
     }
 
     public void addSubgoals(Goal g) {
         this.subGoals.add(g);
+        g.setParent(this);
+        if (g.getClass() == ExitGoal.class) hasExit = true;
     }
 
     public void setMain() {
         isMain = true;
+    }
+
+    public void checkComplete(Goal g) {
+        if (isComplete() && isMain()) dungeon.win();
+        else if (!isMain && parent != null) parent.checkComplete(this);
+    }
+
+    @Override
+    public void setParent(Goals g) {
+        parent = g;
     }
 }
 

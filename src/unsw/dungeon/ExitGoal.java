@@ -2,14 +2,16 @@ package unsw.dungeon;
 
 public class ExitGoal implements Goal, Observer{
 
-    Subject exit;
-    Boolean isMain = false;
-    Boolean status = false;
-    Dungeon dungeon;
+    private Subject exit;
+    private Boolean isMain = false;
+    private Boolean status = false;
+    private Dungeon dungeon;
+    private Goals parent;
+
 
     public ExitGoal (Dungeon dungeon){
         this.dungeon = dungeon;
-        for (Entity e : dungeon.getEntities()){
+        for (Entity e : dungeon.getEntities()) {
             if (e.getClass() == Exit.class) {
                 subscript((Subject) e);
             }
@@ -31,7 +33,16 @@ public class ExitGoal implements Goal, Observer{
     @Override
     public void update(Subject s) {
         status =  true;//TODO
-        dungeon.win();
+        if (isMain())dungeon.win();
+        else if (parent != null) {
+            status = true;
+            // if still some goals are not completed, set to false
+            if (!parent.isComplete()) {
+                System.out.println("You haven't completed other goals yet");
+                status = false;
+            }
+            parent.checkComplete(this);
+        }
     }
 
     public void setMain() {
@@ -43,4 +54,9 @@ public class ExitGoal implements Goal, Observer{
         return isMain;
     }
 
+    @Override
+    public void setParent(Goals g) {
+        parent = g;
+
+    }
 }

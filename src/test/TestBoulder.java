@@ -1,17 +1,11 @@
 package test;
 
+import org.junit.jupiter.api.Test;
+import unsw.dungeon.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
-import unsw.dungeon.Boulder;
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.Player;
-import unsw.dungeon.Point;
-import unsw.dungeon.Switch;
-import unsw.dungeon.Wall;
-
-public class testBoulder {
+public class TestBoulder {
 
 	@Test
     void testBoulderMove(){
