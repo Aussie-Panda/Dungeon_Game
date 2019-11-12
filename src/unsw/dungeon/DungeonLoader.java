@@ -42,12 +42,26 @@ public abstract class DungeonLoader {
         }
         
         // load goals
-        loadGoal(dungeon, json.getJSONObject("goal-condition"));
+        loadMainGoal(dungeon, json.getJSONObject("goal-condition"));
     	
         return dungeon;
     }
     
-    private void loadGoal (Dungeon dungeon, JSONObject json) {
+    private void loadMainGoal (Dungeon dungeon, JSONObject json) {
+
+    	Goal g = loadGoal(dungeon, json); 
+    	
+    	// if goal is single 
+    	if (! (g instanceof Goals)) {
+    		g.setMain(); 
+    		
+    	//	if goal is muti-goal
+    	} else {  
+    		g.setMain();
+    	}
+    }
+    
+    private Goal loadGoal(Dungeon dungeon, JSONObject json) {
     	Goal g = null;
     	String goalName = json.getString("goal");
 //    	System.out.println(json.toString());
@@ -69,19 +83,15 @@ public abstract class DungeonLoader {
     		break;
     	};
     	
-    	// if goal is single 
-    	if (g != null) {
-    		g.setMain(); 
-    		
-    	//	if goal is muti-goal
-    	} else {
+    	// if single goal not found, it's multi-goal
+    	if (g == null) {
     		g = new Goals(dungeon, goalName);
-    		g.setMain();
     		JSONArray jsonSubgoals = json.getJSONArray("subgoals");
     		for (int i = 0; i < jsonSubgoals.length(); i++) {
-                loadGoal(dungeon, jsonSubgoals.getJSONObject(i));
+                ((Goals) g).addSubgoals(loadGoal(dungeon, jsonSubgoals.getJSONObject(i)));
             }
     	}
+    	return g;
     }
 
     private void loadEntity(Dungeon dungeon, JSONObject json) {

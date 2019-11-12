@@ -52,6 +52,7 @@ public class Goals implements Goal {
     public void addSubgoals(Goal g) {
         this.subGoals.add(g);
         g.setParent(this);
+//        System.out.println("adding goals " + g.getClass());
         if (g.getClass() == ExitGoal.class) hasExit = true;
     }
 
