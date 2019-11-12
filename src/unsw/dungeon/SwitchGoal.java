@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 public class SwitchGoal implements Goal, Observer {
 
-    private int switches = 0;
+    private int switches = 0; // number of untriggered switch
     private Dungeon dungeon;
     private boolean status = false;
     private boolean isMain = false;
@@ -10,14 +10,14 @@ public class SwitchGoal implements Goal, Observer {
 
     public SwitchGoal(Dungeon dungeon) {
         for (Entity e : dungeon.getEntities()){
-            if (e.getClass() == Switch.class && !((Switch) e).isOn()) subscript((Subject) e);
+            if (e.getClass() == Switch.class) subscript((Subject) e);
         }
         this.dungeon = dungeon;
     }
 
     @Override
     public void subscript(Subject s) {
-        switches++;
+        if (!((Switch) s).isOn()) switches++;
         s.attachObserver(this);
     }
 
