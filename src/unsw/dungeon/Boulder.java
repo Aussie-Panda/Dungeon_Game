@@ -56,14 +56,17 @@ public class Boulder extends Entity implements Movable {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-//		System.out.println("andjawndjawn/djawndjandjabjdbwajdwbja");
+
 		Point target = setTarget(this.getPt(), direction);
 		Switch dest = p.getDungeon().getSwitch(target);
 		Switch curr = p.getDungeon().getSwitch(this.getPt());
-		
+		//Point currPos = this.getPt();
+		boolean moved = false;
 		
 		//if can move
 		if (passable(p.getDungeon(),target)) {
+			moved = true;
+			
 			if (direction == "up") {	
 				moveUp();
 				//move player
@@ -88,11 +91,14 @@ public class Boulder extends Entity implements Movable {
 		
 		
 		//turn on
-		if (dest != null) {
+		if (dest != null && moved) {
+			//System.out.println("ON!!!!!!!!");
 			dest.setState(1);
 		}
+		
 		//turn off
-		if (curr != null) {
+		if (curr != null && moved) {
+			//System.out.println("OFF!!!!!!!!");
 			curr.setState(0);
 		}
 	}

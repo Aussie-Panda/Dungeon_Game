@@ -45,9 +45,9 @@ public class Switch extends Entity  implements Floor, Subject {
 	}
 
 	public void setState(int state) {
-		this.state = state;
-		if (goal != null) {
-			notifyObserver();
+		if (state != this.state) {
+			this.state = state;
+			if (goal != null) notifyObserver();
 		}
 		
 	}
