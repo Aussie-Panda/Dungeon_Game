@@ -30,8 +30,6 @@ public class Dungeon {
         this.player = null;
     }
 
-
-
     public int getWidth() {
         return width;
     }

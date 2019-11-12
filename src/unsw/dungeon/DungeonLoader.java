@@ -19,6 +19,9 @@ import java.io.FileReader;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private int keyId = 0;
+    private int doorId = 0;
+    private int portalId = 0;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
@@ -48,17 +51,8 @@ public abstract class DungeonLoader {
     }
     
     private void loadMainGoal (Dungeon dungeon, JSONObject json) {
-
     	Goal g = loadGoal(dungeon, json); 
-    	
-    	// if goal is single 
-    	if (! (g instanceof Goals)) {
-    		g.setMain(); 
-    		
-    	//	if goal is muti-goal
-    	} else {  
-    		g.setMain();
-    	}
+    	g.setMain();
     }
     
     private Goal loadGoal(Dungeon dungeon, JSONObject json) {
@@ -126,41 +120,75 @@ public abstract class DungeonLoader {
             Switch newswitch = new Switch(x, y);
             onLoad(newswitch);
             entity = newswitch;
-            break; 
+            break;     
+    	case "treasure":
+    		Treassure treasure = new Treassure(dungeon, x, y);
+    		onLoad(treasure);
+    		entity = treasure;
+    		break;
+    	case "door":
+    		Door door = new Door(dungeon, doorId, x, y);
+    		onLoad(door);
+    		entity = door;
+    		doorId++;
+    		break;
+    	case "key":
+    		Key key = new Key(dungeon, keyId, x, y);
+    		onLoad(key);
+    		entity = key;
+    		keyId++;
+    		break;
+    	case "protal":
+    		Portal portal = new Portal(dungeon, portalId, (portalId%2 == 0), x, y);
+    		onLoad(portal);
+    		entity = portal;
+    		portalId++;
+    		break;
+    	case "enemy":
+    		Enemy enemy = new Enemy(dungeon, x, y);
+    		onLoad(enemy);
+    		entity = enemy;
+    		break;
+    	case "sword":
+    		Sword sword = new Sword(x, y);
+    		onLoad(sword);
+    		entity = sword;
+    		break;
+    	case "invincibility":
+    		Potion potion = new Potion(x, y);
+    		onLoad(potion);
+    		entity = potion;
+    		break;
+    	
+    	//"player", "wall", "exit", "treasure", "door", "key", "boulder", "switch", "portal", "enemy", "sword", "invincibility"]
 
-        // TODO Handle other possible entities
         }
         if (entity != null) dungeon.addEntity(entity);
     }
 
-    //public abstract void onLoad(Entity player);
+    protected abstract void onLoad(Potion potion);
 
-    public abstract void onLoad(Wall wall);
+	protected abstract void onLoad(Sword sword);
 
-	public void onLoad(Boulder boulder) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void onLoad(Enemy enemy);
 
-	public void onLoad(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void onLoad(Key key);
 
-	public void onLoad(Exit exit) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void onLoad(Portal portal);
 
-	public void onLoad() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void onLoad(Door door);
 
-	public void onLoad(Switch newSwitch) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void onLoad(Treassure treasure);
+
+	protected abstract void onLoad(Wall wall);
+
+	protected abstract void onLoad(Boulder boulder);
+
+	protected abstract void onLoad(Player player);
+
+	protected abstract void onLoad(Exit exit);
+
+	protected abstract void onLoad(Switch newSwitch);
 
     // TODO Create additional abstract methods for the other entities
 

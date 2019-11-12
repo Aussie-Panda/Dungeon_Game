@@ -27,6 +27,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image boulderImage;
     private Image switchImage;
     private Image exitImage;
+    private Image potionImage;
+    private Image swordImage;
+    private Image enemyImage;
+    private Image keyImage;
+    private Image portalImage;
+    private Image doorImage;
+    private Image treasureImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -37,41 +44,13 @@ public class DungeonControllerLoader extends DungeonLoader {
         boulderImage = new Image("/boulder.png");
         switchImage = new Image("/pressure_plate.png");
         exitImage = new Image("/exit.png");
-    }
-
-    @Override
-    public void onLoad(Exit exit) {
-        ImageView view = new ImageView(exitImage);
-        addEntity(exit, view);
-    }
-    
-    @Override
-    public void onLoad(Switch newSwitch) {
-        ImageView view = new ImageView(switchImage);
-        addEntity(newSwitch, view);
-    }
-
-    @Override
-    public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
-    }
-    
-    @Override
-    public void onLoad(Boulder boulder) {
-        ImageView view = new ImageView(boulderImage);
-        addEntity(boulder, view);
-    }
-    
-    @Override
-    public void onLoad(Player player) {
-        ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
-    }
-
-    private void addEntity(Entity entity, ImageView view) {
-        trackPosition(entity, view);
-        entities.add(view);
+        potionImage = new Image("/brilliant_blue_new.png");
+        swordImage = new Image("/greatsword_1_new.png");
+        enemyImage = new Image("/deep_elf_master_archer.png");
+        keyImage = new Image("/key.png");
+        portalImage = new Image("/portal.png");
+        doorImage = new Image("/closed_door.png");
+        treasureImage = new Image("/gold_pile.png");
     }
 
     /**
@@ -112,6 +91,84 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonController loadController() throws FileNotFoundException {
         return new DungeonController(load(), entities);
     }
+   
+    private void addEntity(Entity entity, ImageView view) {
+        trackPosition(entity, view);
+        entities.add(view);
+    }
+    
+    @Override
+    protected void onLoad(Exit exit) {
+        ImageView view = new ImageView(exitImage);
+        addEntity(exit, view);
+    }
+    
+    @Override
+    protected void onLoad(Switch newSwitch) {
+        ImageView view = new ImageView(switchImage);
+        addEntity(newSwitch, view);
+    }
 
+    @Override
+    protected void onLoad(Wall wall) {
+        ImageView view = new ImageView(wallImage);
+        addEntity(wall, view);
+    }
+    
+    @Override
+    protected void onLoad(Boulder boulder) {
+        ImageView view = new ImageView(boulderImage);
+        addEntity(boulder, view);
+    }
+    
+    @Override
+    protected void onLoad(Player player) {
+        ImageView view = new ImageView(playerImage);
+        addEntity(player, view);
+    }
+
+	@Override
+	protected void onLoad(Potion potion) {
+		ImageView view = new ImageView(potionImage);
+        addEntity(potion, view);
+	}
+
+	@Override
+	protected void onLoad(Sword sword) {
+		ImageView view = new ImageView(swordImage);
+        addEntity(sword, view);
+	}
+
+	@Override
+	protected void onLoad(Enemy enemy) {
+		ImageView view = new ImageView(enemyImage);
+        addEntity(enemy, view);
+	}
+
+	@Override
+	protected void onLoad(Key key) {
+		ImageView view = new ImageView(keyImage);
+        addEntity(key, view);
+	}
+
+	@Override
+	protected void onLoad(Portal portal) {
+		ImageView view = new ImageView(portalImage);
+        addEntity(portal, view);
+	}
+
+	@Override
+	protected void onLoad(Door door) {
+		ImageView view = new ImageView(doorImage);
+        addEntity(door, view);
+	}
+
+	@Override
+	protected void onLoad(Treassure treasure) {
+		ImageView view = new ImageView(treasureImage);
+        addEntity(treasure, view);
+	}
+
+	
 
 }
