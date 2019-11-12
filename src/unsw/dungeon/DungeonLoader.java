@@ -40,6 +40,17 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        // goals
+        Goal g = null;
+    	switch (json.getString("goal")) {
+    		case "boulders":
+    			System.out.println("get switch goal");
+    			g = new SwitchGoal(dungeon);  
+    			break;
+	    	       
+    	};
+    	if (g != null) g.setMain(); 
         return dungeon;
     }
 
@@ -66,15 +77,52 @@ public abstract class DungeonLoader {
             onLoad(exit);
             entity = exit;
             break;    
+        case "boulder":
+            Boulder boulder = new Boulder(x, y);
+            onLoad(boulder);
+            entity = boulder;
+            break;
+        case "switch":
+            Switch newswitch = new Switch(x, y);
+            onLoad(newswitch);
+            entity = newswitch;
+            break;  
+            
+            
         
         // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
     }
 
-    public abstract void onLoad(Entity player);
+    //public abstract void onLoad(Entity player);
 
     public abstract void onLoad(Wall wall);
+
+	public void onLoad(Boulder boulder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onLoad(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onLoad(Exit exit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onLoad() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onLoad(Switch newSwitch) {
+		// TODO Auto-generated method stub
+		
+	}
 
     // TODO Create additional abstract methods for the other entities
 

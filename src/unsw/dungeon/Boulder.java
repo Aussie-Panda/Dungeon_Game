@@ -56,7 +56,7 @@ public class Boulder extends Entity implements Movable {
 	@Override
 	public void interact(Player p, String direction) {
 		// TODO Auto-generated method stub
-		
+//		System.out.println("andjawndjawn/djawndjandjabjdbwajdwbja");
 		Point target = setTarget(this.getPt(), direction);
 		Switch dest = p.getDungeon().getSwitch(target);
 		Switch curr = p.getDungeon().getSwitch(this.getPt());
@@ -90,10 +90,12 @@ public class Boulder extends Entity implements Movable {
 		//turn on
 		if (dest != null) {
 			dest.setState(1);
+			dest.notifyObserver();
 		}
 		//turn off
 		if (curr != null) {
 			curr.setState(0);
+			dest.notifyObserver();
 		}
 	}
 

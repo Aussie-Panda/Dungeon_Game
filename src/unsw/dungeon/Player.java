@@ -125,6 +125,11 @@ public class Player extends Entity implements Movable, Subject {
 			return;
 		}
 		ArrayList <Entity> eList = dungeon.getEntity(target);
+    	if ((eList.size() == 1) && (eList.get(0) instanceof Floor)) {
+    		// move right
+    		this.getPt().setUp();
+    		return;
+    	}
 		if (eList.isEmpty()) {
 			// move up
 			this.getPt().setUp();
@@ -151,7 +156,11 @@ public class Player extends Entity implements Movable, Subject {
 		if (getY() >= (dungeon.getHeight() - 1)) {
 			return;
 		}
-		
+    	if ((eList.size() == 1) && (eList.get(0) instanceof Floor)) {
+			// move down
+			this.getPt().setDown();
+			return;
+    	}
 		if (eList.isEmpty()) {
 			// move down
 			this.getPt().setDown();
@@ -177,6 +186,11 @@ public class Player extends Entity implements Movable, Subject {
 		if (getX() <= 0) {
 			return;
 		}
+    	if ((eList.size() == 1) && (eList.get(0) instanceof Floor)) {
+			// move left
+			this.getPt().setLeft();
+			return;
+    	}
 		if (eList.isEmpty()) {
 			// move left
 			this.getPt().setLeft();
@@ -198,6 +212,11 @@ public class Player extends Entity implements Movable, Subject {
     	Point target = getPt().getRight();
     	if (getX() >= dungeon.getWidth() - 1) return;
     	ArrayList <Entity> eList = dungeon.getEntity(target);
+    	if ((eList.size() == 1) && (eList.get(0) instanceof Floor)) {
+    		// move right
+			this.getPt().setRight();
+			return;
+    	}
 		if (eList.isEmpty()) {
 			// move right
 			this.getPt().setRight();
