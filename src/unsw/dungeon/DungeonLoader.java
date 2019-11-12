@@ -41,9 +41,14 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        dungeon.checkSpawnOnSwitch();
         // load goals
         loadMainGoal(dungeon, json.getJSONObject("goal-condition"));
     	
+        
+        
+        
+        
         return dungeon;
     }
     
@@ -131,6 +136,7 @@ public abstract class DungeonLoader {
         // TODO Handle other possible entities
         }
         if (entity != null) dungeon.addEntity(entity);
+        
     }
 
     //public abstract void onLoad(Entity player);

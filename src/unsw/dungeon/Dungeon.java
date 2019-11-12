@@ -166,6 +166,47 @@ public class Dungeon {
 		}
 		return result;
 	}
+	
+	// get all the boulder object in the entity list
+	public ArrayList <Boulder> getBoulderList () {
+		ArrayList <Boulder> result = new ArrayList <Boulder> ();
+		for (Entity e : this.entities) {
+			if (e.getClass() == Boulder.class) {
+				result.add((Boulder) e);
+			}
+		}
+		
+		return result;
+	}
+	
+	// get all the switch object in the entity list
+	public ArrayList <Switch> getSwitchList () {
+		ArrayList <Switch> result = new ArrayList <Switch> ();
+		for (Entity e : this.entities) {
+			if (e.getClass() == Switch.class) {
+				result.add((Switch) e);
+			}
+		}
+		
+		return result;
+	}
+	
+	public void checkSpawnOnSwitch () {
+		ArrayList <Boulder> boulders = getBoulderList ();
+		ArrayList <Switch> switches = getSwitchList ();
+		for (Boulder b : boulders) {
+			
+			for (Switch s : switches) {
+				if (s.getPt().equals(b.getPt())) {
+					s.setState(1);
+				}
+			}
+		}
+		
+		
+		
+	}
+	
 
 	public List<Entity> getEntities() {
 		return entities;
