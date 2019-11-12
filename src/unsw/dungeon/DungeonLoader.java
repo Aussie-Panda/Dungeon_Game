@@ -41,17 +41,47 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
-        // goals
-        Goal g = null;
-    	switch (json.getString("goal")) {
-    		case "boulders":
-    			System.out.println("get switch goal");
-    			g = new SwitchGoal(dungeon);  
-    			break;
-	    	       
-    	};
-    	if (g != null) g.setMain(); 
+        // load goals
+        loadGoal(dungeon, json.getJSONObject("goal-condition"));
+    	
         return dungeon;
+    }
+    
+    private void loadGoal (Dungeon dungeon, JSONObject json) {
+    	Goal g = null;
+    	String goalName = json.getString("goal");
+//    	System.out.println(json.toString());
+    	switch (goalName) {
+    	case "boulders":
+			g = new SwitchGoal(dungeon);  
+			break;
+			
+    	case "enemies":
+    		g = new EnemyGoal(dungeon);
+    		break;
+    		
+    	case "treasures":
+    		g = new TreassureGoal(dungeon);
+    		break;
+    		
+    	case "exit":
+    		g = new ExitGoal(dungeon);
+    		break;
+    	};
+    	
+    	// if goal is single 
+    	if (g != null) {
+    		g.setMain(); 
+    		
+    	//	if goal is muti-goal
+    	} else {
+    		g = new Goals(dungeon, goalName);
+    		g.setMain();
+    		JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+    		for (int i = 0; i < jsonSubgoals.length(); i++) {
+                loadGoal(dungeon, jsonSubgoals.getJSONObject(i));
+            }
+    	}
     }
 
     private void loadEntity(Dungeon dungeon, JSONObject json) {
@@ -86,13 +116,11 @@ public abstract class DungeonLoader {
             Switch newswitch = new Switch(x, y);
             onLoad(newswitch);
             entity = newswitch;
-            break;  
-            
-            
-        
+            break; 
+
         // TODO Handle other possible entities
         }
-        dungeon.addEntity(entity);
+        if (entity != null) dungeon.addEntity(entity);
     }
 
     //public abstract void onLoad(Entity player);

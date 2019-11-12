@@ -10,8 +10,7 @@ public class SwitchGoal implements Goal, Observer {
 
     public SwitchGoal(Dungeon dungeon) {
         for (Entity e : dungeon.getEntities()){
-            if (e.getClass() == Switch.class) subscript((Subject) e);
-            System.out.println("subscripting" + switches); 
+            if (e.getClass() == Switch.class && !((Switch) e).isOn()) subscript((Subject) e);
         }
         this.dungeon = dungeon;
     }
@@ -25,7 +24,6 @@ public class SwitchGoal implements Goal, Observer {
 
     @Override
     public void update(Subject s) {
-    	System.out.println(switches);
         // if the subject is triggered, decrease number of untriggered switch
         if (((Switch) s).isOn()) {
             if (switches > 0) switches--;
@@ -41,6 +39,8 @@ public class SwitchGoal implements Goal, Observer {
         } else {
         	status = false;
         }
+
+    	System.out.println(switches);
     }
 
     @Override

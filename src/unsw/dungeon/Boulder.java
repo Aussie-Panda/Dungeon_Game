@@ -90,12 +90,10 @@ public class Boulder extends Entity implements Movable {
 		//turn on
 		if (dest != null) {
 			dest.setState(1);
-			dest.notifyObserver();
 		}
 		//turn off
 		if (curr != null) {
 			curr.setState(0);
-			dest.notifyObserver();
 		}
 	}
 
