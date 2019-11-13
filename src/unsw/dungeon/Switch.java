@@ -48,7 +48,6 @@ public class Switch extends Entity implements Subject {
 	@Override
 	public void interact(Player p, String direction) {
 		// switch is unable to be interacted by player
-		p.setPt(this.getPt());
 	}
 
 }

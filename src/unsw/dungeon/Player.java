@@ -122,10 +122,10 @@ public class Player extends Entity implements Movable, Subject {
 		if (getY() <= 0) return;
 		
 		Point target = getPt().getUp();
-		
 		ArrayList <Entity> eList = dungeon.getEntity(target);
     	
-		if (eList.isEmpty()) {
+		// if no entities at the point or the only entity is switch
+		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
 			// move up
 			this.getPt().setUp();
 		} else {
@@ -142,10 +142,10 @@ public class Player extends Entity implements Movable, Subject {
     	if (getY() >= (dungeon.getHeight() - 1)) return;
     	
     	Point target = getPt().getDown();
-
 		ArrayList <Entity> eList = dungeon.getEntity(target);
 		
-		if (eList.isEmpty()) {
+		// if no entities at the point or the only entity is switch
+		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
 			// move down
 			this.getPt().setDown();
 		} else {
@@ -160,10 +160,10 @@ public class Player extends Entity implements Movable, Subject {
     	if (getX() <= 0) return;
     	
     	Point target = getPt().getLeft();
-    	
 		ArrayList <Entity> eList = dungeon.getEntity(target);
 		
-		if (eList.isEmpty()) {
+		// if no entities at the point or the only entity is switch
+		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
 			// move left
 			this.getPt().setLeft();
 		} else {
@@ -179,9 +179,10 @@ public class Player extends Entity implements Movable, Subject {
     	if (getX() >= dungeon.getWidth() - 1) return;
     	
     	Point target = getPt().getRight();
-    	
     	ArrayList <Entity> eList = dungeon.getEntity(target);
-		if (eList.isEmpty()) {
+    	
+    	// if no entities at the point or the only entity is switch
+		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
 			// move right
 			this.getPt().setRight();
 		} else {
