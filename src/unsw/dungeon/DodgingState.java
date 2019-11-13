@@ -20,6 +20,7 @@ public class DodgingState implements EnemyState {
     	if (dir == "down") return "up";
     	if (dir == "right") return "left";
     	if (dir == "left") return "right";
+    	if (dir == "equal") return "equal";
 		return null;
     }
     
@@ -60,6 +61,11 @@ public class DodgingState implements EnemyState {
         
         
         // Priority: not Block > xDir > yDir
+        if (xDir.contentEquals("equal")) {
+        	if (yBlocked) {
+        		//TODO
+        	}
+        }
         if (yBlocked && !xBlocked)  {
         	enemyMoveX(xDir);
         }
