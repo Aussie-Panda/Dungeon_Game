@@ -30,6 +30,7 @@ public class Sword extends Entity implements Collectable, Consumable {
 		if (!p.hasSword()) {
 			// add to backpack
 			backPack.add(this);
+			p.setState("sword");
 			//remove from dungeon list and grid pane
 			dungeon.removeEntity(this);
 			this.setPt(new Point(-1, -1));
@@ -40,11 +41,12 @@ public class Sword extends Entity implements Collectable, Consumable {
 
 	@Override
 	public void consume(Player p) {
-		if (p.getState().equals("normal")) {
+		if (p.getState().equals("sword")) {
 			durability--;
 			System.out.println("Sword durability: " + durability);
+			if (durability == 0) p.getBackPack().remove(this);
 		}
-		if (durability == 0) p.getBackPack().remove(this);
+		// TODO: nned test
 	}
 
 

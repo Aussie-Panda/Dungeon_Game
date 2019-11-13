@@ -15,9 +15,8 @@ public class Potion extends Entity implements Consumable, Collectable {
 	@Override
 	public void collect(Player p) {
 		Dungeon dungeon = p.getDungeon();
-		if (p.getState() != "invincible") {
-			p.setState("invincible");
-			System.out.println("Become invincible!");
+		if (p.getState() != "invincible" || p.getState() != "sword_invincible") {
+			p.beInvincible();
 			//remove from dungeon list
 			dungeon.removeEntity(this); 
 			consume(p);
@@ -30,8 +29,7 @@ public class Potion extends Entity implements Consumable, Collectable {
 		// set timmer task
 		TimerTask task = new TimerTask() {
 			public void run() {
-	            p.setState("normal"); 
-	            System.out.println("Back to normal");
+	            p.removeInvincible();
 	            timer.cancel();
 	        }
 		};
@@ -48,7 +46,6 @@ public class Potion extends Entity implements Consumable, Collectable {
     
 	@Override
 	public void interact(Player p, String direction) {
-		// TODO Auto-generated method stub
 		
 		if (direction == "up") {
 			p.getPt().setUp();

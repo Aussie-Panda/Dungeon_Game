@@ -25,6 +25,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     //Images
     private Image playerImage;
+    private Image playerInvincibleImage;
+    private Image playerSwordImage;
+    private Image playerSwordInvincibleImage;
     private Image wallImage;
     private Image boulderImage;
     private Image switchImage;
@@ -43,6 +46,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         super(filename);
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
+        playerInvincibleImage = new Image("/human_invincible.png");
+        playerSwordImage = new Image("/human_carry_sword.png");
+        playerSwordInvincibleImage = new Image("/human_invincible_sword.png");
         wallImage = new Image("/brick_brown_0.png");
         boulderImage = new Image("/boulder.png");
         switchImage = new Image("/pressure_plate.png");
@@ -89,15 +95,30 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
     
-    private void trackDoor(Door door, Node node) {
+    private void trackDoor(Door door, ImageView img) {
     	door.canPass.addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, 
 					Boolean oldValue, Boolean newValue) {
-				if (newValue == true) ((ImageView) node).setImage(openedDoorImage);
-				else ((ImageView) node).setImage(closedDoorImage);
+				if (newValue == true) img.setImage(openedDoorImage);
+				else img.setImage(closedDoorImage);
 				
 			}
+    	});
+    }
+    
+    private void trackPlayerState(Player player, ImageView img) {
+    	player.state.addListener(new ChangeListener<Number>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                if (newValue.equals(0)) img.setImage(playerImage);
+                else if (newValue.equals(1)) img.setImage(playerInvincibleImage);
+                else if (newValue.equals(2)) img.setImage(playerSwordImage);
+                else if (newValue.equals(3)) img.setImage(playerSwordInvincibleImage);
+                
+            }
+    		
     	});
     }
 
@@ -144,6 +165,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     protected void onLoad(Player player) {
         ImageView view = new ImageView(playerImage);
         addEntity(player, view);
+        trackPlayerState(player, view); 
     }
 
 	@Override

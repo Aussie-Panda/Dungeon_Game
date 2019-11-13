@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
@@ -14,7 +17,9 @@ public class Player extends Entity implements Movable, Subject {
     private ArrayList <Observer> observers = new ArrayList <Observer>();
     final static int NORMAL = 0;
     final static int INVINCIBLE = 1;
-    private int state = NORMAL;
+    final static int SWORD = 2;
+    final static int SWORD_INVINCIBLE = 3;
+    protected IntegerProperty state = new SimpleIntegerProperty(NORMAL);
     // a back pack contains multiple collectable items
     private ArrayList<Collectable> backPack;
     
@@ -38,13 +43,9 @@ public class Player extends Entity implements Movable, Subject {
     }
     
 	public boolean hasSword () {
-		//if has key in the bag
-		for (Collectable c : backPack) {
-			if (c.getClass() == Sword.class) return true;
-		}
-		return false;
+		//if has sword in the bag
+		return (state.get() == SWORD || state.get() == SWORD_INVINCIBLE);
 	}
-    
 	
 	
 	public boolean hasKey (int id) {
@@ -220,27 +221,51 @@ public class Player extends Entity implements Movable, Subject {
 
 	public String getState() {
 		String str = null;
-		if (this.state == NORMAL) {
+		if (this.state.get() == NORMAL) {
 			str = "normal";
 		}
-		else if (this.state == INVINCIBLE) {
+		else if (this.state.get() == INVINCIBLE) {
 			str = "invincible";
 		} 
+		else if (this.state.get() == SWORD_INVINCIBLE) {
+			str = "invincible";
+		}
+		else if (this.state.get() == SWORD) {
+			str = "sword";
+		}
 		return str;
 	}
 
 	public void setState(String state) {
 		if (state.equals("normal")) {
-			this.state = NORMAL;
+			this.state.set(NORMAL);
 		}
 		
 		else if (state.equals("invincible")) {
-			this.state = INVINCIBLE;
+			this.state.set(INVINCIBLE);
+		}
+		
+		else if (state.equals("sword_invincible")) {
+			this.state.set(SWORD_INVINCIBLE);
+		}
+		
+		else if (state.equals("sword")) {
+			this.state.set(SWORD);
 		}
 		
 		else {
 			System.out.println("TYPO !!!!!!!!!!!!!!!!!!!!");
 		}
+	}
+	
+	public void beInvincible() {
+		if (state.get() < SWORD_INVINCIBLE) state.set(state.get()+1);
+		System.out.println("Become invincible!");
+	}
+	
+	public void removeInvincible() {
+		if (state.get() > NORMAL) state.set(state.get()-1);
+        System.out.println("Back to normal");
 	}
 
 	public Dungeon getDungeon() {

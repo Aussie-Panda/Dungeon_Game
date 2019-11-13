@@ -5,9 +5,9 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Door extends Entity implements Throughable {
 
-    Dungeon dungeon;
-    int id;
-    BooleanProperty canPass = new SimpleBooleanProperty(false);
+    private Dungeon dungeon;
+    private int id;
+    protected BooleanProperty canPass = new SimpleBooleanProperty(false);
 
     public Door (Dungeon dungeon, int id, int x, int y){
         super(x, y);

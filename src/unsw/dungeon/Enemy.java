@@ -50,12 +50,14 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     @Override
     public void interact(Player p, String dir) {
         // enemy die if player is invincible or holding sword
-        if (p.getState().equals("invincible") || p.hasSword()){
+        if (!p.getState().equals("normal")){
             dungeon.removeEntity(this);
+            getPt().setPt(new Point(-1, -1));
             p.consumeSword();
             notifyObserver();
-            getPt().setPt(new Point(-1, -1));
+            
             System.out.println("Slayyyy");
+            
         } else if (p.getState().equals("normal")){
             dungeon.lose();
         }
