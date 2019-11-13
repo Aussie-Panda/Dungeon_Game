@@ -19,8 +19,6 @@ public class Treassure extends Entity implements Collectable, Subject {
     
 	@Override
 	public void interact(Player p, String direction) {
-		// TODO Auto-generated method stub
-		
 		p.setPt(this.getPt());
 		collect(p);
 	}
@@ -28,7 +26,6 @@ public class Treassure extends Entity implements Collectable, Subject {
     
 	@Override
 	public void collect(Player p) {
-
 		p.setTreasure(p.getTreasure()+1);
 		this.numOftreasure = p.getTreasure();
 		// notify goal that this tressure has been picked

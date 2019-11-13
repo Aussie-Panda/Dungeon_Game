@@ -54,6 +54,7 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         if (p.getState().equals("invincible") || p.hasSword()){
             dungeon.removeEntity(this);
             notifyObserver();
+            System.out.println("Slayyyy");
         } else if (p.getState().equals("normal")){
             dungeon.lose();
         }
@@ -172,6 +173,13 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 			result = result & e.passable(dungeon,pt);
 		}
 		return result;
+	}
+
+
+	@Override
+	public boolean passable(Dungeon d, Point pt) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

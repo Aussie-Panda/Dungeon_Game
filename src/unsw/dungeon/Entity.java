@@ -8,21 +8,18 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @author Robert Clifton-Everest
  *
  */
-public class Entity {
+public abstract class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private Point pt;
 
     
-    
     public void interact (Player p) {
     	
     }
     
-    public boolean passable(Dungeon d, Point pt) {
-		return false;
-	}
+    public abstract boolean passable(Dungeon d, Point pt);
     
     /**
      * Create an entity positioned in square (x,y)
@@ -54,13 +51,10 @@ public class Entity {
 	}
 
 	public void setPt(Point pt) {
-		this.pt = pt;
+		this.pt.setPt(pt);
 	}
 
-	public void interact(Player p, String direction) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void interact(Player p, String direction);
 	
 	
 }

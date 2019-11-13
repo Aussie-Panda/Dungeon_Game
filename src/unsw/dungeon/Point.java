@@ -76,6 +76,11 @@ public class Point {
     public void setRight() {
         x().set(getX() + 1);
     }
+    
+    public void setPt(Point pt) {
+    	x().set(pt.getX());
+    	y().set(pt.getY());
+    }
 
 
 }
