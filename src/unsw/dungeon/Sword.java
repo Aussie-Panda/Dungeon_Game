@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class Sword extends Entity implements Collectable {
+public class Sword extends Entity implements Collectable, Consumable {
+	
+	private int durability = 5;
 	
 	public Sword(int x, int y) {
 		super(x, y);
@@ -33,8 +35,13 @@ public class Sword extends Entity implements Collectable {
 			this.setPt(new Point(-1, -1));
 			System.out.println("Sword Picked!");
 		}
-		
-		
+	}
+
+
+	@Override
+	public void consume(Player p) {
+		if (p.getState().equals("normal")) durability--;
+		if (durability == 0) p.getBackPack().remove(this);
 	}
 
 

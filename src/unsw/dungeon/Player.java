@@ -66,7 +66,6 @@ public class Player extends Entity implements Movable, Subject {
 	}
 	
 	public void consumeKey(int id) {
-		// TODO Auto-generated method stub
 		for (Collectable c : backPack) {
 			if (c.getClass() == Key.class) {
 				Key k = (Key)c;
@@ -76,9 +75,16 @@ public class Player extends Entity implements Movable, Subject {
 				}
 			}
 		}
-		
 	}
 	
+	public void consumeSword() {
+		for (Collectable c : backPack) {
+			if (c.getClass() == Sword.class) {
+				((Sword) c).consume(this);
+				return;
+			}
+		}
+	}
 	//=========== end of backPack functions ===========
 
 	@Override

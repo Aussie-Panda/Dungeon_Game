@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
