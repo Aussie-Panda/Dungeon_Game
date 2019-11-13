@@ -126,7 +126,8 @@ public class Player extends Entity implements Movable, Subject {
 	@Override
     public void moveUp() {
 		if (getY() <= 0) return;
-		
+		if (!observers.isEmpty()) notifyObserver();
+
 		Point target = getPt().getUp();
 		ArrayList <Entity> eList = dungeon.getEntity(target);
     	
@@ -146,6 +147,7 @@ public class Player extends Entity implements Movable, Subject {
     @Override
     public void moveDown() {
     	if (getY() >= (dungeon.getHeight() - 1)) return;
+    	if (!observers.isEmpty()) notifyObserver();
     	
     	Point target = getPt().getDown();
 		ArrayList <Entity> eList = dungeon.getEntity(target);
@@ -164,6 +166,7 @@ public class Player extends Entity implements Movable, Subject {
     @Override
     public void moveLeft() {
     	if (getX() <= 0) return;
+    	if (!observers.isEmpty()) notifyObserver();
     	
     	Point target = getPt().getLeft();
 		ArrayList <Entity> eList = dungeon.getEntity(target);
@@ -183,6 +186,7 @@ public class Player extends Entity implements Movable, Subject {
     @Override
     public void moveRight() {
     	if (getX() >= dungeon.getWidth() - 1) return;
+    	if (!observers.isEmpty()) notifyObserver();
     	
     	Point target = getPt().getRight();
     	ArrayList <Entity> eList = dungeon.getEntity(target);

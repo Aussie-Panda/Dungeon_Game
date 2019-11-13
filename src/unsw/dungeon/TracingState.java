@@ -1,17 +1,15 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class TracingState implements EnemyState {
 
-    private Player player;
+    private Enemy enemy;
 
-    public TracingState(Player player) {
-        this.player = player;
+    public TracingState( Enemy enemy) {
+        this.enemy = enemy;
     }
 
-    @Override
-    public void convertState(Enemy e) {
-        e.setState(new DodgingState(player));
-    }
 
     @Override
     public String getState() {
@@ -20,12 +18,30 @@ public class TracingState implements EnemyState {
 
 
 
-    public void tracePlayer(){
-        while(true){
-
+	@Override
+	public void controlMovement() {
+		//Point playerPos = player.getPt();
+        String xDir = enemy.getPlayerXDirection ();
+        String yDir = enemy.getPlayerYDirection ();
+        boolean xBlocked = enemy.isBlocked(xDir);
+        boolean yBlocked = enemy.isBlocked(yDir);
+        
+        
+        // Priority: not Block > xDir > yDir
+        if (yBlocked && !xBlocked)  {
+        	enemy.enemyMoveX(xDir);
         }
-
-    }
+        
+        else if (!yBlocked && xBlocked)  {
+        	enemy.enemyMoveY(yDir);
+        	
+        } 
+        
+        else if (!yBlocked && !xBlocked) {
+        	enemy.enemyMoveX(xDir);
+        }
+		
+	}
 
 }
 
