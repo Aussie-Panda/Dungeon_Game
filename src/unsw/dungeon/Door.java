@@ -1,10 +1,13 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Door extends Entity implements Throughable {
 
     Dungeon dungeon;
     int id;
-    boolean canPass = false;
+    BooleanProperty canPass = new SimpleBooleanProperty(false);
 
     public Door (Dungeon dungeon, int id, int x, int y){
         super(x, y);
@@ -15,7 +18,7 @@ public class Door extends Entity implements Throughable {
 
     @Override
     public boolean passable(Dungeon d, Point pt) {
-        return canPass;
+        return canPass.get();
     }
 
 	// pass through the player to a point
@@ -47,8 +50,7 @@ public class Door extends Entity implements Throughable {
     public void interact(Player p, String direction) {
         // if door is closed and player has the key
         if (!passable(null, null) && p.hasKey(id)){
-            canPass = true;
-            open();
+            canPass.set(true);
             p.consumeKey(id);
             through(p, direction);
 
@@ -61,8 +63,4 @@ public class Door extends Entity implements Throughable {
 
     }
 
-    // change UI
-    private void open() {
-
-    }
 }

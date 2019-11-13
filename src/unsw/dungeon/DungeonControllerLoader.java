@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -32,7 +34,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image enemyImage;
     private Image keyImage;
     private Image portalImage;
-    private Image doorImage;
+    private Image closedDoorImage;
+    private Image openedDoorImage;
     private Image treasureImage;
     
     public DungeonControllerLoader(String filename)
@@ -49,7 +52,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         enemyImage = new Image("/deep_elf_master_archer.png");
         keyImage = new Image("/key.png");
         portalImage = new Image("/portal.png");
-        doorImage = new Image("/closed_door.png");
+        closedDoorImage = new Image("/closed_door.png");
+        openedDoorImage = new Image("/open_door.png");
         treasureImage = new Image("/gold_pile.png");
     }
 
@@ -83,6 +87,18 @@ public class DungeonControllerLoader extends DungeonLoader {
             	else GridPane.setRowIndex(node, newValue.intValue());
             }
         });
+    }
+    
+    private void trackDoor(Door door, Node node) {
+    	door.canPass.addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, 
+					Boolean oldValue, Boolean newValue) {
+				if (newValue == true) ((ImageView) node).setImage(openedDoorImage);
+				else ((ImageView) node).setImage(closedDoorImage);
+				
+			}
+    	});
     }
 
     /**
@@ -162,8 +178,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	protected void onLoad(Door door) {
-		ImageView view = new ImageView(doorImage);
+		ImageView view = new ImageView(closedDoorImage);
         addEntity(door, view);
+        trackDoor(door, view);
 	}
 
 	@Override
