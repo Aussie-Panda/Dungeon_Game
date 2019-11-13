@@ -15,7 +15,6 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         subscript((Subject) dungeon.getPlayer());
         this.state = new TracingState((Player) this.player); // tracing state by default
 
-
     }
 
 

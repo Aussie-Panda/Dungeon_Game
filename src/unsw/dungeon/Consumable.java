@@ -2,6 +2,6 @@ package unsw.dungeon;
 
 public interface Consumable {
 
-    public void consume();
+    public void consume(Player p);
 
 }

@@ -19,18 +19,15 @@ public class Key extends Entity implements Consumable, Collectable {
     }
     
     @Override
-    public void consume() {
-    	//TODO
+    public void consume(Player p) {
+    	p.getBackPack().remove(this);
     	
     }
 
 	@Override
 	public void interact(Player p, String direction) {
-		// TODO Auto-generated method stub
-		
 		p.setPt(this.getPt());
 		collect(p);
-		
 	}
 	
 	@Override
@@ -43,6 +40,7 @@ public class Key extends Entity implements Consumable, Collectable {
 			backPack.add(this);
 			//remove from dungeon list
 			dungeon.removeEntity(this);
+			getPt().setPt(new Point(-1, -1));
 
 		}
 		

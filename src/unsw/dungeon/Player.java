@@ -15,7 +15,6 @@ public class Player extends Entity implements Movable, Subject {
     final static int NORMAL = 0;
     final static int INVINCIBLE = 1;
     private int state = NORMAL;
-    
     // a back pack contains multiple collectable items
     private ArrayList<Collectable> backPack;
     
@@ -72,7 +71,7 @@ public class Player extends Entity implements Movable, Subject {
 			if (c.getClass() == Key.class) {
 				Key k = (Key)c;
 				if (k.getId() == id) {
-					backPack.remove(k);
+					k.consume(this);
 					return;
 				}
 			}

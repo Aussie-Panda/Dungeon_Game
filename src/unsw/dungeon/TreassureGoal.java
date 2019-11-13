@@ -25,6 +25,7 @@ public class TreassureGoal implements Goal, Observer  {
     @Override
     public void update(Subject s) {
         if (treassures > 0) treassures--;
+        System.out.println("Treasure picked! Remaining treasure: " + treassures);
         if (treassures == 0) {
             status = true;
             if (isMain) dungeon.win();

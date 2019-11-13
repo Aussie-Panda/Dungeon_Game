@@ -3,10 +3,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Sword extends Entity implements Collectable {
-
+	
 	public Sword(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -17,17 +16,10 @@ public class Sword extends Entity implements Collectable {
 	
 	@Override
 	public void interact(Player p, String direction) {
-		// TODO Auto-generated method stub
-		
 		p.setPt(this.getPt());
 		collect(p);
-		
-}
+	}
 	
-
-
-
-
 	@Override
 	public void collect(Player p) {
 		//if sword is colleted switch player's state
@@ -36,9 +28,10 @@ public class Sword extends Entity implements Collectable {
 		if (!p.hasSword()) {
 			// add to backpack
 			backPack.add(this);
-			//remove from dungeon list
+			//remove from dungeon list and grid pane
 			dungeon.removeEntity(this);
-
+			this.setPt(new Point(-1, -1));
+			System.out.println("Sword Picked!");
 		}
 		
 		

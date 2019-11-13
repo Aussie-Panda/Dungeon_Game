@@ -70,14 +70,17 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-                GridPane.setColumnIndex(node, newValue.intValue());
+                if (newValue.equals(-1)) ((ImageView) node).setImage(null);
+                else GridPane.setColumnIndex(node, newValue.intValue());
+                
             }
         });
         entity.y().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-                GridPane.setRowIndex(node, newValue.intValue());
+            	if (newValue.equals(-1)) ((ImageView) node).setImage(null);
+            	else GridPane.setRowIndex(node, newValue.intValue());
             }
         });
     }

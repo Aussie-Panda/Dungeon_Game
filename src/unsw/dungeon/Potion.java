@@ -1,39 +1,43 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class Potion extends Entity implements Consumable, Collectable {
-
+	Timer timer = new Timer();
+	
+	
 	public Potion(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void collect(Player p) {
-		//if sword is colleted switch player's state
-		ArrayList<Collectable> backPack = p.getBackPack();
 		Dungeon dungeon = p.getDungeon();
 		if (p.getState() != "invincible") {
 			p.setState("invincible");
+			System.out.println("Become invincible!");
 			//remove from dungeon list
-			dungeon.removeEntity(this);
-			// set timer for 5 sec	    
-			Timer timer = new Timer();
-	        timer.schedule(new PotionTimer(), 0, 1000);
-	        p.setState("normal");
-		    
-			
-
+			dungeon.removeEntity(this); 
+			consume(p);
 		}
-		
-		
 	}
+	
 
 	@Override
-	public void consume() {
-		// TODO Auto-generated method stub
+	public void consume(Player p) {
+		// set timmer task
+		TimerTask task = new TimerTask() {
+			public void run() {
+	            p.setState("normal"); 
+	            System.out.println("Back to normal");
+	            timer.cancel();
+	        }
+		};
+		getPt().setPt(new Point(-1, -1));
+		timer.schedule(task, new Date(new Date().getTime() + 5000));
 
 	}
 	
@@ -41,7 +45,6 @@ public class Potion extends Entity implements Consumable, Collectable {
     public boolean passable (Dungeon d, Point pt) {
     	return true;
     }
-    
     
     
 	@Override

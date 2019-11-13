@@ -18,10 +18,6 @@ public class Door extends Entity implements Throughable {
         return canPass;
     }
 
-    public boolean canPass() {
-		return canPass;
-	}
-
 	// pass through the player to a point
 	@Override
 	public void through(Movable m, String dir) {
@@ -50,14 +46,14 @@ public class Door extends Entity implements Throughable {
     @Override
     public void interact(Player p, String direction) {
         // if door is closed and player has the key
-        if (!canPass && p.hasKey(id)){
+        if (!passable(null, null) && p.hasKey(id)){
             canPass = true;
             open();
             p.consumeKey(id);
             through(p, direction);
 
         // if door is opened
-        } else if (canPass) {
+        } else if (passable(null, null)) {
             through(p, direction);
         }
 
