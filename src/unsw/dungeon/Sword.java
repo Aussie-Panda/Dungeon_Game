@@ -40,7 +40,10 @@ public class Sword extends Entity implements Collectable, Consumable {
 
 	@Override
 	public void consume(Player p) {
-		if (p.getState().equals("normal")) durability--;
+		if (p.getState().equals("normal")) {
+			durability--;
+			System.out.println("Sword durability: " + durability);
+		}
 		if (durability == 0) p.getBackPack().remove(this);
 	}
 
