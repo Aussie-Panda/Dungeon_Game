@@ -44,9 +44,14 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        dungeon.checkSpawnOnSwitch();
         // load goals
         loadMainGoal(dungeon, json.getJSONObject("goal-condition"));
     	
+        
+        
+        
+        
         return dungeon;
     }
     
@@ -164,6 +169,7 @@ public abstract class DungeonLoader {
 
         }
         if (entity != null) dungeon.addEntity(entity);
+        
     }
 
     protected abstract void onLoad(Potion potion);
