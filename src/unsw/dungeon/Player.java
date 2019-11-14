@@ -271,6 +271,11 @@ public class Player extends Entity implements Movable, Subject {
 		if (state.get() > NORMAL) state.set(state.get()-1);
         System.out.println("Back to normal");
 	}
+	
+	public void swordState() {
+		state.set(state.get()+2);
+		System.out.println("Sword Picked!");
+	}
 
 	public Dungeon getDungeon() {
 		return dungeon;

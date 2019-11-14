@@ -6,6 +6,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -20,6 +23,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
+    protected BooleanProperty winStatus = new SimpleBooleanProperty();
 //    private Goal mainGoal; // store the first processed goal
     // need a status indicating winning
     
@@ -211,10 +215,12 @@ public class Dungeon {
 	}
 
 	public void win(){
+		winStatus.set(true);
     	System.out.println("WIN!!");
 	}
 
 	public void lose() {
+		winStatus.set(false);
     	System.out.println("LOSE!!");
 	}
 

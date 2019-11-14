@@ -34,7 +34,7 @@ public class Potion extends Entity implements Consumable, Collectable {
 	        }
 		};
 		getPt().setPt(new Point(-1, -1));
-		timer.schedule(task, new Date(new Date().getTime() + 500000));
+		timer.schedule(task, new Date(new Date().getTime() + 5000));
 
 	}
 	

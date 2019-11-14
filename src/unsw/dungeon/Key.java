@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class Key extends Entity implements Consumable, Collectable {
 
-    Dungeon dungeon;
-    int id;
+    private int id;
 
     public Key(Dungeon dungeon, int id, int x, int y) {
         super(x, y);
-        this.dungeon = dungeon;
+        this.id = id;
 
     }
 

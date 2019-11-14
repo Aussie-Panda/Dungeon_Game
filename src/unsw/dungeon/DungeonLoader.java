@@ -4,6 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.image.Image;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -19,9 +23,9 @@ import java.io.FileReader;
 public abstract class DungeonLoader {
 
     private JSONObject json;
-    private int keyId = 0;
-    private int doorId = 0;
-    private int portalId = 0;
+    private int keyId = 1;
+    private int doorId = 1;
+    private int portalId = 1;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
@@ -48,10 +52,6 @@ public abstract class DungeonLoader {
         // load goals
         loadMainGoal(dungeon, json.getJSONObject("goal-condition"));
     	
-        
-        
-        
-        
         return dungeon;
     }
     
@@ -143,11 +143,21 @@ public abstract class DungeonLoader {
     		entity = key;
     		keyId++;
     		break;
-    	case "protal":
-    		Portal portal = new Portal(dungeon, portalId, (portalId%2 == 0), x, y);
+    	case "portal":
+    		int targetId;
+    		boolean isA;
+    		if (portalId%2 == 1) {
+    			targetId = portalId;
+    			isA = true;
+    		} else {
+    			targetId = portalId - 1;
+    			isA = false;
+    		}
+    		Portal portal = new Portal(dungeon, targetId, isA, x, y);
+    		portalId++;
     		onLoad(portal);
     		entity = portal;
-    		portalId++;
+    		
     		break;
     	case "enemy":
     		Enemy enemy = new Enemy(dungeon, x, y);
@@ -171,6 +181,7 @@ public abstract class DungeonLoader {
         if (entity != null) dungeon.addEntity(entity);
         
     }
+
 
     protected abstract void onLoad(Potion potion);
 

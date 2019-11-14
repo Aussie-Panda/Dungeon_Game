@@ -62,5 +62,9 @@ public class Door extends Entity implements Throughable {
         // else do nothing
 
     }
+    
+    public int getId() {
+    	return id;
+    }
 
 }

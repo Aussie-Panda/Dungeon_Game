@@ -35,10 +35,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image potionImage;
     private Image swordImage;
     private Image enemyImage;
-    private Image keyImage;
     private Image portalImage;
-    private Image closedDoorImage;
-    private Image openedDoorImage;
     private Image treasureImage;
     
     public DungeonControllerLoader(String filename)
@@ -56,10 +53,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         potionImage = new Image("/brilliant_blue_new.png");
         swordImage = new Image("/greatsword_1_new.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
-        keyImage = new Image("/key.png");
         portalImage = new Image("/portal.png");
-        closedDoorImage = new Image("/closed_door.png");
-        openedDoorImage = new Image("/open_door.png");
         treasureImage = new Image("/gold_pile.png");
     }
 
@@ -100,8 +94,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, 
 					Boolean oldValue, Boolean newValue) {
-				if (newValue == true) img.setImage(openedDoorImage);
-				else img.setImage(closedDoorImage);
+				if (newValue == true) img.setImage(new Image("/open_door_" + door.getId() + ".png"));
+				else img.setImage(new Image("/closed_door_"+door.getId()+".png"));
 				
 			}
     	});
@@ -188,7 +182,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	protected void onLoad(Key key) {
-		ImageView view = new ImageView(keyImage);
+		ImageView view = new ImageView(new Image("/key_"+key.getId()+".png"));
         addEntity(key, view);
 	}
 
@@ -200,7 +194,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	protected void onLoad(Door door) {
-		ImageView view = new ImageView(closedDoorImage);
+		ImageView view = new ImageView(new Image("/closed_door_"+door.getId()+".png"));
         addEntity(door, view);
         trackDoor(door, view);
 	}

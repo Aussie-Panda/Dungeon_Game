@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Portal extends Entity implements Throughable {
 
-    int id;
-    boolean isA = true;
-    Dungeon dungeon;
+    private int id;
+    private boolean isA = true;
+    private Dungeon dungeon;
 
     public Portal (Dungeon dungeon, int id, boolean isA, int x, int y){
         super(x, y);
@@ -19,19 +19,24 @@ public class Portal extends Entity implements Throughable {
     // find valid Direction clock-wisely from a portal
     private Point validDirection(Portal por){
         ArrayList <Point> dir = new ArrayList<Point>();
+        if(por  == null) System.out.println("portal is null");
         dir.add(por.getPt().getUp());
         dir.add(por.getPt().getRight());
         dir.add(por.getPt().getDown());
         dir.add(por.getPt().getLeft());
+        
+        ArrayList <Entity> eList;
+        boolean result;
         for (Point pt : dir){
-            ArrayList<Entity> eList = dungeon.getEntity(pt);
+        	result = true;
             if (pt.getY() < dungeon.getHeight()
                     && pt.getY() >= 0
                     && pt.getX() < dungeon.getWidth()
-                    && pt.getX() >= 0
-                    && passable(dungeon, pt)){
-                    return pt;
-                }
+                    && pt.getX() >= 0){
+            	eList = dungeon.getEntity(pt);
+            	for (Entity e : eList) result = result && e.passable(dungeon, pt);
+                if (result) return pt;
+            }
         }
         return null;
     }
@@ -39,22 +44,17 @@ public class Portal extends Entity implements Throughable {
     @Override
     public void through(Movable p, String dir) {
         // get the corresponding portal
-        Portal B  = dungeon.getPortal(id, !isA);
+        Portal B = dungeon.getPortal(id, isA);
         Point pt = validDirection(B);
         
-        
         if (pt != null) {
-        	
         	Collectable c = dungeon.getCollectable(pt);
         	if (c != null && (p.getClass() == Player.class)) {
             	((Entity) c).interact((Player) p, dir);
             	return;
             }
-        	
         	((Entity) p).setPt(pt);
         }
-        
-
     }
 
     @Override

@@ -30,11 +30,10 @@ public class Sword extends Entity implements Collectable, Consumable {
 		if (!p.hasSword()) {
 			// add to backpack
 			backPack.add(this);
-			p.setState("sword");
+			p.swordState();
 			//remove from dungeon list and grid pane
 			dungeon.removeEntity(this);
 			this.setPt(new Point(-1, -1));
-			System.out.println("Sword Picked!");
 		}
 	}
 
