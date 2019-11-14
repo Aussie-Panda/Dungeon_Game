@@ -30,9 +30,6 @@ public class DodgingState implements EnemyState {
     		enemy.moveUp();
     	} else if (dir == "down") {
     		enemy.moveDown();
-    	} else if (dir == "equal") {
-    		System.out.println("y equal move x");
-    		enemyMoveX(reverseDir(enemy.getPlayerXDirection ()));
     	}
     }
     
@@ -41,9 +38,6 @@ public class DodgingState implements EnemyState {
     		enemy.moveLeft();
     	} else if (dir == "right") {
     		enemy.moveRight();
-    	}  else if (dir == "equal") {
-    		System.out.println("x equals move y");
-    		enemyMoveY(reverseDir(enemy.getPlayerYDirection ()));
     	}
     }
 
@@ -52,6 +46,7 @@ public class DodgingState implements EnemyState {
 	@Override
 	public void controlMovement() {
 		//Point playerPos = player.getPt();
+		//xDir and yDir is suppose to go dir
         String xDir = reverseDir(enemy.getPlayerXDirection ());
         String yDir = reverseDir(enemy.getPlayerYDirection ());
         boolean xBlocked = enemy.isBlocked(xDir);
@@ -60,11 +55,25 @@ public class DodgingState implements EnemyState {
         boolean yReversed = enemy.isBlocked(reverseDir(yDir));
         
         
-        // Priority: not Block > xDir > yDir
-        if (xDir.contentEquals("equal")) {
-        	if (yBlocked) {
-        		//TODO
+        // pro ai
+        if (xDir.equals("equal")) {
+        	//System.out.println("x equals");
+        	if (enemy.isBlocked("left")) {
+        		//System.out.println("move right");
+        		enemyMoveX("right");
+        	} else {
+        		enemyMoveX("left");
         	}
+        } else if (yDir.equals("equal")) {
+        	if (enemy.isBlocked("up")) {
+        		enemyMoveY("down");
+        	} else {
+        		enemyMoveY("up");
+        	}
+        }
+        // Priority: not Block > xDir > yDir
+        else if (xDir.contentEquals("equal")) {
+
         }
         if (yBlocked && !xBlocked)  {
         	enemyMoveX(xDir);
@@ -78,20 +87,15 @@ public class DodgingState implements EnemyState {
         else if (!yBlocked && !xBlocked) {
         	enemyMoveX(xDir);
         }
-        else if (xBlocked && yBlocked) {
+        
+        else if (yBlocked && xBlocked) {
+        	if (!xReversed) {
+        		enemyMoveX(reverseDir(xDir));
+        	} else {
+        		enemyMoveY(reverseDir(yDir));
+        	}
         	
-        	 if (yReversed && !xReversed)  {
-             	enemyMoveX(reverseDir(xDir));
-             }
-        	 else if (!yReversed && xReversed)  {
-             	enemyMoveY(reverseDir(yDir));
-             	
-             } 
-             
-             else if (!yReversed && !xReversed) {
-             	enemyMoveX(reverseDir(xDir));
-             }
-        	 
         }
+ 
 	}
 }
