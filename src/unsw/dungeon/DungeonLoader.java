@@ -157,7 +157,6 @@ public abstract class DungeonLoader {
     		portalId++;
     		onLoad(portal);
     		entity = portal;
-    		
     		break;
     	case "enemy":
     		Enemy enemy = new Enemy(dungeon, x, y);

@@ -35,7 +35,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image potionImage;
     private Image swordImage;
     private Image enemyImage;
-    private Image portalImage;
     private Image treasureImage;
     
     public DungeonControllerLoader(String filename)
@@ -53,7 +52,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         potionImage = new Image("/brilliant_blue_new.png");
         swordImage = new Image("/greatsword_1_new.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
-        portalImage = new Image("/portal.png");
         treasureImage = new Image("/gold_pile.png");
     }
 
@@ -188,7 +186,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	protected void onLoad(Portal portal) {
-		ImageView view = new ImageView(portalImage);
+		System.out.println(portal.getId());
+		ImageView view = new ImageView(new Image("/portal_"+portal.getId()+".png"));
         addEntity(portal, view);
 	}
 
