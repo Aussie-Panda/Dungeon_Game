@@ -1,1 +1,4 @@
 .DS_Store
+.idea/
+bin/
+hs_err_pid33621.log
