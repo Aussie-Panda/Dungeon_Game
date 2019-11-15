@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -18,7 +19,10 @@ public class DungeonController {
 
     @FXML
     private GridPane squares;
-
+    
+    @FXML
+    Button resetButton = new Button("R");
+    
     private List<ImageView> initialEntities;
 
     private Player player;
@@ -42,10 +46,18 @@ public class DungeonController {
             }
         }
 
+
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
+        //gridPane.add(button1, 0, 2); 
+        double max = 10.0;
+        resetButton.setMaxWidth(max);
+        resetButton.setStyle("-fx-font-weight: bold;");
+        squares.add(resetButton, 0, dungeon.getHeight());
 
     }
+    
+    
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
