@@ -23,7 +23,7 @@ public class DungeonApplication extends Application {
     	dungeonScreen.getController().setLoseScreen(loseScreen);
     	
     	winScreen.getController().setStartScreen(startScreen);
-    	loseScreen.getController().setDungeonScreen(dungeonOrigScreen);
+    	loseScreen.getController().setDungeonScreen(dungeonScreen);
 
     	dungeonScreen.getController().setDungeonScreen(dungeonOrigScreen);
 

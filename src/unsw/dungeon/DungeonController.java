@@ -101,8 +101,10 @@ public class DungeonController {
     public void reset () throws IOException {
     	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
 		newDungeon.getController().setDungeonScreen(newDungeon);
+		newDungeon.getController().setWinScreen(winScreen);
+		newDungeon.getController().setLoseScreen(loseScreen);
 		newDungeon.start();
-    	
+		
     }
 
     
