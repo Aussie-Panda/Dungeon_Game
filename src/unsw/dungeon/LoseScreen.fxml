@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.dungeon.LoseController">
+   <children>
+      <ImageView fitHeight="221.0" fitWidth="189.0" layoutX="411.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deep_elf_master_archer.png" />
+         </image>
+      </ImageView>
+      <Text fill="#616161" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over" textAlignment="CENTER" wrappingWidth="600.0">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Text>
+      <Button fx:id="mainMenu" layoutX="336.0" layoutY="267.0" onAction="#handleMainMenu" mnemonicParsing="false" prefHeight="21.0" prefWidth="160.0" text="Back to main menu" textAlignment="CENTER" textOverrun="CLIP">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="tryAgain" layoutX="117.0" layoutY="267.0" onAction="#handleTryAgain" mnemonicParsing="false" prefHeight="21.0" prefWidth="160.0" text="Try again" textAlignment="CENTER" textOverrun="CLIP">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</Pane>

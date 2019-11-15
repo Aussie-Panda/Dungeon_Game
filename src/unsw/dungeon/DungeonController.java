@@ -3,6 +3,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,7 +37,9 @@ public class DungeonController {
     private Dungeon dungeon;
     
     private StartScreen startScreen;
-
+    private WinScreen winScreen;
+    private LoseScreen loseScreen;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -88,11 +92,33 @@ public class DungeonController {
         
         squares.add(resetButton, dungeon.getWidth(), 0);
         squares.add(returnButton, dungeon.getWidth(), 1);
-
+        
+        
+        trackWinStatus();
     }
     
     public void setStartScreen(StartScreen startScreen) {
         this.startScreen = startScreen;
+    }
+    
+    public void setWinScreen(WinScreen winScreen) {
+    	this.winScreen = winScreen;
+    }
+    
+    public void setLoseScreen(LoseScreen loseScreen) {
+    	this.loseScreen = loseScreen;
+    }
+    
+    private void trackWinStatus() {
+    	dungeon.winStatus.addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, 
+					Boolean oldValue, Boolean newValue) {
+				if (newValue == true) winScreen.start();
+				else loseScreen.start();
+				
+			}
+    	});
     }
 
     @FXML
