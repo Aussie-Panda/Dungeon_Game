@@ -14,9 +14,11 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
     	StartScreen startScreen = new StartScreen(primaryStage);
     	DungeonScreen dungeonScreen = new DungeonScreen(primaryStage, "advanced.json");
+    	DungeonScreen dungeonOrigScreen = new DungeonScreen(primaryStage, "advanced.json");
 
     	startScreen.getController().setDungeonScreen(dungeonScreen);
-    	dungeonScreen.getController().setStartScreen(startScreen);
+
+    	dungeonScreen.getController().setDungeonScreen(dungeonOrigScreen);
     	
     	startScreen.start();
 
