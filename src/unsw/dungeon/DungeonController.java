@@ -3,12 +3,16 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -21,13 +25,16 @@ public class DungeonController {
     private GridPane squares;
     
     @FXML
-    Button resetButton = new Button("R");
+    Button resetButton = new Button("Reset");
+    Button returnButton = new Button("Return");
     
     private List<ImageView> initialEntities;
 
     private Player player;
 
     private Dungeon dungeon;
+    
+    private StartScreen startScreen;
 
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
@@ -49,15 +56,44 @@ public class DungeonController {
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
+        
         //gridPane.add(button1, 0, 2); 
-        double max = 10.0;
-        resetButton.setMaxWidth(max);
+        
+        //AnchorPane anchor_pane = new AnchorPane();
+        double width = 100.0;
+        double height = 10.0;
+        resetButton.setMaxWidth(width);
+        resetButton.setMaxHeight(height);
+        returnButton.setMaxWidth(width);
+        returnButton.setMaxHeight(height);
+        
         resetButton.setStyle("-fx-font-weight: bold;");
-        squares.add(resetButton, 0, dungeon.getHeight());
+        returnButton.setStyle("-fx-font-weight: bold;");
+
+        returnButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+            	//TODO need to reset before goes to the start screen
+            	startScreen.start();
+            }
+        });
+        
+        resetButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+            	//TODO need to reset
+
+                	System.out.println("-----DUNGEON RESET SUCCESSFUL-----");
+
+            }
+        });
+        
+        squares.add(resetButton, dungeon.getWidth(), 0);
+        squares.add(returnButton, dungeon.getWidth(), 1);
 
     }
     
-    
+    public void setStartScreen(StartScreen startScreen) {
+        this.startScreen = startScreen;
+    }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {

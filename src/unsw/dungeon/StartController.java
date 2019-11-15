@@ -12,9 +12,6 @@ public class StartController {
 
     private DungeonScreen dungeonScreen;
     
-//    startButton.setOnAction(e -> {
-//    	setUserAgentStyleSheet(STYLESHEET_MODENA);
-//    });
     
     @FXML
     public void handleStart(ActionEvent event) {

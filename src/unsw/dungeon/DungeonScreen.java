@@ -38,4 +38,8 @@ public class DungeonScreen {
         stage.show();
     }
     
+    public DungeonController getController() {
+        return controller;
+    }
+    
 }
