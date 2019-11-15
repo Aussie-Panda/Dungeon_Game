@@ -16,14 +16,17 @@ public class DungeonApplication extends Application {
     	WinScreen winScreen = new WinScreen(primaryStage);
     	LoseScreen loseScreen = new LoseScreen(primaryStage);
     	DungeonScreen dungeonScreen = new DungeonScreen(primaryStage, "advanced.json");
+    	DungeonScreen dungeonOrigScreen = new DungeonScreen(primaryStage, "advanced.json");
 
     	startScreen.getController().setDungeonScreen(dungeonScreen);
-    	dungeonScreen.getController().setStartScreen(startScreen);
     	dungeonScreen.getController().setWinScreen(winScreen);
     	dungeonScreen.getController().setLoseScreen(loseScreen);
     	
     	winScreen.getController().setStartScreen(startScreen);
-    	loseScreen.getController().setDungeonScreen(dungeonScreen);
+    	loseScreen.getController().setDungeonScreen(dungeonOrigScreen);
+
+    	dungeonScreen.getController().setDungeonScreen(dungeonOrigScreen);
+
     	
     	startScreen.start();
 

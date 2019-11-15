@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -23,7 +25,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
-    protected BooleanProperty winStatus = new SimpleBooleanProperty();
+    protected IntegerProperty winStatus = new SimpleIntegerProperty(0);
 //    private Goal mainGoal; // store the first processed goal
     // need a status indicating winning
     
@@ -215,12 +217,12 @@ public class Dungeon {
 	}
 
 	public void win(){
-		winStatus.set(true);
+		winStatus.set(1);
     	System.out.println("WIN!!");
 	}
 
 	public void lose() {
-		winStatus.set(false);
+		winStatus.set(2);
     	System.out.println("LOSE!!");
 	}
 

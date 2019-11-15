@@ -41,5 +41,50 @@ public class DungeonScreen {
     public DungeonController getController() {
         return controller;
     }
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+	public Stage getStage() {
+		return stage;
+	}
+
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public Scene getScene() {
+		return scene;
+	}
+
+
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+
+
+	public void setController(DungeonController controller) {
+		this.controller = controller;
+	}
     
 }

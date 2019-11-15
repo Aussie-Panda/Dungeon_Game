@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class DungeonController {
     
     @FXML
     Button resetButton = new Button("Reset");
-    Button returnButton = new Button("Return");
     
     private List<ImageView> initialEntities;
 
@@ -36,10 +36,11 @@ public class DungeonController {
 
     private Dungeon dungeon;
     
-    private StartScreen startScreen;
     private WinScreen winScreen;
     private LoseScreen loseScreen;
     
+    private DungeonScreen dungeonScreen;
+
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -68,37 +69,46 @@ public class DungeonController {
         double height = 10.0;
         resetButton.setMaxWidth(width);
         resetButton.setMaxHeight(height);
-        returnButton.setMaxWidth(width);
-        returnButton.setMaxHeight(height);
-        
-        resetButton.setStyle("-fx-font-weight: bold;");
-        returnButton.setStyle("-fx-font-weight: bold;");
 
-        returnButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-            	//TODO need to reset before goes to the start screen
-            	startScreen.start();
-            }
-        });
+        resetButton.setStyle("-fx-font-weight: bold;");
+
         
         resetButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+            @Override 
+            public void handle(ActionEvent e) {
             	//TODO need to reset
+            	try {
+					reset();
+					System.out.println("RESET SUCCESSFUL");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
 
-                	System.out.println("-----DUNGEON RESET SUCCESSFUL-----");
+
+    			
 
             }
         });
         
         squares.add(resetButton, dungeon.getWidth(), 0);
-        squares.add(returnButton, dungeon.getWidth(), 1);
         
         
         trackWinStatus();
+
     }
+    public void reset () throws IOException {
+    	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
+		newDungeon.getController().setDungeonScreen(newDungeon);
+		newDungeon.start();
+    	
+    }
+
     
-    public void setStartScreen(StartScreen startScreen) {
-        this.startScreen = startScreen;
+    
+    public void setDungeonScreen(DungeonScreen dungeonScreen) {
+        this.dungeonScreen = dungeonScreen;
     }
     
     public void setWinScreen(WinScreen winScreen) {
@@ -110,14 +120,13 @@ public class DungeonController {
     }
     
     private void trackWinStatus() {
-    	dungeon.winStatus.addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, 
-					Boolean oldValue, Boolean newValue) {
-				if (newValue == true) winScreen.start();
-				else loseScreen.start();
-				
-			}
+    	dungeon.winStatus.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+            	if (newValue.equals(1)) winScreen.start();
+            	else if (newValue.equals(2)) loseScreen.start();
+            }
     	});
     }
 
