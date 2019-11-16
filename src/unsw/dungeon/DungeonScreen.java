@@ -5,6 +5,8 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class DungeonScreen {
@@ -13,6 +15,7 @@ public class DungeonScreen {
     private DungeonController controller;
     private Scene scene;
     private String filename;
+    
     
     //remember to add filename to dungeon screen
     public DungeonScreen(Stage stage, String filename) throws IOException {
@@ -33,9 +36,16 @@ public class DungeonScreen {
     
     
     public void start() {
+//    	MediaPlayer mediaplayer;
+//    	Media musicFile = new Media ("https://www.youtube.com/watch?v=06XG30BRMuY");
+//    	mediaplayer = new MediaPlayer(musicFile);
+//    	mediaplayer.setAutoPlay(true);
+//    	
+    	
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
+
     }
     
     public DungeonController getController() {

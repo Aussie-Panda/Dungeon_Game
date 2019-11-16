@@ -28,6 +28,15 @@ public class DungeonController {
     @FXML
     Button resetButton = new Button("Reset");
     
+    @FXML
+    Button level1Button = new Button("lv.1");
+    
+    @FXML
+    Button level2Button = new Button("lv.2");
+    
+    @FXML
+    Button level3Button = new Button("lv.3");
+    
     private List<ImageView> initialEntities;
 
     private Player player;
@@ -60,12 +69,23 @@ public class DungeonController {
         
         //AnchorPane anchor_pane = new AnchorPane();
         double width = 100.0;
-        double height = 10.0;
-        resetButton.setMaxWidth(width);
+        double height = 11.0;
+        resetButton.setMinWidth(width);
         resetButton.setMaxHeight(height);
 
+        level1Button.setMaxWidth(width);
+        level1Button.setMaxHeight(height);
+        
+        level2Button.setMaxWidth(width);
+        level2Button.setMaxHeight(height);
+        
+        level3Button.setMaxWidth(width);
+        level3Button.setMaxHeight(height);
+        
         resetButton.setStyle("-fx-font-weight: bold;");
-
+        level1Button.setStyle("-fx-font-weight: bold;");
+        level2Button.setStyle("-fx-font-weight: bold;");
+        level3Button.setStyle("-fx-font-weight: bold;");
         
         resetButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
@@ -78,17 +98,65 @@ public class DungeonController {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-            	
-
-
-    			
 
             }
         });
         
+        level1Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent e) {
+            	//TODO need to reset
+            	try {
+					level("maze.json");
+					System.out.println("LOAD level SUCCESSFUL");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+            }
+        });
+        
+        level2Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent e) {
+            	//TODO need to reset
+            	try {
+					level("boulders.json");
+					System.out.println("LOAD level SUCCESSFUL");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+            }
+        });
+        
+        level3Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent e) {
+            	//TODO need to reset
+            	try {
+					level("advanced.json");
+					System.out.println("LOAD level SUCCESSFUL");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+            }
+        });
+        
+        
+        //TODO
         squares.add(resetButton, dungeon.getWidth(), 0);
+        squares.add(level1Button, dungeon.getWidth(), 1);
+        squares.add(level2Button, dungeon.getWidth(), 2);
+        squares.add(level3Button, dungeon.getWidth(), 3);
+        
 
     }
+    
     public void reset () throws IOException {
     	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
 		newDungeon.getController().setDungeonScreen(newDungeon);
@@ -96,7 +164,15 @@ public class DungeonController {
     	
     }
 
-    
+    public void level (String fileName) throws IOException {
+    	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), fileName);
+		newDungeon.getController().setDungeon1Screen(newDungeon);
+		newDungeon.start();
+    	
+    }
+    public void setDungeon1Screen(DungeonScreen dungeonScreen) {
+        this.dungeonScreen = dungeonScreen;
+    }
     
     public void setDungeonScreen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
