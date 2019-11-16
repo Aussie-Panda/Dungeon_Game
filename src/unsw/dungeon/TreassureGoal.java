@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
 public class TreassureGoal implements Goal, Observer  {
-
+	
+	private String name = "Pick Up Treasures";
     private int treassures = 0;
     private boolean status = false;
     private boolean isMain = false;
@@ -26,12 +27,14 @@ public class TreassureGoal implements Goal, Observer  {
     public void update(Subject s) {
         if (treassures > 0) treassures--;
         System.out.println("Treasure picked! Remaining treasure: " + treassures);
+        dungeon.updateGoal();
         if (treassures == 0) {
             status = true;
             if (isMain) dungeon.win();
             else if (parent != null) parent.checkComplete(this);
         }
         else status = false;
+        
     }
 
     @Override
@@ -46,10 +49,21 @@ public class TreassureGoal implements Goal, Observer  {
 
     public void setMain() {
         isMain = true;
+        this.dungeon.setMainGoal(this);
     }
 
     @Override
     public void setParent(Goals g) {
         parent = g;
     }
+    
+    @Override
+    public String getName() {
+    	return name;
+    }
+
+	@Override
+	public int getNum() {
+		return treassures;
+	}
 }

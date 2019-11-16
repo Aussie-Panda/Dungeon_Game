@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
 public class SwitchGoal implements Goal, Observer {
-
+	
+	private String name = "Toggle Switches";
     private int switches = 0; // number of untriggered switch
     private Dungeon dungeon;
     private boolean status = false;
@@ -24,6 +25,7 @@ public class SwitchGoal implements Goal, Observer {
 
     @Override
     public void update(Subject s) {
+    	
         // if the subject is triggered, decrease number of untriggered switch
         if (((Switch) s).isOn()) {
             if (switches > 0) switches--;
@@ -40,6 +42,7 @@ public class SwitchGoal implements Goal, Observer {
         } else {
         	status = false;
         }
+        dungeon.updateGoal();
     }
 
     @Override
@@ -55,10 +58,21 @@ public class SwitchGoal implements Goal, Observer {
     @Override
     public void setMain() {
         isMain = true;
+        this.dungeon.setMainGoal(this);
     }
 
     @Override
     public void setParent(Goals g){
         parent = g;
     }
+    
+    @Override
+    public String getName() {
+    	return name;
+    }
+
+	@Override
+	public int getNum() {
+		return switches;
+	}
 }

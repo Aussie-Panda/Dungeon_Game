@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 public class EnemyGoal implements Goal, Observer {
 	
+	private String name = "Kill Enemies";
 	private Dungeon dungeon;
     private int enemies = 0;
     private boolean isMain = false;
@@ -25,6 +26,7 @@ public class EnemyGoal implements Goal, Observer {
 
     @Override
     public void update(Subject s) {
+     
         if (enemies > 0) enemies--;
         if (enemies == 0) {
         	status = true;
@@ -32,6 +34,7 @@ public class EnemyGoal implements Goal, Observer {
         	else if (parent != null) parent.checkComplete(this);
         }
         else status = false;
+        dungeon.updateGoal();
     }
 
     @Override
@@ -46,10 +49,22 @@ public class EnemyGoal implements Goal, Observer {
 
     public void setMain() {
         isMain = true;
+        this.dungeon.setMainGoal(this);
     }
+    
 
     @Override
     public void setParent(Goals g) {
         parent = g;
     }
+    
+    @Override
+    public String getName() {
+    	return name;
+    }
+
+	@Override
+	public int getNum() {
+		return enemies;
+	}
 }

@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
 public class ExitGoal implements Goal, Observer{
-
+	
+	private String name = "Get to Exit";
     private Subject exit;
     private Boolean isMain = false;
     private Boolean status = false;
@@ -32,6 +33,7 @@ public class ExitGoal implements Goal, Observer{
 
     @Override
     public void update(Subject s) {
+    	
         status =  true;
         if (isMain())dungeon.win();
         else if (parent != null) {
@@ -43,10 +45,12 @@ public class ExitGoal implements Goal, Observer{
             }
             parent.checkComplete(this);
         }
+        dungeon.updateGoal();
     }
 
     public void setMain() {
         isMain = true;
+        this.dungeon.setMainGoal(this);
     }
 
     @Override
@@ -59,4 +63,15 @@ public class ExitGoal implements Goal, Observer{
         parent = g;
 
     }
+    
+    @Override
+    public String getName() {
+    	return name;
+    }
+
+
+	@Override
+	public int getNum() {
+		return (status == true)? 0:1;
+	}
 }

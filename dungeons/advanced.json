@@ -245,7 +245,7 @@
     {
       "x": 9,
       "y": 6,
-      "type": "portal"
+      "type": "treasure"
     },
     {
       "x": 13,
@@ -602,7 +602,15 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "enemies"
+        "goal": "OR",
+        "subgoals": [
+            {
+                "goal": "treasures"
+            },
+            {
+                "goal": "enemies"
+            }
+        ]
       },
       {
         "goal": "treasures"

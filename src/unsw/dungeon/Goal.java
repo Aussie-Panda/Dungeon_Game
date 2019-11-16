@@ -6,5 +6,7 @@ public interface Goal {
     public boolean isMain();
     public void setParent(Goals g);
     public void setMain();
+    public String getName();
+    public int getNum();
 
 }

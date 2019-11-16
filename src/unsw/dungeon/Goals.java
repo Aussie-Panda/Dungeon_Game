@@ -22,7 +22,6 @@ public class Goals implements Goal {
     // will be called by subject (player) if player get to an exit
     @Override
     public boolean isComplete(){
-
         Boolean res = null;
         switch (type){
             case "OR":
@@ -55,9 +54,18 @@ public class Goals implements Goal {
 //        System.out.println("adding goals " + g.getClass());
         if (g.getClass() == ExitGoal.class) hasExit = true;
     }
+    
+    
 
-    public void setMain() {
+    public ArrayList<Goal> getSubGoals() {
+		return subGoals;
+	}
+
+
+
+	public void setMain() {
         isMain = true;
+        this.dungeon.setMainGoal(this);
     }
 
     public void checkComplete(Goal g) {
@@ -69,5 +77,20 @@ public class Goals implements Goal {
     public void setParent(Goals g) {
         parent = g;
     }
+    
+    @Override
+    public String getName() {
+    	return null;
+    }
+    
+
+	@Override
+	public int getNum() {
+		return -1;
+	}
+	
+	public String getType() {
+		return type;
+	}
 }
 

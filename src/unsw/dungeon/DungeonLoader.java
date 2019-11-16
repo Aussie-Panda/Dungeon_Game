@@ -63,7 +63,6 @@ public abstract class DungeonLoader {
     private Goal loadGoal(Dungeon dungeon, JSONObject json) {
     	Goal g = null;
     	String goalName = json.getString("goal");
-//    	System.out.println(json.toString());
     	switch (goalName) {
     	case "boulders":
 			g = new SwitchGoal(dungeon);  
