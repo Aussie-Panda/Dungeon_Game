@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class DungeonController {
     
     private WinScreen winScreen;
     private LoseScreen loseScreen;
-    
+    private StartScreen startScreen;
     private DungeonScreen dungeonScreen;
 
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
@@ -78,17 +79,11 @@ public class DungeonController {
             public void handle(ActionEvent e) {
             	//TODO need to reset
             	try {
-					reset();
-					System.out.println("RESET SUCCESSFUL");
+					reset ();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-            	
-
-
-    			
-
             }
         });
         
@@ -99,17 +94,53 @@ public class DungeonController {
 
     }
     public void reset () throws IOException {
-    	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
-		newDungeon.getController().setDungeonScreen(newDungeon);
-		newDungeon.getController().setWinScreen(winScreen);
-		newDungeon.getController().setLoseScreen(loseScreen);
-		newDungeon.start();
+//    	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
+//		newDungeon.getController().setDungeonScreen(newDungeon);
+//		newDungeon.getController().setWinScreen(winScreen);
+//		newDungeon.getController().setLoseScreen(loseScreen);
+//
+//		newDungeon.start();
+    	
+    	//TODO clear dungeon
+    	//TODO load dungeon
+    	System.out.println("in reset");
+    	reloadDungeon("advanced.json");
+    	if (dungeonScreen == null) {
+    		System.out.println("alwdlkmawkldnkjawndkjawndkjawndwkajnd");
+    	}
+    	dungeonScreen.start();
+    	//startScreen.start();
 		
+    }
+    
+    public void reloadDungeon (String fileName) throws IOException {
+    	//TODO clear dungeon
+    	System.out.println("cleared");
+    	this.dungeon = null;
+    	squares.getChildren().clear();
+    	
+    	
+    	DungeonControllerLoader loader = new DungeonControllerLoader(fileName);
+    	this.dungeon = loader.load();
+    	if (fileName == null) {
+    		System.out.println("get stage is" + dungeonScreen.getStage());
+    	}
+    	DungeonScreen newScreen = new DungeonScreen(dungeonScreen.getStage(), fileName);
+    	this.dungeonScreen = newScreen;
+    	newScreen.setController(this);
+    	setDungeonScreen(newScreen);
+    	this.initialize();
+    	
     }
 
     
     
-    public void setDungeonScreen(DungeonScreen dungeonScreen) {
+    public void setStartScreen(StartScreen startScreen) {
+		this.startScreen = startScreen;
+		
+	}
+
+	public void setDungeonScreen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
     }
     
