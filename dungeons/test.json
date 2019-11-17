@@ -130,17 +130,17 @@
     {
       "x": 7,
       "y": 2,
-      "type": "wall"
+      "type": "door"
     },
     {
       "x": 8,
       "y": 2,
-      "type": "wall"
+      "type": "door"
     },
     {
       "x": 9,
       "y": 2,
-      "type": "wall"
+      "type": "door"
     },
     {
       "x": 12,
@@ -245,7 +245,7 @@
     {
       "x": 9,
       "y": 6,
-      "type": "wall"
+      "type": "treasure"
     },
     {
       "x": 13,
@@ -360,7 +360,7 @@
     {
       "x": 0,
       "y": 10,
-      "type": "wall"
+      "type": "portal"
     },
     {
       "x": 3,
@@ -380,12 +380,12 @@
     {
       "x": 7,
       "y": 10,
-      "type": "treasure"
+      "type": "portal"
     },
     {
       "x": 11,
       "y": 10,
-      "type": "invincibility"
+      "type": "portal"
     },
     {
       "x": 17,
@@ -602,10 +602,18 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "enemies"
+        "goal": "OR",
+        "subgoals": [
+            {
+                "goal": "treasures"
+            },
+            {
+                "goal": "enemies"
+            }
+        ]
       },
       {
-        "goal": "treasure"
+        "goal": "treasures"
       }
     ]
   }
