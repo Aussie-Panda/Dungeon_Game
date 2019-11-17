@@ -226,9 +226,9 @@ public class Dungeon {
 
 	public void lose() {
 		winStatus.set(-1);
-		
-		player.setPt(new Point(-1, -1));
 		player.setDisable(true);
+		player.setPt(new Point(-1, -1));
+		
     	System.out.println("LOSE!!");
 	}
 	
