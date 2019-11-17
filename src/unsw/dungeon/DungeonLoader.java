@@ -54,13 +54,23 @@ public abstract class DungeonLoader {
     	
         return dungeon;
     }
-    
+    /**
+     * load the main goal into the dungeon
+     * @param dungeon the dungeon that want to add goal
+     * @param json
+     */
     private void loadMainGoal (Dungeon dungeon, JSONObject json) {
     	Goal g = loadGoal(dungeon, json); 
     	g.setMain();
     }
-    
-    private Goal loadGoal(Dungeon dungeon, JSONObject json) {
+	
+	/**
+	 * load the main goal into the dungeon
+	 * @param dungeon the dungeon that want to add goal
+	 * @param json
+	 */
+
+	private Goal loadGoal(Dungeon dungeon, JSONObject json) {
     	Goal g = null;
     	String goalName = json.getString("goal");
     	switch (goalName) {
@@ -92,6 +102,11 @@ public abstract class DungeonLoader {
     	return g;
     }
 
+	/**
+	 * load the entity into the dungeon
+	 * @param dungeon the dungeon you want to load
+	 * @param json
+	 */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -204,7 +219,5 @@ public abstract class DungeonLoader {
 	protected abstract void onLoad(Exit exit);
 
 	protected abstract void onLoad(Switch newSwitch);
-
-    // TODO Create additional abstract methods for the other entities
 
 }

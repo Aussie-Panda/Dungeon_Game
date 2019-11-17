@@ -16,7 +16,12 @@ public class Portal extends Entity implements Throughable {
 
     }
 
-    // find valid Direction clock-wisely from a portal
+    
+    /**
+     * find valid landing Direction clock-wisely from a portal (clock-wise)
+     * @param por the portal you want to check
+     * @return the first found valid point
+     */
     private Point validDirection(Portal por){
         ArrayList <Point> dir = new ArrayList<Point>();
         if(por  == null) System.out.println("portal is null");
@@ -39,7 +44,7 @@ public class Portal extends Entity implements Throughable {
             }
         }
         return null;
-    }
+    } 
 
     @Override
     public void through(Movable p, String dir) {
@@ -62,10 +67,18 @@ public class Portal extends Entity implements Throughable {
         through(p, direction);
     }
 
+    /**
+     * get the id of the portal
+     * @return the id of the portal
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * check if the portal is entrance or exit
+     * @return if it is entrance or exit
+     */
     public boolean isA() {
         return isA;
     }

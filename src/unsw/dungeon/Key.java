@@ -45,6 +45,10 @@ public class Key extends Entity implements Consumable, Collectable {
 		
 	}
 
+	/**
+	 * get the id of the key
+	 * @return the id of the key
+	 */
 	public int getId() {
 		return id;
 	}

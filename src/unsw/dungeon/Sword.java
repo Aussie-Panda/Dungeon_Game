@@ -37,7 +37,9 @@ public class Sword extends Entity implements Collectable, Consumable {
 		}
 	}
 
-
+	/**
+	 * consume the sword if sword has no durability
+	 */
 	@Override
 	public void consume(Player p) {
 		if (p.getState().equals("sword")) {

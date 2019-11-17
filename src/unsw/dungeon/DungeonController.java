@@ -22,7 +22,8 @@ import javafx.scene.layout.VBox;
 /**
  * A JavaFX controller for the dungeon.
  * @author Robert Clifton-Everest
- *
+ * @author Yanning Cao
+ * @author Katrina Ding
  */
 public class DungeonController {
 
@@ -67,6 +68,10 @@ public class DungeonController {
         this.initialEntities = new ArrayList<>(initialEntities);
     }
 
+    /**
+     * intilize the controller
+     * add label and buttons
+     */
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
@@ -222,7 +227,6 @@ public class DungeonController {
         });
         
         
-        //TODO
         squares.add(resetButton, dungeon.getWidth(), 0);
         squares.add(level1Button, dungeon.getWidth(), 1);
         squares.add(level2Button, dungeon.getWidth(), 2);
@@ -247,6 +251,11 @@ public class DungeonController {
         trackWinStatus();
     }
     
+    /**
+     * create the label for goals
+     * @param goal the goal that need to be labeld
+     * @return an arraylist of the content on the label
+     */
     public ArrayList<String> goalLabels(Goal goal) {
     	ArrayList <String> labelList = new ArrayList <String>();
     	if (goal != null && goal.getClass() != Goals.class) {
@@ -267,6 +276,11 @@ public class DungeonController {
     	return labelList;
     }
     
+    /**
+     * update the goal's label
+     * @param idx the goald's index
+     * @param newLabelList the new lable list that is upadated
+     */
     private void updateGoalLabels(int idx, ArrayList <String> newLabelList) {
     	int i = 0;
     	for (Label l : goalLabelList){
@@ -274,6 +288,10 @@ public class DungeonController {
     	}
     }
     
+    /**
+     * track if the goal has been changed
+     * @param idx the index of the goal
+     */
     private void trackGoalChangedFlag(int idx) {
     	dungeon.getGoalChangedFlag().addListener(new ChangeListener<Boolean>() {
 			@Override
@@ -284,6 +302,9 @@ public class DungeonController {
     	});
     }
     
+    /**
+     * track if player has win the game
+     */
     private void trackWinStatus() {
     	dungeon.getWinStatus().addListener(new ChangeListener<Number>() {
 			@Override
@@ -299,6 +320,10 @@ public class DungeonController {
     	});
     }
     
+    /**
+     * reset the dungeon
+     * @throws IOException
+     */
     public void reset () throws IOException {
     	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), this.dungeonScreen.getFilename());
 		newDungeon.getController().setDungeonScreen(newDungeon);
@@ -306,6 +331,11 @@ public class DungeonController {
     	
     }
 
+    /**
+     * laod a new map in to the dungeon
+     * @param fileName the fileName want to be load
+     * @throws IOException
+     */
     public void level (String fileName) throws IOException {
     	DungeonScreen newDungeon = new DungeonScreen(this.dungeonScreen.getStage(), fileName);
 		newDungeon.getController().setDungeon1Screen(newDungeon);
@@ -313,6 +343,10 @@ public class DungeonController {
 		
     	
     }
+    /**
+     * set the dungeon screen
+     * @param dungeonScreen
+     */
     public void setDungeon1Screen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
     }
@@ -321,6 +355,10 @@ public class DungeonController {
         this.dungeonScreen = dungeonScreen;
     }
 
+    /**
+     * handle the movement keys
+     * @param event
+     */
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {

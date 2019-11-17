@@ -7,7 +7,7 @@ public class Exit extends Entity implements Subject {
 
 	public Exit(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
     @Override

@@ -6,7 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 /**
  * An entity in the dungeon.
  * @author Robert Clifton-Everest
- *
+ * @author Yanning Cao
+ * @author Katrina Ding
  */
 public abstract class Entity {
 
@@ -14,11 +15,20 @@ public abstract class Entity {
     // externally observed.
     private Point pt;
 
-    
+    /**
+     * allows player to interact with the object
+     * @param p
+     */
     public void interact (Player p) {
     	
     }
     
+    /**
+     * state if the entity is passable
+     * @param d the dungeon that the entity is locate
+     * @param pt the location of the entity
+     * @return true is can be passed false if not
+     */
     public abstract boolean passable(Dungeon d, Point pt);
     
     /**
@@ -54,6 +64,10 @@ public abstract class Entity {
 		this.pt.setPt(pt);
 	}
 
+	/**
+	 * allows player to interact with the object
+     * @param p
+	 */
 	public abstract void interact(Player p, String direction);
 	
 	

@@ -14,7 +14,12 @@ public class DodgingState implements EnemyState {
     public String getState() {
         return "Dodging";
     }
-
+    
+    /**
+     * reverse the dirction
+     * @param dir the direction needs to be reversed
+     * @return
+     */
     public String reverseDir (String dir) {
     	if (dir == "up") return "down";
     	if (dir == "down") return "up";
@@ -24,7 +29,10 @@ public class DodgingState implements EnemyState {
 		return null;
     }
     
-    
+    /**
+     * enemy move along the y axis
+     * @param dir the dirction you want to move
+     */
     public void enemyMoveY (String dir) {
     	if (dir == "up") {
     		enemy.moveUp();
@@ -33,6 +41,10 @@ public class DodgingState implements EnemyState {
     	}
     }
     
+    /**
+     * enemy move along the x axis
+     * @param dir the direction you want to move
+     */
     public void enemyMoveX (String dir) {
     	if (dir == "left") {
     		enemy.moveLeft();

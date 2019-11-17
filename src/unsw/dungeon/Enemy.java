@@ -17,6 +17,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 
     }
 
+    /**
+     * set the state of the enemy
+     * @param state
+     */
     public void setState(EnemyState state) {
         this.state = state;
     }
@@ -53,6 +57,9 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
         state.controlMovement();
     }
 
+    /**
+     * kill the player or killed by the player
+     */
     @Override
     public void interact(Player p, String dir) {
         // enemy die if player is invincible or holding sword
@@ -173,7 +180,11 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 	}
 
     
-    
+    /**
+     * check the instance on the pt is passable or not
+     * @param pt
+     * @return
+     */
 	public boolean passable (Point pt) {
 		boolean result = true;
 		
@@ -187,7 +198,11 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 
 	//================functions for state===========
 	
-    // player at result side of the enemy
+ 
+	/**
+	 * get the player direction on the x axis
+	 * @return player's direction in string format
+	 */
     public String getPlayerXDirection () {
     	Point playerPos = ((Player) player).getPt();
     	Point enemyPos  = this.getPt();
@@ -205,7 +220,11 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     	}
 		return result;
     }
-    
+
+	/**
+	 * get the player direction on the y axis
+	 * @return player's direction in string format
+	 */
     public String getPlayerYDirection () {
     	Point playerPos = ((Player) player).getPt();
     	Point enemyPos  = this.getPt();
@@ -224,6 +243,11 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 		return result;
     }
     
+    /**
+     * check if i'm block in certain direction
+     * @param dir the direction you want to check
+     * @return true if is blocked else false
+     */
     public boolean isBlocked(String dir) {
     	boolean result = true;
 
@@ -242,6 +266,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     	
     }
     
+    /**
+     * enemy move along the y axis
+     * @param dir the dirction you want to move
+     */
     public void enemyMoveY (String dir) {
     	if (dir == "up") {
     		this.moveUp();
@@ -252,6 +280,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
     	}
     }
     
+    /**
+     * enemy move along the x axis
+     * @param dir the dirction you want to move
+     */
     public void enemyMoveX (String dir) {
     	if (dir == "left") {
     		this.moveLeft();

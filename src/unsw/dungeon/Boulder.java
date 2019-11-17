@@ -2,14 +2,28 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * A boulder class which allows player to interact with boulder
+ * and can triggers switch with boulder
+ * @author Yanning Cao
+ * @author Katrina Ding
+ */
+
 public class Boulder extends Entity implements Movable {
 
 	public Boulder(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+
 	}
 
-	// TODO
+	/**
+	 * check if the object locate at pt is a passable object
+	 * @param dungeon the dungeon that the boulder is in
+     * @param pt the coordinate that the object is locate
+     * 
+     * @return if the object at pt is passable or not
+     * 
+	 */
     @Override
 	public boolean passable (Dungeon dungeon, Point pt) {
 		boolean result = false;
@@ -29,6 +43,12 @@ public class Boulder extends Entity implements Movable {
 		return result;
 	}
     
+    /**
+     * get the target object's want-to-go location
+     * @param pt
+     * @param direction
+     * @return the required position
+     */
     public Point setTarget(Point pt, String direction) {
     	Point target = new Point(-1, -1);
     	if (direction == "up") {
@@ -51,7 +71,10 @@ public class Boulder extends Entity implements Movable {
     }
 
     
-    
+    /**
+     * interact with player and trigger the switch
+     * 
+     */
 	@Override
 	public void interact(Player p, String direction) {
 		Point target = setTarget(this.getPt(), direction);
@@ -88,13 +111,11 @@ public class Boulder extends Entity implements Movable {
 		
 		//turn on
 		if (dest != null && moved) {
-			//System.out.println("ON!!!!!!!!");
 			dest.setState(1);
 		}
 		
 		//turn off
 		if (curr != null && moved) {
-			//System.out.println("OFF!!!!!!!!");
 			curr.setState(0);
 		}
 	}

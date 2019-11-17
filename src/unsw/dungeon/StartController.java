@@ -12,13 +12,19 @@ public class StartController {
 
     private DungeonScreen dungeonScreen;
     
-    
+    /**
+     * handle the start button
+     * @param event
+     */
     @FXML
     public void handleStart(ActionEvent event) {
         dungeonScreen.start();
 
     }
-
+    /**
+     * set the dungeon screen
+     * @param dungeonScreen
+     */
     public void setDungeonScreen(DungeonScreen dungeonScreen) {
         this.dungeonScreen = dungeonScreen;
     }

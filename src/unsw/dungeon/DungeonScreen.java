@@ -34,65 +34,93 @@ public class DungeonScreen {
         
     }
     
-    
+    /**
+     * start the screen
+     */
     public void start() {
-//    	MediaPlayer mediaplayer;
-//    	Media musicFile = new Media ("https://www.youtube.com/watch?v=06XG30BRMuY");
-//    	mediaplayer = new MediaPlayer(musicFile);
-//    	mediaplayer.setAutoPlay(true);
-//    	
+
     	
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
 
     }
-    
+    /**
+     * get the controller of the dungeon
+     * @return the controller of the dungeon
+     */
     public DungeonController getController() {
         return controller;
     }
 
-
+    /**
+     * get the filename that has been loaded into the dungeon
+     * @return the filename
+     */
 	public String getFilename() {
 		return filename;
 	}
 
-
+	/**
+	 * set the filename you wish to load into the dungeon
+	 * @param filename
+	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
-
+	/**
+	 * get the stage of the dungeon
+	 * @return the stage of the dungeon
+	 */
 	public Stage getStage() {
 		return stage;
 	}
 
-
+	/**
+	 * set the stage of the dungeon
+	 * @param stage
+	 */
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
-
+	/**
+	 * get the title of the dungeon
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}
 
-
+	/**
+	 * set the title of the dungeon
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
+	/**
+	 * get the scene of the dungeon
+	 * @return the scene of the dungeon
+	 */
 	public Scene getScene() {
 		return scene;
 	}
 
-
+	/**
+	 * set the scene of the dungeon
+	 * @param scene the scene of the dungeon
+	 */
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
 
-
+	/**
+	 * set the controller for the dungeon
+	 * @param controller the controller for the dungeon
+	 */
 	public void setController(DungeonController controller) {
 		this.controller = controller;
 	}

@@ -30,12 +30,19 @@ public class StartScreen {
         //scene.getStylesheets().add("style.css");
     }
 
+    /**
+     * start the screen
+     */
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * get the start controller
+     * @return
+     */
     public StartController getController() {
         return controller;
     }

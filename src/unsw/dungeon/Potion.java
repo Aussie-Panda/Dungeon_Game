@@ -24,6 +24,9 @@ public class Potion extends Entity implements Consumable, Collectable {
 	}
 	
 
+	/**
+	 * consume the potion and get the invincible state
+	 */
 	@Override
 	public void consume(Player p) {
 		// set timmer task

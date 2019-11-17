@@ -5,6 +5,13 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Door extends Entity implements Throughable {
 
+	/**
+	 * A Door class which allows player to interact with Door
+	 * and can triggers switch with boulder
+	 * @author Yanning Cao
+	 * @author Katrina Ding
+	 */
+
     private Dungeon dungeon;
     private int id;
     protected BooleanProperty canPass = new SimpleBooleanProperty(false);
@@ -54,7 +61,10 @@ public class Door extends Entity implements Throughable {
         // else do nothing
 
     }
-    
+    /**
+     * get the door id
+     * @return the id of the door
+     */
     public int getId() {
     	return id;
     }

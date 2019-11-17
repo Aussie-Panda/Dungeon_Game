@@ -17,7 +17,8 @@ import javafx.scene.layout.GridPane;
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
  * connects them via listeners to the model, and creates a controller.
  * @author Robert Clifton-Everest
- *
+ * @author Yanning Cao
+ * @author Katrina Ding
  */
 public class DungeonControllerLoader extends DungeonLoader {
 

@@ -9,7 +9,7 @@ public class Switch extends Entity implements Subject {
     
 	public Switch(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+
 	}
 	
     @Override
@@ -17,7 +17,10 @@ public class Switch extends Entity implements Subject {
     	return true;
     }
     
-	
+	/**
+	 * check if the switch status is on
+	 * @return
+	 */
 	public boolean isOn () {
 		if (state == OFF) return false;
 		return true;
@@ -33,10 +36,18 @@ public class Switch extends Entity implements Subject {
 		goal.update(this);
 	}
 
+	/**
+	 * get the switch state
+	 * @return the state of the switch
+	 */
 	public int getState() {
 		return state;
 	}
 
+	/**
+	 * set the switch state
+	 * @param state 
+	 */
 	public void setState(int state) {
 		if (state != this.state) {
 			this.state = state;

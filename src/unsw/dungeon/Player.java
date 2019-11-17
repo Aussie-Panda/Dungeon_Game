@@ -8,7 +8,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 /**
  * The player entity
  * @author Robert Clifton-Everest
- *
+ * @author Yanning Cao
+ * @author Katrina Ding
  */
 public class Player extends Entity implements Movable, Subject {
 
@@ -38,17 +39,29 @@ public class Player extends Entity implements Movable, Subject {
 
     //=========== backPack functions ===========
     
-    // pick up all the collectable items
+
+    /**
+     * pick up all the collectable items
+     * @param c
+     */
     public void pickUp (Collectable c) {
     	c.collect(this);
     }
     
+    /**
+     * check if the player carries a sword
+     * @return
+     */
 	public boolean hasSword () {
 		//if has sword in the bag
 		return (state.get() == SWORD || state.get() == SWORD_INVINCIBLE);
 	}
 	
-	
+	/**
+	 * check if the player have the key with the  same id
+	 * @param id the id of the door
+	 * @return if has the key correspond to the door return true else false
+	 */
 	public boolean hasKey (int id) {
 		//if has key in the bag
 		for (Collectable c : backPack) {
@@ -57,8 +70,10 @@ public class Player extends Entity implements Movable, Subject {
 		return false;
 	}
 	
-	
-
+	/**
+	 * check if the player carries a key
+	 * @return	true if player has key else false
+	 */
 	public boolean hasKey () {
 		//if has key in the bag
 		for (Collectable c : backPack) {
@@ -67,6 +82,10 @@ public class Player extends Entity implements Movable, Subject {
 		return false;
 	}
 	
+	/**
+	 * consume a key 
+	 * @param id the key's id you wish to consume
+	 */
 	public void consumeKey(int id) {
 		for (Collectable c : backPack) {
 			if (c.getClass() == Key.class) {
@@ -79,6 +98,9 @@ public class Player extends Entity implements Movable, Subject {
 		}
 	}
 	
+	/**
+	 * consume the sword
+	 */
 	public void consumeSword() {
 		for (Collectable c : backPack) {
 			if (c.getClass() == Sword.class) {
@@ -104,7 +126,11 @@ public class Player extends Entity implements Movable, Subject {
 
 	//=========== enviroment detection ===========
 	
-	
+	/**
+	 * check if a object on a specific point is consumable
+	 * @param pt
+	 * @return
+	 */
 	public boolean passable (Point pt) {
 		boolean result = true;
 		
@@ -123,7 +149,9 @@ public class Player extends Entity implements Movable, Subject {
 	//=========== player Movement ===========
 
 
-	
+	/**
+	 * player moves up and interact with the object
+	 */
 	@Override
     public void moveUp() {
 		if (disable == false) {
@@ -147,7 +175,9 @@ public class Player extends Entity implements Movable, Subject {
 		
 	}
 	
-
+	/**
+	 * player moves down and interact with the object
+	 */
     @Override
     public void moveDown() {
     	if (disable == false) {
@@ -170,6 +200,9 @@ public class Player extends Entity implements Movable, Subject {
     	
     }
 
+	/**
+	 * player moves left and interact with the object
+	 */
     @Override
     public void moveLeft() {
     	if (disable == false) {
@@ -193,6 +226,9 @@ public class Player extends Entity implements Movable, Subject {
 
     }
 
+	/**
+	 * player moves right and interact with the object
+	 */
     @Override
     public void moveRight() {
     	if (disable == false) {
@@ -218,24 +254,44 @@ public class Player extends Entity implements Movable, Subject {
     
     //=========== getters and setters functions ===========
 
+    /**
+     * get the backpack
+     * @return pleyer's backpack
+     */
 	public ArrayList<Collectable> getBackPack() {
 		return backPack;
 	}
 
+	/**
+	 * get the treasure
+	 * @return
+	 */
 	public int getTreasure() {
 		return treasure;
 	}
 
+	/**
+	 * set the treasure
+	 * @param treasure
+	 */
 	public void setTreasure(int treasure) {
 		this.treasure = treasure;
 	}
 
+	/**
+	 * set player's backpack
+	 * @param backPack
+	 */
 	public void setBackPack(ArrayList<Collectable> backPack) {
 		this.backPack = backPack;
 	}
 	
 
 
+	/**
+	 * get player's state
+	 * @return the format will be in String
+	 */
 	public String getState() {
 		String str = null;
 		if (this.state.get() == NORMAL) {
@@ -253,6 +309,10 @@ public class Player extends Entity implements Movable, Subject {
 		return str;
 	}
 
+	/**
+	 * set player's statue using String
+	 * @param state the string of the state
+	 */
 	public void setState(String state) {
 		if (state.equals("normal")) {
 			this.state.set(NORMAL);
@@ -275,27 +335,44 @@ public class Player extends Entity implements Movable, Subject {
 		}
 	}
 	
+	/**
+	 * set player's state to invincible
+	 */
 	public void beInvincible() {
 		if (state.get() < SWORD_INVINCIBLE) state.set(state.get()+1);
 		System.out.println("Become invincible!");
 	}
 	
+	/**
+	 * remove invincible state from the player
+	 */
 	public void removeInvincible() {
 		if (state.get() > NORMAL) state.set(state.get()-1);
         System.out.println("Back to normal");
 	}
 	
+	/**
+	 * set the player state to sword
+	 */
 	public void swordState() {
 		state.set(state.get()+2);
 		System.out.println("Sword Picked!");
 	}
 	
+	/**
+	 * remove the sword state
+	 * @param s
+	 */
 	public void removeSword(Sword s) {
 		getBackPack().remove(s);
 		state.set(state.get()-2);
 		System.out.println("Sword is broken");
 	}
 
+	/**
+	 * get the dungeon the player's in
+	 * @return
+	 */
 	public Dungeon getDungeon() {
 		return dungeon;
 	}
@@ -305,10 +382,18 @@ public class Player extends Entity implements Movable, Subject {
 		return false;
 	}
 
+	/**
+	 * check if the player's move ability has been disabled
+	 * @return true is it is diabeld else false
+	 */
 	public boolean isDisable() {
 		return disable;
 	}
 
+	/**
+	 * set the disable 
+	 * @param disable
+	 */
 	public void setDisable(boolean disable) {
 		this.disable = disable;
 	}
