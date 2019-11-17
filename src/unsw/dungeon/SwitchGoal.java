@@ -38,7 +38,7 @@ public class SwitchGoal implements Goal, Observer {
         if (switches == 0) {
             status = true;
             if (isMain) dungeon.win();
-            else if (parent != null) parent.checkComplete(this);
+            else if (parent != null) parent.checkComplete();
         } else {
         	status = false;
         }
