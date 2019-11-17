@@ -39,27 +39,51 @@ public abstract class Entity {
     public Entity(int x, int y) {
         pt = new Point(x, y);
     }
-
+    
+    /**
+     * get the integer property of x
+     * @return integer property of x
+     */
     public IntegerProperty x() {
         return pt.x();
     }
 
+    /**
+     * get the integer property of y
+     * @return the integer property of y
+     */
     public IntegerProperty y() {
         return pt.y();
     }
 
+    /**
+     * get the integer of y coordinate
+     * @return the integer of y  coordinate
+     */
     public int getY() {
         return pt.getY();
     }
 
+    /**
+     * get the integer of x coordinate
+     * @return the integer of x coordinate
+     */
     public int getX() {
         return pt.getX();
     }
-
+    
+    /**
+     *  get the point instance of this entity
+     *  @return the Point instance of this entity
+     */
 	public Point getPt() {
 		return pt;
 	}
-
+	
+	/**
+	 * set the entity with a new coordinate (Point)
+	 * @param pt the new point wants to set
+	 */
 	public void setPt(Point pt) {
 		this.pt.setPt(pt);
 	}

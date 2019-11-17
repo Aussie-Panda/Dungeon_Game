@@ -111,7 +111,7 @@ public class Point {
     }
     
     /**
-     * set poitn to a specific position
+     * set point to a specific position
      * @param pt the location you wish to set
      */
     public void setPt(Point pt) {

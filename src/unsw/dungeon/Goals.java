@@ -7,7 +7,6 @@ public class Goals implements Goal {
     private Dungeon dungeon;
     private String type;
     private boolean isMain = false;
-//    private boolean status = false;
     private ArrayList<Goal> subGoals = new ArrayList <Goal>();
     private Goals parent;
     private boolean hasExit = false;
@@ -48,29 +47,38 @@ public class Goals implements Goal {
         return isMain;
     }
 
+    /**
+     * add Subgoals to subgoals list
+     * @param g the goal to be added
+     */
     public void addSubgoals(Goal g) {
         this.subGoals.add(g);
         g.setParent(this);
-//        System.out.println("adding goals " + g.getClass());
         if (g.getClass() == ExitGoal.class) hasExit = true;
     }
     
     
-
+    /**
+     * get the list of subgoals
+     * @return subGoals Array list of subgoals
+     */
     public ArrayList<Goal> getSubGoals() {
 		return subGoals;
 	}
 
 
-
+    @Override
 	public void setMain() {
         isMain = true;
         this.dungeon.setMainGoal(this);
     }
-
-    public void checkComplete(Goal g) {
+    
+    /**
+     * check if this all goals are completed, if yes, notify parent goal to check completeness
+     */
+    public void checkComplete() {
         if (isComplete() && isMain()) dungeon.win();
-        else if (!isMain && parent != null) parent.checkComplete(this);
+        else if (!isMain && parent != null) parent.checkComplete();
     }
 
     @Override

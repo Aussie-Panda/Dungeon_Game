@@ -43,11 +43,12 @@ public class ExitGoal implements Goal, Observer{
                 System.out.println("You haven't completed other goals yet");
                 status = false;
             }
-            parent.checkComplete(this);
+            parent.checkComplete();
         }
         dungeon.updateGoal();
     }
-
+    
+    @Override
     public void setMain() {
         isMain = true;
         this.dungeon.setMainGoal(this);

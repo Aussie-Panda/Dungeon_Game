@@ -54,6 +54,7 @@ public abstract class DungeonLoader {
     	
         return dungeon;
     }
+    
     /**
      * load the main goal into the dungeon
      * @param dungeon the dungeon that want to add goal
@@ -65,7 +66,7 @@ public abstract class DungeonLoader {
     }
 	
 	/**
-	 * load the main goal into the dungeon
+	 * load a goal into the dungeon
 	 * @param dungeon the dungeon that want to add goal
 	 * @param json
 	 */

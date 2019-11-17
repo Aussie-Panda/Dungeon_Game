@@ -31,7 +31,7 @@ public class EnemyGoal implements Goal, Observer {
         if (enemies == 0) {
         	status = true;
         	if (isMain()) dungeon.win();
-        	else if (parent != null) parent.checkComplete(this);
+        	else if (parent != null) parent.checkComplete();
         }
         else status = false;
         dungeon.updateGoal();
@@ -46,7 +46,8 @@ public class EnemyGoal implements Goal, Observer {
     public boolean isMain() {
         return isMain;
     }
-
+    
+    @Override
     public void setMain() {
         isMain = true;
         this.dungeon.setMainGoal(this);

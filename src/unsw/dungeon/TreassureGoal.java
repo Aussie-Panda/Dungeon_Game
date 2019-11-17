@@ -31,7 +31,7 @@ public class TreassureGoal implements Goal, Observer  {
         if (treassures == 0) {
             status = true;
             if (isMain) dungeon.win();
-            else if (parent != null) parent.checkComplete(this);
+            else if (parent != null) parent.checkComplete();
         }
         else status = false;
         
@@ -46,7 +46,8 @@ public class TreassureGoal implements Goal, Observer  {
     public boolean isMain() {
         return isMain;
     }
-
+    
+    @Override
     public void setMain() {
         isMain = true;
         this.dungeon.setMainGoal(this);
