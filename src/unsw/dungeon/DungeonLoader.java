@@ -72,7 +72,7 @@ public abstract class DungeonLoader {
     		g = new EnemyGoal(dungeon);
     		break;
     		
-    	case "treasures":
+    	case "treasure":
     		g = new TreassureGoal(dungeon);
     		break;
     		
