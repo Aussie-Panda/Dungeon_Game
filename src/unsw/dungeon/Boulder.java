@@ -20,8 +20,7 @@ public class Boulder extends Entity implements Movable {
 		
 		if (eList.size() == 1) {
 			for (Entity e : eList) {
-				if ((e instanceof Collectable) || 
-				(e.getClass() == Switch.class)) {
+				if (e.getClass() == Switch.class) {
 					return true;
 				}
 			}

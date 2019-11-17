@@ -221,12 +221,13 @@ public class Dungeon {
 	public void win(){
 		winStatus.set(1);
     	System.out.println("WIN!!");
+    	player.setDisable(true);
 	}
 
 	public void lose() {
 		winStatus.set(-1);
 		
-		player.setPt(new Point(19, 19));
+		player.setPt(new Point(-1, -1));
 		player.setDisable(true);
     	System.out.println("LOSE!!");
 	}

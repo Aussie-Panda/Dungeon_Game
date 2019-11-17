@@ -47,6 +47,9 @@ public class DungeonController {
     @FXML
     Button level4Button = new Button("lv.4");
     
+    @FXML
+    Button level5Button = new Button("lv.5");
+    
     private ArrayList <Label> goalLabelList = new ArrayList<Label>();
     private List<ImageView> initialEntities;
 
@@ -96,6 +99,9 @@ public class DungeonController {
         level4Button.setMaxWidth(width);
         level4Button.setMaxHeight(height);
         
+        level5Button.setMaxWidth(width);
+        level5Button.setMaxHeight(height);
+        
         label.setMaxWidth(width);
         label.setMaxHeight(height);
         
@@ -105,6 +111,7 @@ public class DungeonController {
         level2Button.setStyle("-fx-font-weight: bold;");
         level3Button.setStyle("-fx-font-weight: bold;");
         level4Button.setStyle("-fx-font-weight: bold;");
+        level5Button.setStyle("-fx-font-weight: bold;");
         label.setStyle("-fx-font-weight: bold;");
         
         resetButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -180,6 +187,20 @@ public class DungeonController {
             }
         });
         
+        level5Button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent e) {
+
+            	try {
+					level("advanced3.json");
+					System.out.println("LOAD level SUCCESSFUL");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+            }
+        });
+        
         
         //TODO
         squares.add(resetButton, dungeon.getWidth(), 0);
@@ -187,20 +208,21 @@ public class DungeonController {
         squares.add(level2Button, dungeon.getWidth(), 2);
         squares.add(level3Button, dungeon.getWidth(), 3);
         squares.add(level4Button, dungeon.getWidth(), 4);
-        squares.add(label, dungeon.getWidth(), 5);
+        squares.add(level5Button, dungeon.getWidth(), 5);
+        squares.add(label, dungeon.getWidth(), 6);
         
         // add goals labels
 
         Goal mainGoal = dungeon.getMainGoal();
         ArrayList <String> labelList = goalLabels(mainGoal);
-        int i = 6;
+        int i = 7;
         for (String s : labelList) {
         	Label l = new Label(s);
         	squares.add(l, dungeon.getWidth(), i);
         	goalLabelList.add(l);
         	i++;
         }
-        trackGoalChangedFlag(6);
+        trackGoalChangedFlag(7);
         trackWinStatus();
     }
     

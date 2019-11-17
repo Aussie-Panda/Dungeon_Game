@@ -44,7 +44,7 @@ public class Door extends Entity implements Throughable {
         if (!passable(null, null) && p.hasKey(id)){
             canPass.set(true);
             p.consumeKey(id);
-            through(p, direction);
+            //through(p, direction);
 
         // if door is opened
         } else if (passable(null, null)) {
