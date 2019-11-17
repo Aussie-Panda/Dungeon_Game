@@ -34,7 +34,10 @@ public class Enemy extends Entity implements Movable, Observer, Subject {
 
     @Override
     public void notifyObserver() {
-        goal.update(this);
+    	if (goal != null) {
+    		goal.update(this);
+    	}
+        
     }
 
     @Override

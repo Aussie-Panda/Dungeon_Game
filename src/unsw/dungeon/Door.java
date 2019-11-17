@@ -24,24 +24,16 @@ public class Door extends Entity implements Throughable {
 	// pass through the player to a point
 	@Override
 	public void through(Movable m, String dir) {
-
-        switch (dir){
-            case "up":
-                ((Entity) m).setPt(getPt().getUp());
-                break;
-
-            case "down":
-                ((Entity) m).setPt(getPt().getDown());
-                break;
-
-            case "left":
-                ((Entity) m).setPt(getPt().getLeft());
-                break;
-
-            case "right":
-                ((Entity) m).setPt(getPt().getRight());
-                break;
+		Point dest = this.getPt();
+        
+    	((Entity) m).setPt(dest);
+    	Collectable c = dungeon.getCollectable(dest);
+    	if (c != null && (m.getClass() == Player.class)) {
+        	((Entity) c).interact((Player) m, dir);
+        	return;
         }
+        	
+        
 		
 	}
 

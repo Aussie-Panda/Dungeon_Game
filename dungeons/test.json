@@ -605,7 +605,7 @@
         "goal": "OR",
         "subgoals": [
             {
-                "goal": "treasures"
+                "goal": "treasure"
             },
             {
                 "goal": "enemies"
@@ -613,7 +613,7 @@
         ]
       },
       {
-        "goal": "treasures"
+        "goal": "treasure"
       }
     ]
   }

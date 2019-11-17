@@ -14,6 +14,7 @@ public class Player extends Entity implements Movable, Subject {
 
     private Dungeon dungeon;
     private int treasure;
+    private boolean disable = false;
     private ArrayList <Observer> observers = new ArrayList <Observer>();
     final static int NORMAL = 0;
     final static int INVINCIBLE = 1;
@@ -125,81 +126,93 @@ public class Player extends Entity implements Movable, Subject {
 	
 	@Override
     public void moveUp() {
-		if (getY() <= 0) return;
-		if (!observers.isEmpty()) notifyObserver();
+		if (disable == false) {
+			if (getY() <= 0) return;
+			if (!observers.isEmpty()) notifyObserver();
 
-		Point target = getPt().getUp();
-		ArrayList <Entity> eList = dungeon.getEntity(target);
-    	
-		// if no entities at the point or the only entity is switch
-		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
-			// move up
-			this.getPt().setUp();
-		} else {
-			for (Entity e : eList) {
-				e.interact(this, "up");
+			Point target = getPt().getUp();
+			ArrayList <Entity> eList = dungeon.getEntity(target);
+	    	
+			// if no entities at the point or the only entity is switch
+			if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
+				// move up
+				this.getPt().setUp();
+			} else {
+				for (Entity e : eList) {
+					e.interact(this, "up");
+				}
 			}
 		}
+		
 		
 	}
 	
 
     @Override
     public void moveDown() {
-    	if (getY() >= (dungeon.getHeight() - 1)) return;
-    	if (!observers.isEmpty()) notifyObserver();
+    	if (disable == false) {
+    		if (getY() >= (dungeon.getHeight() - 1)) return;
+        	if (!observers.isEmpty()) notifyObserver();
+        	
+        	Point target = getPt().getDown();
+    		ArrayList <Entity> eList = dungeon.getEntity(target);
+    		
+    		// if no entities at the point or the only entity is switch
+    		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
+    			// move down
+    			this.getPt().setDown();
+    		} else {
+    			for (Entity e : eList) {
+    				e.interact(this, "down");
+    			}
+    		}
+    	}
     	
-    	Point target = getPt().getDown();
-		ArrayList <Entity> eList = dungeon.getEntity(target);
-		
-		// if no entities at the point or the only entity is switch
-		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
-			// move down
-			this.getPt().setDown();
-		} else {
-			for (Entity e : eList) {
-				e.interact(this, "down");
-			}
-		}
     }
 
     @Override
     public void moveLeft() {
-    	if (getX() <= 0) return;
-    	if (!observers.isEmpty()) notifyObserver();
+    	if (disable == false) {
+    		if (getX() <= 0) return;
+        	if (!observers.isEmpty()) notifyObserver();
+        	
+        	Point target = getPt().getLeft();
+    		ArrayList <Entity> eList = dungeon.getEntity(target);
+    		
+    		// if no entities at the point or the only entity is switch
+    		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
+    			// move left
+    			this.getPt().setLeft();
+    		} else {
+    			for (Entity e : eList) {
+    				e.interact(this, "left");
+    			}
+    		}
+    	}
     	
-    	Point target = getPt().getLeft();
-		ArrayList <Entity> eList = dungeon.getEntity(target);
-		
-		// if no entities at the point or the only entity is switch
-		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
-			// move left
-			this.getPt().setLeft();
-		} else {
-			for (Entity e : eList) {
-				e.interact(this, "left");
-			}
-		}
 
     }
 
     @Override
     public void moveRight() {
-    	if (getX() >= dungeon.getWidth() - 1) return;
-    	if (!observers.isEmpty()) notifyObserver();
+    	if (disable == false) {
+    		if (getX() >= dungeon.getWidth() - 1) return;
+        	if (!observers.isEmpty()) notifyObserver();
+        	
+        	Point target = getPt().getRight();
+        	ArrayList <Entity> eList = dungeon.getEntity(target);
+        	
+        	// if no entities at the point or the only entity is switch
+    		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
+    			// move right
+    			this.getPt().setRight();
+    		} else {
+    			for (Entity e : eList) {
+    				e.interact(this, "right");
+    			}
+    		}
+    	}
     	
-    	Point target = getPt().getRight();
-    	ArrayList <Entity> eList = dungeon.getEntity(target);
-    	
-    	// if no entities at the point or the only entity is switch
-		if (eList.isEmpty() || (eList.size() == 1 && eList.get(0).getClass() == Switch.class)) {
-			// move right
-			this.getPt().setRight();
-		} else {
-			for (Entity e : eList) {
-				e.interact(this, "right");
-			}
-		}
     }
     //=========== end of Player movement functions ===========  
     
@@ -276,6 +289,12 @@ public class Player extends Entity implements Movable, Subject {
 		state.set(state.get()+2);
 		System.out.println("Sword Picked!");
 	}
+	
+	public void removeSword(Sword s) {
+		getBackPack().remove(s);
+		state.set(state.get()-2);
+		System.out.println("Sword is broken");
+	}
 
 	public Dungeon getDungeon() {
 		return dungeon;
@@ -284,6 +303,14 @@ public class Player extends Entity implements Movable, Subject {
 	@Override
 	public boolean passable(Dungeon d, Point pt) {
 		return false;
+	}
+
+	public boolean isDisable() {
+		return disable;
+	}
+
+	public void setDisable(boolean disable) {
+		this.disable = disable;
 	}
 
 	@Override

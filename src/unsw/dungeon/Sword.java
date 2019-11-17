@@ -43,7 +43,9 @@ public class Sword extends Entity implements Collectable, Consumable {
 		if (p.getState().equals("sword")) {
 			durability--;
 			System.out.println("Sword durability: " + durability);
-			if (durability == 0) p.getBackPack().remove(this);
+			if (durability == 0) {
+				p.removeSword(this);
+			}
 		}
 		// TODO: nned test
 	}

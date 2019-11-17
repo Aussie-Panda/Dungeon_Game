@@ -107,11 +107,28 @@
       "y": 1,
       "type": "sword"
     },
+
     {
       "x": 8,
       "y": 1,
       "type": "wall"
     },
+    {
+      "x": 8,
+      "y": 3,
+      "type": "door"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "type": "key"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "type": "wall"
+    },
+
     {
       "x": 17,
       "y": 1,
@@ -222,6 +239,28 @@
       "y": 5,
       "type": "enemy"
     },
+
+    {
+      "x": 3,
+      "y": 7,
+      "type": "enemy"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "type": "enemy"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "type": "enemy"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "type": "enemy"
+    },
+
     {
       "x": 8,
       "y": 5,
@@ -387,11 +426,68 @@
       "y": 10,
       "type": "treasure"
     },
+
     {
-      "x": 11,
+      "x": 9,
       "y": 10,
+      "type": "wall"
+    },
+    
+    {
+      "x": 9,
+      "y": 13,
+      "type": "wall"
+    },
+
+    {
+      "x": 9,
+      "y": 14,
+      "type": "wall"
+    },
+
+    {
+      "x": 10,
+      "y": 3,
       "type": "invincibility"
     },
+    {
+      "x": 16,
+      "y": 14,
+      "type": "exit"
+    },
+    {
+      "x": 15,
+      "y": 13,
+      "type": "portal"
+    },
+    {
+      "x": 14,
+      "y": 8,
+      "type": "portal"
+    },
+    {
+      "x": 14,
+      "y": 14,
+      "type": "enemy"
+    },
+    {
+      "x": 16,
+      "y": 12,
+      "type": "wall"
+    },
+
+    {
+      "x": 15,
+      "y": 12,
+      "type": "wall"
+    },
+
+    {
+      "x": 15,
+      "y": 14,
+      "type": "wall"
+    },
+
     {
       "x": 17,
       "y": 10,
@@ -604,7 +700,18 @@
     }
   ],
   "goal-condition": {
-    "goal": "exit"
+    "goal": "AND",
+    "subgoals": [
+      {
+        "goal": "enemies"
+      },
+      {
+        "goal": "exit"
+      },
+      {
+        "goal": "treasure"
+      }
+    ]
   }
 
 }
