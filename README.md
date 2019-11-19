@@ -10,19 +10,6 @@
 
 * Learn the application of design patterns.
 
-## Due Dates
-
-Milestone 1: 5PM Sunday Week 5 (Feedback: Week 6 Lab)
-
-Milestone 2: 5PM Sunday Week 7 (Feedback: Week 8 Lab)
-
-Final milestone: 5PM Sunday Week 9 (Demonstration: Week 10 Lab)
-
-**NOTE:** There is **NO** provision for late submissions with a late penalty. Not submitting by the deadline is considered non-submission.
-
-## Value: 25 marks
-
----
 
 ## Overview
 
@@ -34,9 +21,6 @@ Your first step in this project will be to find a partner. You will do this unde
 
 After resolving who you will be working with, you should follow the instructions in the week 3 lab for registering your group. A repository on GitLab will be created for you at the end of week 3 based on the group you create, so you **must** create one by then.
 
-Once created, your repository will be available here (replace *GROUP_NAME* with your group's name):
-
-https://gitlab.cse.unsw.edu.au/COMP2511/19T3/GROUP_NAME
 
 ## Project setup
 
@@ -45,13 +29,6 @@ https://gitlab.cse.unsw.edu.au/COMP2511/19T3/GROUP_NAME
 Because this project uses JavaFX, it requires some additional setup steps in Eclipse. It's relatively straightforward if you're using a CSE computer, but if you're using your own computer you will need to download an alternate JDK.
 
 0. **(Only necessary for non-CSE computers)** Go [here](https://www.azul.com/downloads/zulu-community/?&package=jdk-fx) and download the Java 11 Zulu JDK FX for your OS. Unzip it once it finishes downloading.
-1. In Eclipse, import this project as normal. You should see an exclamation mark on the project indicating an error.
-2. Go to **Window -> Preferences**. On the left, under **Java** select **Installed JREs** then click **Add**. Ensure **Standard VM** is selected and click **Next**.
-3. * **(On CSE computers)** Enter exactly `/home/cs2511/jdk-jfx` into **JRE Home**. The other fields should fill in automatically.
-   * **(On non-CSE computers)** Click **Directory** and select the directory of the Zulu JDK you unzipped in step 1. Change **JRE name** to exactly `jdk-jfx`.
-4. Click **Finish** then **Apply and Close**
-
-If these steps worked, the project should no longer have the exclamation mark on it and you should be able to run the starter code.
 
 ## Preliminary client requirements
 
@@ -209,94 +186,10 @@ While it is up to you how to divide the work between you and your partner, both 
 * The starter code uses the observer pattern to ensure the frontend and backend are in a consistent state and that they are not tightly coupled. It would be advisable to do the same for the changes you will make.
 * The majority of marks available (see below) are for having a well designed application that meets the requirements. Avoid adding extra complexity and extensions till you have something that meets the most basic requirements.
 
-## Submission
-
-### Milestone 1
-
-You should have all your user stories entered into the issue board on your GitLab repository. You may continue to use the board between the deadline and your tutor's assessment, but they will be looking at the dates issues were modified to make sure you did the work that was required of you prior to the deadline.
-
-### Milestone 2
-
-Submit the contents of your GitLab repository with the following command:
-
-```bash
-$ 2511 submit milestone2
-```
-
-Your UML class diagram should be a PDF file at the root of your repository named `design.pdf`.
-
-### Milestone 3
-
-Submit the contents of your GitLab repository with the following command:
-
-```bash
-$ 2511 submit milestone3
-```
 
 You will demonstrate your application to your tutor in Week 10. You may be asked to justify your design decisions and explain how you worked with your partner.
 
-## Marking criteria
 
-The marks are allocated as follows:
-
-* Milestone 1 (5 marks)
-* Milestone 2 (8 marks)
-* Final milestone (12 marks)
-
-Below is a *rough* guide on how you will be assessed for each milestone.
-
-### Milestone 1
-
-| Criteria | Mark  |                                                                                                  |
-|:-------- |:----- |:------------------------------------------------------------------------------------------------ |
-| Stories  | 0     | No user stories                                                                                  |
-|          | 1     | User and epic stories not in a valid format and/or vague or ambiguous                            |
-|          | 2     | User and epic stories in a valid format, but with unclear benefits, goals or acceptance criteria |
-|          | 3     | Unambiguous and clear user stories with concrete acceptance criteria                             |
-| Planning | 0     | No user stories have points or priorities                                                        |
-|          | 1     | Only some user stories have points or priorities                                                 |
-|          | 2     | User stories have appropriate story point values and priorities                                  |
-
-### Milestone 2
-
-| Criteria     | Mark |                                                                                                   |
-|:------------ |:---- |:------------------------------------------------------------------------------------------------- |
-| Completeness | 0    | No or largely incomplete backend                                                                  |
-|              | 1    | Backend implements some of the entities                                                           |
-|              | 2    | Backend implements most of the entities                                                           |
-|              | 3    | Backend implements all of the entities                                                            |
-| Testing      | 0    | No JUnit tests                                                                                    |
-|              | 1    | JUnit tests for behaviour of a few entities                                                       |
-|              | 2    | Rigorous JUnit tests for behaviour of all entities                                                |
-| Design       | 0    | No apparent consideration for design                                                              |
-|              | 1    | Messy design and diagrams and/or design inconsistent with code                                    |
-|              | 2    | Clear design and diagrams with partial adherence to design principles and patterns                |
-|              | 3    | Clear design and diagrams fully adhering to design principles and patterns and conforming to code |
-
-Marks will be deducted for poor git and GitLab usage. For example, meaningless commit messages, large commits, issue board out of date, etc.
-
-### Milestone 3
-
-| Criteria     | Mark |                                                                                                   |
-|:------------ |:---- |:------------------------------------------------------------------------------------------------- |
-| Completeness | 0    | No or largely incomplete project                                                                  |
-|              | 1    | Dungeons can be played with most of the entities                                                  |
-|              | 2    | Dungeons can be played with all of the entities                                                   |
-| Design       | 0    | No apparent consideration for design                                                              |
-|              | 1    | Messy design and diagrams and/or design inconsistent with code                                    |
-|              | 2    | Messy diagrams and/or poor application of design patterns                                         |
-|              | 3    | Clear design and diagrams with partial adherence to design principles and patterns                |
-|              | 4    | Clear design and diagrams fully adhering to design principles and conforming to code, and correct application of design patterns |
-| Interaction  | 0    | Very basic user interface                                                                         |
-|              | 1    | Interface that makes it possible to solve dungeons, but is slow, awkward, or buggy                |
-|              | 2    | An interface that is mostly usable but with little consideration for usability heuristics         |
-|              | 3    | Interface that is easy to use                                                                     |
-|              | 4    | A product that is engaging, intuitive and fun to use                                              |
-| Extensions   | 0    | No extensions or only very basic extensions                                                       |
-|              | 1    | One extension that represents some technical consideration                                        |
-|              | 2    | Multiple extensions that represent some technical as well as design and user interaction consideration |
-
-Marks will be deducted for poor git and GitLab usage. For example, meaningless commit messages, large commits, issue board out of date, etc.
 
 [player]:        images/human_new.png
 [wall]:          images/brick_brown_0.png
